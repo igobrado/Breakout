@@ -12,7 +12,7 @@ class Application
     virtual int run()      = 0;
 
   protected:
-    virtual int loop() = 0;
+    virtual int loop(float accumulator) = 0;
 };
 
 #endif //BREAKOUT_APPLICATION_HPP

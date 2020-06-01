@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "StateMachine.hpp"
+
 struct ScreenDimensions
 {
     std::uint32_t width;
@@ -15,11 +17,14 @@ class GameData
 {
 public:
     explicit GameData(const ScreenDimensions dimensions, const char* applicationName);
-    sf::RenderWindow& window();
+    sf::RenderWindow&        window();
+    ::machine::StateMachine& machine();
 
+    void switchState(::machine::StateType staTetype, GameData& gameData);
 private:
-    const ScreenDimensions mScreenDimensions;
-    sf::RenderWindow       mWindow;
+    const ScreenDimensions  mScreenDimensions;
+    sf::RenderWindow        mWindow;
+    ::machine::StateMachine mStateMachine;
 };
 
 }  // namespace common
