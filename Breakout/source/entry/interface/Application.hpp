@@ -2,13 +2,17 @@
 #define BREAKOUT_APPLICATION_HPP
 
 #include <iostream>
+#include <cstdint>
 
-class Aplication
+class Application
 {
 public:
+    Application() = default;
+    virtual ~Application() = default;
     virtual int run() = 0;
-    virtual ~Aplication() = default;
-};
 
+protected:
+    virtual void loop() = 0;
+};
 
 #endif //BREAKOUT_APPLICATION_HPP
