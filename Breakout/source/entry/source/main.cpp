@@ -1,26 +1,9 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include "sandbox/Breakout.hpp"
 
 int main()
 {
-    sf::SoundBuffer buffer;
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+    std::unique_ptr<Application> breakout = std::make_unique<game::Breakout>(
+            ScreenDimensions{ 1920, 1080 },
+            "Breakout");
+    return breakout->run();
 }
