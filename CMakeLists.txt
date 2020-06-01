@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(Breakout)
 set(BREAKOUT_SOURCES)
-set(BREAKOUT_HEADERS Breakout/source/game/common/GameData.cpp Breakout/source/game/common/GameData.hpp)
+set(BREAKOUT_HEADERS)
 set(CMAKE_CXX_STANDARD 20)
 set(BREAKOUT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
