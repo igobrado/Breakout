@@ -15,9 +15,10 @@ enum class StateType
 class State
 {
 public:
+    State()          = default;
     virtual ~State() = default;
 
-    State(const State&)           = delete;
+    State(const State&) = delete;
     State& operator=(const State&) = delete;
 
     virtual void update(const float deltaTime) = 0;

@@ -3,15 +3,38 @@
 namespace machine
 {
 
+EndState::EndState(common::GameData& gameData)  //
+        : State{}
+        , mGameData{ gameData }
+{
+}
+EndState::~EndState()
+{
+    // cleanup
+}
+
 void EndState::update(const float deltaTime)
 {
 }
 
 void EndState::handleInput()
 {
+    sf::Event         eventToProcess{};
+    sf::RenderWindow& window = mGameData.window();
+    while (window.pollEvent(eventToProcess))
+    {
+        if (eventToProcess.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+    }
 }
 
 void EndState::draw()
+{
+}
+
+void EndState::onMouseKeyPressed(const sf::Mouse::Button button)
 {
 }
 
