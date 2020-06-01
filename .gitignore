@@ -3,3 +3,10 @@
 .idea/
 build/
 cmake-build-debug/
+.vscode/
+
+#files
+
+**.sln
+**.vcxproj
+**.user**
