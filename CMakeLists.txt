@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+
 project(Breakout)
 set(BREAKOUT_SOURCES)
 set(BREAKOUT_HEADERS)
@@ -12,7 +13,9 @@ if (UNIX)
 endif()
 
 if (WIN32)
-    #TODO
+    set(SFML_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML/win32/include")
+    set(SFML_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML/win32/lib")
+    set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML/win32/lib/cmake/SFML")
 endif()
 
     link_directories(SFML_LIBRARY_DIR)
