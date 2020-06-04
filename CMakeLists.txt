@@ -20,7 +20,7 @@ endif()
 
     link_directories(SFML_LIBRARY_DIR)
     include_directories(SFML_INCLUDE_DIR)
-    include_directories("${CNAKE_CURRENT_LIST_DIR}/Dependencies/tinyxml2")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/Dependencies/tinyxml2")
     find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
 
 if(SFML_FOUND)
