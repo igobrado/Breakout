@@ -1,6 +1,5 @@
 #include "sandbox/Breakout.hpp"
 ///#include "State.hpp"
-
 int main()
 {
     std::unique_ptr<Application> breakout = std::make_unique<game::Breakout>(
