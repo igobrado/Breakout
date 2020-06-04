@@ -12,7 +12,7 @@ public:
     Drawable(const Drawable&) = delete;
     Drawable& operator=(const Drawable&) = delete;
 
-    virtual void Draw(sf::RenderWindow& window) = 0;
+    virtual void draw(sf::RenderWindow& window) = 0;
 };
 
 #endif  // BREAKOUT_DRAWABLE_HPP

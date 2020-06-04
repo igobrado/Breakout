@@ -20,9 +20,9 @@ public:
     Moveable(const Moveable&) = delete;
     Moveable& operator=(const Moveable&) = delete;
 
-    virtual void                UpdateMovement(const float& deltaTime) = 0;
-    virtual const sf::Vector2f& Position()                             = 0;
-    virtual sf::FloatRect       GlobalBounds()                         = 0;
+    virtual void                updateMovement(const float& deltaTime) = 0;
+    virtual const sf::Vector2f& position()                             = 0;
+    virtual sf::FloatRect       globalBounds()                         = 0;
 };
 
 #endif  // BREAKOUT_MOVEABLE_HPP
