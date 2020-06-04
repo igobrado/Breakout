@@ -2,13 +2,13 @@
 
 namespace common
 {
-GameData::GameData(const ScreenDimensions dimensions, const char* applicationName)  //
+GameData::GameData(ScreenDimensions dimensions, const char* applicationName)  //
     : mScreenDimensions{ dimensions }
     , mWindow{ sf::VideoMode{ mScreenDimensions.width, mScreenDimensions.height }, applicationName }
-    , mStateMachine{}  //
-    {
-
-    };
+    , mStateMachine{}
+    , mResourceHolder{}
+{
+}
 
 sf::RenderWindow& GameData::window()
 {
@@ -22,7 +22,6 @@ sf::RenderWindow& GameData::window()
 
 void GameData::switchState(::machine::StateType /*stateType*/, GameData& /*gameData*/)
 {
-
 }
 
 }  // namespace common

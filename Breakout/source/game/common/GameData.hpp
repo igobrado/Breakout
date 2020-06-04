@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "ResourceHolder.hpp"
 #include "StateMachine.hpp"
 
 struct ScreenDimensions
@@ -16,15 +17,17 @@ namespace common
 class GameData
 {
 public:
-    explicit GameData(const ScreenDimensions dimensions, const char* applicationName);
+    explicit GameData(ScreenDimensions dimensions, const char* applicationName);
     sf::RenderWindow&        window();
     ::machine::StateMachine& machine();
 
     void switchState(::machine::StateType staTetype, GameData& gameData);
+
 private:
     const ScreenDimensions  mScreenDimensions;
     sf::RenderWindow        mWindow;
     ::machine::StateMachine mStateMachine;
+    ResourceHolder          mResourceHolder;
 };
 
 }  // namespace common

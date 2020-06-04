@@ -16,9 +16,7 @@ struct str_less
 
     template <
             typename LHS,
-            typename RHS,
-            typename std::enable_if<
-                    std::is_same<std::string, LHS>::value && std::is_same<std::string, RHS>::value>::type>
+            typename RHS>
     constexpr bool operator()(const LHS& t_lhs, const RHS& t_rhs) const
     {
         return std::lexicographical_compare(t_lhs.begin(), t_lhs.end(), t_rhs.begin(), t_rhs.end());
