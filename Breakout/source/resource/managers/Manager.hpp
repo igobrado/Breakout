@@ -11,11 +11,16 @@
 #include "Template.hpp"
 #include "tinyxml2.h"
 
+/**
+ * @brief Generic manager representation.
+ *
+ * @note Every manager-like class shall inherit from it.
+ * @tparam T
+ */
+
 template <typename T>
 class Manager
 {
-    friend class Manager<sf::Texture>;
-
 public:
     Manager()  //
         : mDocument{}
@@ -24,6 +29,13 @@ public:
     }
 
 public:
+    /**
+     * @brief Looks for object inside of map with targetID.
+     *
+     * @param targetID id of target object.
+     * @return founded object.
+     * @throws std::out_of_range if object was not found.
+     */
     const T& getProperty(const std::string_view targetID) const
     {
         auto found = mData.find(targetID);
@@ -33,19 +45,40 @@ public:
         }
         return found->second;
     }
+
+    /**
+     * @brief converts const char* to string with lower-case characters
+     * @param str input string
+     * @return output string
+     */
     std::string tolower(const char* str)
     {
-        std::string t{str};
+        std::string t{ str };
         std::transform(t.begin(), t.end(), t.begin(), ::tolower);
         return t;
     }
+
 protected:
+    /**
+     * @brief forwards argumets to std::map<>::emplace.
+     *
+     * @tparam Args T value of container.
+     * @param args  data to construct object.
+     * @return True if insert happened.
+     */
     template <typename... Args>
     bool emplace(Args&&... args)
     {
         return mData.emplace(std::forward<Args>(args)...).second;
     }
 
+    /**
+     * @brief Loads XML file and constructs map according to it.
+     *
+     * @param startPos start module of xml file.
+     * @param moduleName Name of module.
+     * @param componentName  Wanted component to read.
+     */
     void Load(tinyxml2::XMLElement* startPos, const char* moduleName, const char* componentName) = delete;
 
 protected:
@@ -55,6 +88,9 @@ private:
     std::map<std::string, T, temp::str_less> mData;
 };
 
+/**
+ * @brief Implementation of manager class for texture.
+ */
 class TextureManager : public Manager<sf::Texture>
 {
 public:
@@ -86,13 +122,17 @@ protected:
             element->QueryStringAttribute("Name", &name);
             sf::Texture texture{};
             texture.loadFromFile(path);
-            static_cast<void>(emplace(std::piecewise_construct,  //
-                    std::forward_as_tuple(tolower(name)),  //
-                    std::forward_as_tuple(std::move(texture))));
+            static_cast<void>(                         ///< To satisfy compiler warning for discarding return value.
+                    emplace(std::piecewise_construct,  //
+                            std::forward_as_tuple(tolower(name)),  //
+                            std::forward_as_tuple(std::move(texture))));
         }
     }
 };
 
+/**
+ * @brief Implementation of manager class for sound.
+ */
 using SoundPair = std::pair<std::unique_ptr<sf::SoundBuffer>, std::shared_ptr<sf::Sound>>;
 class SoundManager : public Manager<SoundPair>
 {
@@ -127,9 +167,10 @@ public:
                 std::shared_ptr<sf::Sound> sound{ std::make_shared<sf::Sound>() };
                 sound->setBuffer(*soundBuffer);
                 sound->setVolume(10.0f);
-                emplace(std::piecewise_construct,     //
-                        std::forward_as_tuple(tolower(name)),  //
-                        std::forward_as_tuple(std::move(soundBuffer), std::move(sound)));
+                static_cast<void>(  ///< To satisfy compiler warning for discarding return value.
+                        emplace(std::piecewise_construct,              //
+                                std::forward_as_tuple(tolower(name)),  //
+                                std::forward_as_tuple(std::move(soundBuffer), std::move(sound))));
             }
         }
     }

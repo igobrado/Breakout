@@ -12,11 +12,13 @@ namespace game
 class Breakout : public Application
 {
 public:
-    explicit Breakout(const ScreenDimensions dimensions, const char* applicationName);
+    explicit Breakout(const char* applicationName);
     ~Breakout() override = default;
+    /**@copydoc Application::run**/
     int run() override;
 
 protected:
+    /**@copydoc Application::loop**/
     int loop(float accumulator) override;
 
 private:

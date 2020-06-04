@@ -45,7 +45,7 @@ class SFML_AUDIO_API SoundFileReader
 public:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Structure holding the audio properties of a sound file
+    /// \brief Structure holding the audio definitions of a sound file
     ///
     ////////////////////////////////////////////////////////////
     struct Info
@@ -69,7 +69,7 @@ public:
     /// during the whole lifetime of the reader.
     ///
     /// \param stream Source stream to read from
-    /// \param info   Structure to fill with the properties of the loaded sound
+    /// \param info   Structure to fill with the definitions of the loaded sound
     ///
     /// \return True if the file was successfully opened
     ///

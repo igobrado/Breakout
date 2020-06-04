@@ -206,7 +206,7 @@ public:
 /// \class sf::Listener
 /// \ingroup audio
 ///
-/// The audio listener defines the global properties of the
+/// The audio listener defines the global definitions of the
 /// audio environment, it defines where and how sounds and musics
 /// are heard. If sf::View is the eyes of the user, then sf::Listener
 /// is his ears (by the way, they are often linked together --

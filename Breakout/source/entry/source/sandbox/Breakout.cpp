@@ -3,8 +3,8 @@
 namespace game
 {
 
-Breakout::Breakout(const ScreenDimensions dimensions, const char* applicationName)
-    : mGameData(std::make_shared<::common::GameData>(dimensions, applicationName))
+Breakout::Breakout(const char* applicationName)
+    : mGameData(std::make_shared<::common::GameData>(applicationName))
     , mTestShape{ mGameData->resource().getTexture("red") }
     , mClock{}
 {

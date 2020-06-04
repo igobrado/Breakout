@@ -213,7 +213,7 @@ typedef Rect<float> FloatRect;
 /// (Vector2 and Vector3).
 ///
 /// To keep things simple, sf::Rect doesn't define
-/// functions to emulate the properties that are not directly
+/// functions to emulate the definitions that are not directly
 /// members (such as right, bottom, center, etc.), it rather
 /// only provides intersection functions.
 ///

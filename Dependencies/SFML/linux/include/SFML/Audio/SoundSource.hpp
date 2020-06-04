@@ -36,7 +36,7 @@
 namespace sf
 {
 ////////////////////////////////////////////////////////////
-/// \brief Base class defining a sound's properties
+/// \brief Base class defining a sound's definitions
 ///
 ////////////////////////////////////////////////////////////
 class SFML_AUDIO_API SoundSource : AlResource
@@ -323,7 +323,7 @@ protected:
 /// only serves as a common base for all audio objects
 /// that can live in the audio environment.
 ///
-/// It defines several properties for the sound: pitch,
+/// It defines several definitions for the sound: pitch,
 /// volume, position, attenuation, etc. All of them can be
 /// changed at any time with no impact on performances.
 ///

@@ -7,6 +7,11 @@
 
 namespace temp
 {
+/**
+ * @brief Modification of std::str_less<>
+ *
+ * Used for sorting inside of map with lexicographical compare.
+ */
 struct str_less
 {
     bool operator()(const std::string& t_lhs, const std::string& t_rhs) const

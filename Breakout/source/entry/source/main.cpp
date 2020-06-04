@@ -7,7 +7,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 #endif
 {
     std::unique_ptr<Application> breakout = std::make_unique<game::Breakout>(  //
-            ScreenDimensions{ 800, 600 },
             "Breakout");
     return breakout->run();
 }  //

@@ -6,12 +6,15 @@ list(APPEND BREAKOUT_SOURCES
         ${COMMON_DIR}/GameData.cpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.cpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Brick.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.cpp
         )
 
 list(APPEND BREAKOUT_HEADERS
         ${COMMON_DIR}/GameData.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/objects/interface//Moveable.hpp
+        ${COMMON_DIR}/ScreenDimensions.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/objects/interface/Movable.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/interface/Drawable.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Brick.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.hpp
         )

@@ -2,33 +2,43 @@
 #define BREAKOUT_BRICK_HPP
 
 #include "Drawable.hpp"
-
+#include "Movable.hpp"
 namespace gui
 {
-struct BrickDef
+
+/**
+ * @brief Holds ball important data.
+ */
+struct BrickDef : public Definitions
 {
-    BrickDef()  //
-        : brickStrength{ 0U }
-        , position{ 0.0f, 0.0f }
-        , bounds{ 0.0f, 0.0f, 0.0f, 0.0f }
+    BrickDef(sf::Vector2f currentPosition, sf::FloatRect globalBounds, std::uint16_t brickStrength)  //
+        : Definitions{ currentPosition, globalBounds }
+        , brickStrength{ brickStrength }
     {
     }
     std::uint16_t brickStrength;
-    sf::Vector2f  position;
-    sf::FloatRect bounds;
 };
 
+/**
+ * @brief Represents Ball object, wraps sf::Sprite class to abstract brick.
+ *
+ * @note implements interfaces: \see Movable \see Drawable
+ */
 class Brick : public Drawable
 {
 public:
     Brick(const sf::Texture& texture, BrickDef definition);
-    const BrickDef& properties() const;
-    void draw(sf::RenderWindow& window) override;
+
+    /**@copydoc Movable::definitions()*/
+    const Definitions& definitions() const;
+
+    /**@copydoc Movable::draw()*/
+    void               draw(sf::RenderWindow& window) override;
 
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;
-    BrickDef   mBrickDefinitons;
+    BrickDef   mBrickDefinitions;
 };
 
 }  // namespace gui

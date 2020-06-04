@@ -6,16 +6,17 @@ namespace gui
 Brick::Brick(const sf::Texture& texture, BrickDef definition)
     : mXDrawOffset{ 20.0f }
     , mSprite{ texture }
-    , mBrickDefinitons{ definition }
+    , mBrickDefinitions{ definition }
 {
-    mSprite.setPosition(
-            sf::Vector2f{ definition.position.x * definition.bounds.width + definition.bounds.width + mXDrawOffset,
-                          definition.position.y * definition.bounds.height + definition.bounds.height });
+    mSprite.setPosition(sf::Vector2f{ definition.currentPosition.x * definition.globalBounds.width
+                                              + definition.globalBounds.width + mXDrawOffset,
+                                      definition.currentPosition.y * definition.globalBounds.height
+                                              + definition.globalBounds.height });
 }
 
-const BrickDef& Brick::properties() const
+const Definitions& Brick::definitions() const
 {
-    return mBrickDefinitons;
+    return mBrickDefinitions;
 }
 
 void Brick::draw(sf::RenderWindow& window)

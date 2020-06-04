@@ -235,7 +235,7 @@ private:
 ///
 /// It inherits all the functions from sf::Transformable:
 /// position, rotation, scale, origin. It also adds sprite-specific
-/// properties such as the texture to use, the part of it to display,
+/// definitions such as the texture to use, the part of it to display,
 /// and some convenience functions to change the overall color of the
 /// sprite, or to get its bounding rectangle.
 ///
