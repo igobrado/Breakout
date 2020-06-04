@@ -21,7 +21,7 @@ protected:
 
 private:
     std::shared_ptr<::common::GameData> mGameData;
-    sf::CircleShape                     mTestShape;
+    sf::Sprite                          mTestShape;
     sf::Clock                           mClock;
     static constexpr float const        sDeltaTime = 1.0f / 80.0f;
 };

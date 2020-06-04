@@ -5,9 +5,10 @@ namespace game
 
 Breakout::Breakout(const ScreenDimensions dimensions, const char* applicationName)
     : mGameData(std::make_shared<::common::GameData>(dimensions, applicationName))
-    , mTestShape{ 100.0f }
+    , mTestShape{ mGameData->resource().getTexture("red") }
     , mClock{}
 {
+    mTestShape.setPosition(100, 100);
 }
 
 int Breakout::run()
@@ -33,7 +34,6 @@ int Breakout::run()
     //    mGameData->machine().activeState()->draw();
     //}
     //return 0;
-    mTestShape.setFillColor(sf::Color::Green);
 
     return loop(0);
 }

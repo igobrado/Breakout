@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Textures>
+  <Bricks>
+    <Brick Texture = "../resource/images/bricks/red.png" Name = "Red"/>
+    <Brick Texture = "../resource/images/bricks/blue.png" Name = "Blue"/>
+    <Brick Texture = "../resource/images/bricks/green.png" Name = "Green"/>
+    <Brick Texture = "../resource/images/bricks/cyan.png" Name = "Cyan"/>
+  </Bricks>
+
+  <Backgrounds>
+    <Background Texture = "../resource/images/boards/board00.jpg" Name = "stateOne"/>
+    <Background Texture = "../resource/images/boards/board04.jpg" Name = "stateTwo"/>
+    <Background Texture = "../resource/images/boards/board01.png" Name = "Low"/>
+    <Background Texture = "../resource/images/boards/board02.png" Name = "Mid"/>
+    <Background Texture = "../resource/images/boards/board03.png" Name = "Hard"/>
+    <Background Texture = "../resource/images/play.png" Name = "Intro"/>
+  </Backgrounds>
+
+  <Paddles>
+    <Paddle Texture = "../resource/images/paddles/paddle.png" Name = "Paddle"/>
+    <Paddle Texture = "../resource/images/paddles/widerpaddle.png" Name = "BoostPaddle"/>
+  </Paddles>
+
+  <Balls>
+    <Ball Texture = "../resource/images/balls/ball.png" Name = "Ball"/>
+  </Balls>
+
+  <Gui>
+    <Arrow Texture = "../resource/images/arrow.png" Name = "Arrow"/>
+  </Gui>
+
+</Textures>

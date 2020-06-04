@@ -1,6 +1,7 @@
 #ifndef BREAKOUT_MANAGER_HPP
 #define BREAKOUT_MANAGER_HPP
 
+#include <cstring>
 #include <map>
 #include <memory>
 
@@ -28,11 +29,16 @@ public:
         auto found = mData.find(targetID);
         if (found == std::end(mData))
         {
-            throw  std::out_of_range("No data in map with " + std::string{targetID} + "\n");
+            throw std::out_of_range("No data in map with " + std::string{ targetID } + "\n");
         }
         return found->second;
     }
-
+    std::string tolower(const char* str)
+    {
+        std::string t{str};
+        std::transform(t.begin(), t.end(), t.begin(), ::tolower);
+        return t;
+    }
 protected:
     template <typename... Args>
     bool emplace(Args&&... args)
@@ -80,9 +86,9 @@ protected:
             element->QueryStringAttribute("Name", &name);
             sf::Texture texture{};
             texture.loadFromFile(path);
-            emplace(std::piecewise_construct,     //
-                    std::forward_as_tuple(name),  //
-                    std::forward_as_tuple(std::move(texture)));
+            static_cast<void>(emplace(std::piecewise_construct,  //
+                    std::forward_as_tuple(tolower(name)),  //
+                    std::forward_as_tuple(std::move(texture))));
         }
     }
 };
@@ -122,7 +128,7 @@ public:
                 sound->setBuffer(*soundBuffer);
                 sound->setVolume(10.0f);
                 emplace(std::piecewise_construct,     //
-                        std::forward_as_tuple(name),  //
+                        std::forward_as_tuple(tolower(name)),  //
                         std::forward_as_tuple(std::move(soundBuffer), std::move(sound)));
             }
         }

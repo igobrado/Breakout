@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Sounds>
+  <Ambiental>
+    <Sound Buffer = "../resource/sound/music/ambiental.wav" Name = "Ambiental"/>
+    <Sound Buffer = "../resource/sound/music/ambiental2.wav" Name = "Ambiental2"/>
+  </Ambiental>
+  <Game>
+    <Sound Buffer = "../resource/sound/hits/hit.wav" Name = "Hit"/>
+    <Sound Buffer = "../resource/sound/hits/hitTwo.wav" Name = "HitTwo"/>
+  </Game>
+</Sounds>
+

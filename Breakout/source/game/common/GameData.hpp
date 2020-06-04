@@ -20,7 +20,7 @@ public:
     explicit GameData(ScreenDimensions dimensions, const char* applicationName);
     sf::RenderWindow&        window();
     ::machine::StateMachine& machine();
-
+    ResourceHolder& resource();
     void switchState(::machine::StateType staTetype, GameData& gameData);
 
 private:

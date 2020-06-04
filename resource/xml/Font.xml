@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Fonts>
+  <Classic>
+    <FontID Font = "../resource/font/ArialTh.ttf" Name = "Arial"/>
+  </Classic>
+</Fonts>

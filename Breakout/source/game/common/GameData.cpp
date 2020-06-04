@@ -24,4 +24,9 @@ void GameData::switchState(::machine::StateType /*stateType*/, GameData& /*gameD
 {
 }
 
+ResourceHolder& GameData::resource()
+{
+    return mResourceHolder;
+}
+
 }  // namespace common

@@ -3,7 +3,7 @@
 int main()
 {
     std::unique_ptr<Application> breakout = std::make_unique<game::Breakout>(
-            ScreenDimensions{ 1920, 1080 },
+            ScreenDimensions{ 800, 600  },
             "Breakout");
     return breakout->run();
 }

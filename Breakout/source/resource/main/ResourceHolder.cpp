@@ -1,7 +1,7 @@
 #include "ResourceHolder.hpp"
 
 ResourceHolder::ResourceHolder()
-    : mTextureManager{""}
+    : mTextureManager{"../resource/xml/Textures.xml"}
     , mSoundManager{""}
 {
 
