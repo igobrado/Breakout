@@ -42,8 +42,10 @@ class Ball
 public:
     explicit Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
     Ball(Ball&& other) noexcept;
+    Ball& operator=(Ball&& other) noexcept;
 
-    void draw(sf::RenderWindow& window) override;
+    /**@copydoc Drawable::draw()*/
+    void  draw(sf::RenderWindow& window) override;
 
     /**@copydoc Movable::updateMovement()*/
     void updateMovement(const float& deltaTime) override;

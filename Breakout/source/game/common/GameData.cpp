@@ -31,16 +31,6 @@ ResourceHolder& GameData::resource()
     return mResourceHolder;
 }
 
-const float GameData::scalingFactorX() const
-{
-    return mScalingFactorX;
-}
-
-const float GameData::scalingFactorY() const
-{
-    return mScalingFactorY;
-}
-
 sf::Vector2f GameData::scalingFactor() const
 {
     return sf::Vector2f{ mScalingFactorX, mScalingFactorY };

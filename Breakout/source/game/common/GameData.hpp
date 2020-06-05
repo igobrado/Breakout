@@ -46,9 +46,9 @@ public:
      */
     void switchState(::machine::StateType stateType, GameData& gameData);
 
-    const float scalingFactorX() const;
-    const float scalingFactorY() const;
-
+    /**
+     * @return scaling factor relative on 1280x720 resolution.
+     */
     sf::Vector2f scalingFactor() const;
 private:
     ScreenDimensions        mScreenDimensions;

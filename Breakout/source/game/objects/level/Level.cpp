@@ -1,7 +1,7 @@
 #include "Level.hpp"
 
-#include <random>
 #include <cassert>
+#include <random>
 
 Level::Level(
         ResourceHolder&         resourceHolder,
@@ -31,7 +31,9 @@ Level& Level::operator=(Level&& other) noexcept
 {
     if (this != &other)
     {
-        // mBall = std::move(other.mBall);
+        mBall   = std::move(other.mBall);
+        mBricks = std::move(other.mBricks);
+        mPaddle = std::move(other.mPaddle);
     }
     return *this;
 }

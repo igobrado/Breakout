@@ -16,8 +16,18 @@ Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
 
 Paddle::Paddle(Paddle&& other) noexcept
     : mSprite{ std::move(other.mSprite) }
-    , mPaddleDefinitions{ std::move(other.mPaddleDefinitions) }
+    , mPaddleDefinitions{ other.mPaddleDefinitions }
 {
+}
+
+Paddle& Paddle::operator=(Paddle&& other) noexcept
+{
+    if (this != &other)
+    {
+        mSprite            = std::move(other.mSprite);
+        mPaddleDefinitions = other.mPaddleDefinitions;
+    }
+    return *this;
 }
 
 void Paddle::draw(sf::RenderWindow& window)

@@ -29,6 +29,16 @@ Ball::Ball(Ball&& other) noexcept  //
 {
 }
 
+Ball& Ball::operator=(Ball&& other) noexcept
+{
+    if (this != &other)
+    {
+        mSprite          = std::move(other.mSprite);
+        mBallDefinitions = other.mBallDefinitions;
+    }
+    return *this;
+}
+
 void Ball::draw(sf::RenderWindow& window)
 {
     window.draw(mSprite);
@@ -36,6 +46,8 @@ void Ball::draw(sf::RenderWindow& window)
 
 void Ball ::updateMovement(const float& deltaTime)
 {
+    mBallDefinitions.globalBounds = mSprite.getGlobalBounds();
+
     mBallDefinitions.lastPosition    = mBallDefinitions.currentPosition;
     mBallDefinitions.currentPosition = mSprite.getPosition();
 
@@ -61,9 +73,9 @@ const Definitions& Ball::definitions()
 
 void Ball::onPaddleHit()
 {
-    std::random_device                     rd;
-    std::mt19937                           mt{rd()};
-    std::uniform_int_distribution<int> dist{3, 7};
+    std::random_device                 rd;
+    std::mt19937                       mt{ rd() };
+    std::uniform_int_distribution<int> dist{ 3, 7 };
 
     mBallDefinitions.direction.y = -(dist(mt));
 }

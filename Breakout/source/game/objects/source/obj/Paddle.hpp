@@ -15,8 +15,8 @@ struct PaddleDef : public Definitions
     {
     }
 
-    sf::Vector2f       velocity;
-    const sf::Vector2f paddleSpeed;
+    sf::Vector2f velocity;
+    sf::Vector2f paddleSpeed;
 };
 
 class Paddle
@@ -26,7 +26,9 @@ class Paddle
 public:
     Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor);
     Paddle(Paddle&& other) noexcept;
+    Paddle& operator=(Paddle&& other) noexcept;
 
+    /**@copydoc Drawable::draw()*/
     void draw(sf::RenderWindow& window) override;
 
     /**@copydoc Movable::updateMovement()*/
@@ -36,6 +38,11 @@ public:
     const Definitions& definitions() override;
 
 protected:
+    /**
+     * @brief Updates paddle movement.
+     *
+     * @note Shall be called only by updateMovement.
+     */
     void update();
 
 private:
