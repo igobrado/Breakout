@@ -16,8 +16,9 @@ struct BallDefs : public Definitions
             sf::Vector2f  currentPosition,
             sf::Vector2f  lastPosition,
             sf::Vector2f  clientZone,
-            sf::Vector2f  direction)
-        : Definitions(currentPosition, globalBounds)
+            sf::Vector2f  direction,
+            sf::Vector2f  scalingFactor)
+        : Definitions{ currentPosition, globalBounds, scalingFactor }
         , lastPosition{ lastPosition }
         , clientZone{ clientZone }
         , direction{ direction }
@@ -39,13 +40,13 @@ class Ball
     , public Drawable
 {
 public:
-    explicit Ball(const sf::Texture& texture);
+    explicit Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
     Ball(Ball&& other) noexcept;
 
     void draw(sf::RenderWindow& window) override;
 
     /**@copydoc Movable::updateMovement()*/
-    void               updateMovement(const float& deltaTime) override;
+    void updateMovement(const float& deltaTime) override;
 
     /**@copydoc Movable::definitions()*/
     const Definitions& definitions() override;

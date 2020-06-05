@@ -7,15 +7,16 @@
 namespace gui
 {
 
-Ball::Ball(const sf::Texture& texture)  //
+Ball::Ball(const sf::Texture& texture, sf::Vector2f scalingFactor)  //
     : mSprite{ texture }
     , mBallDefinitions{ { mSprite.getLocalBounds() },
                         { 500.0f, 500.0f },
                         { 0.0f, 0.0f },
                         { sScreenDimensions.width - mSprite.getLocalBounds().width,
                           sScreenDimensions.height - mSprite.getLocalBounds().height },
-                        { 7.0f, 7.0f } }
+                        { 7.0f, 7.0f }, scalingFactor }
 {
+    mSprite.setScale(mBallDefinitions.scalingFactor);
 }
 
 Ball::Ball(Ball&& other) noexcept  //

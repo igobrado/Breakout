@@ -35,19 +35,20 @@ static constexpr const char* toString(BrickColor color)
  */
 struct BrickDef : public Definitions
 {
-    BrickDef(std::uint16_t brickStrength, BrickColor color)
-        : Definitions{ sf::Vector2f{ 0.0f, 0.0f }, sf::FloatRect{ 0.0f, 0.0f, 0.0f, 0.0f } }
+    BrickDef(std::uint16_t brickStrength, BrickColor color, sf::Vector2f scalingFactor)
+        : Definitions{ sf::Vector2f{ 0.0f, 0.0f }, sf::FloatRect{ 0.0f, 0.0f, 0.0f, 0.0f }, scalingFactor }
         , brickStrength(brickStrength)
         , color(color)
     {
     }
 
     BrickDef(
-            sf::Vector2f  currentPosition,
-            sf::FloatRect globalBounds,
-            std::uint16_t brickStrength,
-            BrickColor    color)  //
-        : Definitions{ currentPosition, globalBounds }
+            sf::Vector2f        currentPosition,
+            sf::FloatRect       globalBounds,
+            std::uint16_t       brickStrength,
+            BrickColor          color,
+            sf::Vector2f scalingFactor)  //
+        : Definitions{ currentPosition, globalBounds, scalingFactor }
         , brickStrength{ brickStrength }
         , color{ color }
     {
@@ -83,6 +84,7 @@ public:
      * @return true if brick strength is 0 false if not.
      */
     bool shouldDestroy() const;
+
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;

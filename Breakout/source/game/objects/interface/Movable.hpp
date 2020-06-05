@@ -19,13 +19,16 @@ enum class Direction
  */
 struct Definitions
 {
-    Definitions(sf::Vector2f currentPosition, sf::FloatRect globalBounds)
+    Definitions(sf::Vector2f currentPosition, sf::FloatRect globalBounds, sf::Vector2f scalingFactor)
         : currentPosition(currentPosition)
         , globalBounds(globalBounds)
+        , scalingFactor{ scalingFactor }
     {
     }
+
     sf::Vector2f  currentPosition;
     sf::FloatRect globalBounds;
+    sf::Vector2f scalingFactor;
 };
 
 /**

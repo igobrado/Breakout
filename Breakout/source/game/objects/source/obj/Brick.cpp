@@ -4,16 +4,19 @@ namespace gui
 {
 
 Brick::Brick(const sf::Texture& texture, BrickDef definition)
-    : mXDrawOffset{ 20.0f }
+    : mXDrawOffset{ 0 }
     , mSprite{ texture }
     , mBrickDefinitions{ definition }
 {
+    mSprite.setScale(mBrickDefinitions.scalingFactor);
     mBrickDefinitions.globalBounds = mSprite.getLocalBounds();
+    mXDrawOffset = mSprite.getTexture()->getSize().x;
     mSprite.setPosition(sf::Vector2f{ mBrickDefinitions.currentPosition.x * mBrickDefinitions.globalBounds.width
-                                              + mBrickDefinitions.globalBounds.width + mXDrawOffset,
+                                              + mBrickDefinitions.globalBounds.width,
                                       mBrickDefinitions.currentPosition.y * mBrickDefinitions.globalBounds.height
                                               + mBrickDefinitions.globalBounds.height });
     mBrickDefinitions.currentPosition = mSprite.getPosition();
+
 }
 
 Brick::Brick(Brick&& other) noexcept

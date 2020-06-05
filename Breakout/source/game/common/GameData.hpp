@@ -46,11 +46,17 @@ public:
      */
     void switchState(::machine::StateType stateType, GameData& gameData);
 
+    const float scalingFactorX() const;
+    const float scalingFactorY() const;
+
+    sf::Vector2f scalingFactor() const;
 private:
     ScreenDimensions        mScreenDimensions;
     sf::RenderWindow        mWindow;
     ::machine::StateMachine mStateMachine;
     ResourceHolder          mResourceHolder;
+    const float             mScalingFactorX;
+    const float             mScalingFactorY;
 };
 
 }  // namespace common

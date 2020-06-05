@@ -10,10 +10,11 @@ struct ScreenDimensions
 };
 
 /**
- * @brief Default screen dimensions.
+ * @brief Screen dimensions.
  *
  * @note Shall NOT be used for data processing and any ANY kind of callculation!
  */
-constexpr const ScreenDimensions sScreenDimensions = ScreenDimensions{ 1600U, 900U };
+constexpr const ScreenDimensions sScreenDimensions = ScreenDimensions{ 1280U, 720U };
+
 
 #endif  // BREAKOUT_SCREENDIMENSIONS_HPP

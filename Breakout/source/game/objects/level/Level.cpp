@@ -7,7 +7,8 @@ Level::Level(
         const BrickDefinitions& brickDefinitions,
         std::function<void()>&& endLevelCallback)
     : mResourceHolder{ resourceHolder }
-    , mBall{ mResourceHolder.getTexture("ball") }
+    , mBall{ mResourceHolder.getTexture("ball"), brickDefinitions[0].scalingFactor }  ///< ugly workaround
+                                                                                                           ///< shall be removed
     , mEndLevelCallback{ std::move(endLevelCallback) }
 {
     for (auto i : { 1, 2, 3, 4, 5 })
@@ -70,7 +71,7 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
     std::mt19937                    gen{ rd() };
     std::uniform_int_distribution<> distrib{ 0, static_cast<int>(brickDefinitions.size() - 1) };
 
-    for (std::uint8_t i = 0U; i != 16U; ++i)
+    for (std::uint8_t i = 0U; i != 13U; ++i)
     {
         const auto color           = static_cast<gui::BrickColor>(distrib(gen));
         auto       brickDefinition = std::find_if(

@@ -9,14 +9,13 @@ GameState::GameState(common::GameData& gameData)  //
     , mLevelStack{}
     , mBackground{ mGameData.resource().getTexture("low") }
 {
-    gui::BrickDef    red{ 1, gui::BrickColor::RED };
-    gui::BrickDef    blue{ 1, gui::BrickColor::BLUE };
-    gui::BrickDef    green{ 1, gui::BrickColor::GREEN };
-    gui::BrickDef    cyan{ 1, gui::BrickColor::CYAN };
+    gui::BrickDef    red{ 1, gui::BrickColor::RED, mGameData.scalingFactor() };
+    gui::BrickDef    blue{ 1, gui::BrickColor::BLUE, mGameData.scalingFactor() };
+    gui::BrickDef    green{ 1, gui::BrickColor::GREEN, mGameData.scalingFactor() };
+    gui::BrickDef    cyan{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
     BrickDefinitions tst{ red, blue, green, cyan };
 
     mLevelStack.push(Level{ mGameData.resource(), tst, []() {} });
-
 }
 
 void GameState::update(const float deltaTime)

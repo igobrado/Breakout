@@ -1,11 +1,10 @@
 #ifndef BREAKOUT_LEVEL_HPP
 #define BREAKOUT_LEVEL_HPP
 
+#include <SFML/Graphics.hpp>
 #include <functional>
 #include <unordered_map>
 #include <vector>
-
-#include <SFML/Graphics.hpp>
 
 #include "Ball.hpp"
 #include "Brick.hpp"

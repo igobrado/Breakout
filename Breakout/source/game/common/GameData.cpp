@@ -1,5 +1,7 @@
 #include "GameData.hpp"
 
+#include <cassert>
+#include <iostream>
 namespace common
 {
 GameData::GameData(const char* applicationName)  //
@@ -7,6 +9,8 @@ GameData::GameData(const char* applicationName)  //
     , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
     , mStateMachine{}
     , mResourceHolder{}
+    , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }
+    , mScalingFactorY{ static_cast<float>(mWindow.getSize().y / 720.) }
 {
 }
 
@@ -27,6 +31,21 @@ void GameData::switchState(::machine::StateType /*stateType*/, GameData& /*gameD
 ResourceHolder& GameData::resource()
 {
     return mResourceHolder;
+}
+
+const float GameData::scalingFactorX() const
+{
+    return mScalingFactorX;
+}
+
+const float GameData::scalingFactorY() const
+{
+    return mScalingFactorY;
+}
+
+sf::Vector2f GameData::scalingFactor() const
+{
+    return sf::Vector2f{ mScalingFactorX, mScalingFactorY };
 }
 
 }  // namespace common
