@@ -1,6 +1,7 @@
 #include "Level.hpp"
 
 #include <random>
+#include <cassert>
 
 Level::Level(
         ResourceHolder&         resourceHolder,
@@ -38,18 +39,22 @@ Level& Level::operator=(Level&& other) noexcept
 void Level::update(const float& deltaTime)
 {
     mBall.updateMovement(deltaTime);
+    if (mBall.isCollided(mPaddle.definitions().globalBounds))
+    {
+        mBall.onPaddleHit();
+    }
 
     auto it = checkBrickCollision();
     mPaddle.updateMovement(deltaTime);
-    // if (it != std::end(mBricks))
-    //{
-    //    mBricks.erase(it);
-    //    // increaseScore
-    //    if (!mBricks.size())
-    //    {
-    //        // kill level
-    //    }
-    //}
+    if (it != std::end(mBricks))
+    {
+        mBricks.erase(it);
+        // increaseScore
+        if (mBricks.empty())
+        {
+            // kill level
+        }
+    }
     if (mBall.definitions().currentPosition.y < 0)
     {
         // if ball is lower then paddle kill level, for now leave empty.
@@ -101,6 +106,8 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
             {
                 return true;
             }
+            brick.onBrickHit();
+            mBall.onBrickHit();
         }
         return brick.shouldDestroy();
     });

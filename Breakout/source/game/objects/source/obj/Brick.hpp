@@ -72,7 +72,7 @@ public:
     Brick& operator=(Brick&& other) noexcept;
 
     /**@copydoc Movable::definitions()*/
-    const Definitions& definitions() const;
+    const Definitions& definitions();
 
     /**@copydoc Movable::draw()*/
     void draw(sf::RenderWindow& window) override;
@@ -86,6 +86,7 @@ public:
      */
     bool shouldDestroy() const;
 
+    void onBrickHit();
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;

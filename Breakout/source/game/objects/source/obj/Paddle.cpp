@@ -10,7 +10,6 @@ Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
                             sScreenDimensions.height - mSprite.getGlobalBounds().height * 4 },
                           mSprite.getGlobalBounds(),
                           scalingFactor }
-
 {
     mSprite.setPosition(mPaddleDefinitions.currentPosition);
 }
@@ -45,6 +44,8 @@ void Paddle::updateMovement(const float& deltaTime)
 
 const Definitions& Paddle::definitions()
 {
+    mPaddleDefinitions.currentPosition = mSprite.getPosition();
+    mPaddleDefinitions.globalBounds    = mSprite.getGlobalBounds();
     return mPaddleDefinitions;
 }
 
@@ -63,4 +64,5 @@ void Paddle::update()
     }
     mSprite.move(mPaddleDefinitions.velocity);
 }
+
 }  // namespace gui

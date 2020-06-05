@@ -9,7 +9,7 @@ Brick::Brick(const sf::Texture& texture, BrickDef definition)
     , mBrickDefinitions{ definition }
 {
     mSprite.setScale(mBrickDefinitions.scalingFactor);
-    mBrickDefinitions.globalBounds = mSprite.getLocalBounds();
+    mBrickDefinitions.globalBounds = mSprite.getGlobalBounds();
     mXDrawOffset = mSprite.getTexture()->getSize().x;
     mSprite.setPosition(sf::Vector2f{ mBrickDefinitions.currentPosition.x * mBrickDefinitions.globalBounds.width
                                               + mBrickDefinitions.globalBounds.width,
@@ -37,8 +37,9 @@ Brick& Brick::operator=(Brick&& other) noexcept
     return *this;
 }
 
-const Definitions& Brick::definitions() const
+const Definitions& Brick::definitions()
 {
+    mBrickDefinitions.globalBounds = mSprite.getGlobalBounds();
     return mBrickDefinitions;
 }
 
@@ -50,6 +51,11 @@ void Brick::draw(sf::RenderWindow& window)
 bool Brick::shouldDestroy() const
 {
     return mBrickDefinitions.brickStrength == 0;
+}
+
+void Brick::onBrickHit()
+{
+    --mBrickDefinitions.brickStrength;
 }
 
 }  // namespace gui
