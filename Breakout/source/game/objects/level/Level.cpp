@@ -8,7 +8,8 @@ Level::Level(
         std::function<void()>&& endLevelCallback)
     : mResourceHolder{ resourceHolder }
     , mBall{ mResourceHolder.getTexture("ball"), brickDefinitions[0].scalingFactor }  ///< ugly workaround
-                                                                                                           ///< shall be removed
+                                                                                      ///< shall be removed
+    , mPaddle{ mResourceHolder.getTexture("paddle"), brickDefinitions[0].scalingFactor }
     , mEndLevelCallback{ std::move(endLevelCallback) }
 {
     for (auto i : { 1, 2, 3, 4, 5 })
@@ -21,6 +22,7 @@ Level::Level(Level&& other) noexcept
     : mResourceHolder{ other.mResourceHolder }
     , mBall{ std::move(other.mBall) }
     , mBricks{ std::move(other.mBricks) }
+    , mPaddle({ std::move(other.mPaddle) })
 {
 }
 
@@ -38,6 +40,7 @@ void Level::update(const float& deltaTime)
     mBall.updateMovement(deltaTime);
 
     auto it = checkBrickCollision();
+    mPaddle.updateMovement(deltaTime);
     // if (it != std::end(mBricks))
     //{
     //    mBricks.erase(it);
@@ -63,6 +66,7 @@ void Level::draw(sf::RenderWindow& window)
             {                                   //
                 brick.draw(window);
             });
+    mPaddle.draw(window);
 }
 
 void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions)

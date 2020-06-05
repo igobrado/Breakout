@@ -8,6 +8,7 @@
 
 #include "Ball.hpp"
 #include "Brick.hpp"
+#include "Paddle.hpp"
 #include "ResourceHolder.hpp"
 
 /**
@@ -74,6 +75,7 @@ private:
     ResourceHolder&         mResourceHolder;
     std::vector<gui::Brick> mBricks;
     gui::Ball               mBall;
+    gui::Paddle             mPaddle;
     std::function<void()>   mEndLevelCallback;
 };
 

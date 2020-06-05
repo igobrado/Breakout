@@ -1,7 +1,5 @@
 #include "GameData.hpp"
 
-#include <cassert>
-#include <iostream>
 namespace common
 {
 GameData::GameData(const char* applicationName)  //

@@ -3,6 +3,7 @@
 
 #include "Drawable.hpp"
 #include "Movable.hpp"
+
 namespace gui
 {
 

@@ -9,6 +9,7 @@ list(APPEND BREAKOUT_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.cpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Brick.cpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Paddle.cpp
         )
 
 list(APPEND BREAKOUT_HEADERS
@@ -20,5 +21,5 @@ list(APPEND BREAKOUT_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/LevelStack.hpp
-
+        ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Paddle.hpp
         )
