@@ -5,7 +5,7 @@
 #include <cctype>
 #include <string>
 
-namespace temp
+namespace defined
 {
 /**
  * @brief Modification of std::str_less<>
@@ -30,5 +30,6 @@ struct str_less
     {
     };
 };
-}  // namespace temp
+}  // namespace defined
+
 #endif  // BREAKOUT_TEMPLATE_HPP

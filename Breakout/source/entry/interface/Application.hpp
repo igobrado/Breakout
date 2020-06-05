@@ -22,12 +22,6 @@ public:
      */
     virtual int run() = 0;
 
-protected:
-    /**
-     * @brief Encapsulates main loop.
-     * @return 0 if exit was successful, -1 if not.
-     */
-    virtual int loop(float accumulator) = 0;
 };
 
 #endif  // BREAKOUT_APPLICATION_HPP

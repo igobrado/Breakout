@@ -14,6 +14,6 @@ struct ScreenDimensions
  *
  * @note Shall NOT be used for data processing and any ANY kind of callculation!
  */
-constexpr const ScreenDimensions sScreenDimensions = ScreenDimensions{ 800U, 600U };
+constexpr const ScreenDimensions sScreenDimensions = ScreenDimensions{ 1600U, 900U };
 
 #endif  // BREAKOUT_SCREENDIMENSIONS_HPP

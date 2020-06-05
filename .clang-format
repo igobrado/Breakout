@@ -15,15 +15,15 @@ AlignOperands:   true
 AlignTrailingComments: true
 AlignConsecutiveMacros: true
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: true
+AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
 BreakBeforeBraces: Custom
@@ -67,30 +67,6 @@ ForEachMacros:
   - BOOST_FOREACH
   - std::for_each
 IncludeBlocks:   Regroup
-IncludeCategories:
-
-  - Regex:           '^<(gmock|gtest|Poco|rapidjson|eb)\/([A-Z0-9.\/-_])+'
-    Priority:        4
-
-  - Regex:           '^<([A-Z0-9\/-_])+>'
-    Priority:        3
-
-  - Regex:           '^<.*/.*\.hpp>'
-    Priority:        5
-
-  - Regex:           '^<.*.h>'
-    Priority:        1
-
-  - Regex:           '^<.*/.*\.h>'
-    Priority:        2
-
-  - Regex:           '^".*/.*\.hpp"'
-    Priority:        6
-
-  - Regex:           '^"([A-Z0-9.-_])+"'
-    Priority:        7
-
-IncludeIsMainRegex: '(_test)?$'
 IndentCaseLabels: true
 IndentPPDirectives: AfterHash
 IndentWidth:     4
@@ -109,7 +85,6 @@ PointerAlignment: Left
 RawStringFormats:
   - Language: TextProto
     BasedOnStyle: google
-    Delimiters: - pb
 ReflowComments:  true
 SortIncludes:    true
 SortUsingDeclarations: true
@@ -124,7 +99,7 @@ SpacesInContainerLiterals: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-Standard:        Cpp11
+Standard: Latest
 TabWidth:        4
 UseTab:          Never
 

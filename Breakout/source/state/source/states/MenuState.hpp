@@ -1,8 +1,8 @@
 #ifndef BREAKOUT_MENUSTATE_HPP
 #define BREAKOUT_MENUSTATE_HPP
 
-#include "State.hpp"
 #include "GameData.hpp"
+#include "State.hpp"
 
 namespace machine
 {
@@ -11,7 +11,6 @@ class MenuState : public State
 {
 public:
     explicit MenuState(::common::GameData& gameData);
-    ~MenuState() override;
 
     /**@copydoc State::update()*/
     void update(const float deltaTime) override;
@@ -28,10 +27,12 @@ protected:
      * @param button ButtonID that was being pressed.
      */
     void onMouseKeyPressed(const sf::Mouse::Button button);
+
 private:
     ::common::GameData& mGameData;
+    sf::Sprite          mBackground;
 };
 
-}
+}  // namespace machine
 
 #endif  // BREAKOUT_MENUSTATE_HPP

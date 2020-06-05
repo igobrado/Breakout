@@ -6,11 +6,8 @@ namespace machine
 MenuState::MenuState(common::GameData& gameData)  //
         : State{}
         , mGameData{ gameData }
+        , mBackground{ mGameData.resource().getTexture("statetwo") }
 {
-}
-MenuState::~MenuState()
-{
-    // cleanup
 }
 
 void MenuState::update(const float deltaTime)
@@ -32,6 +29,9 @@ void MenuState::handleInput()
 
 void MenuState::draw()
 {
+    mGameData.window().clear();
+    mGameData.window().draw(mBackground);
+    mGameData.window().display();
 }
 
 void MenuState::onMouseKeyPressed(const sf::Mouse::Button button)

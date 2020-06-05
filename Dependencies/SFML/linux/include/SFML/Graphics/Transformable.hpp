@@ -402,7 +402,7 @@ private:
 ///         myTransform.setPosition(v.x(), v.y());
 ///     }
 ///
-///     void Draw(sf::RenderTarget& target) const
+///     void draw(sf::RenderTarget& target) const
 ///     {
 ///         target.draw(..., myTransform.getTransform());
 ///     }

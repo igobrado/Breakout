@@ -19,7 +19,7 @@ public:
     Drawable& operator=(const Drawable&) = delete;
 
     /**
-     * @brief calls API from render window RenderWindow::Draw() and draws object to screen.
+     * @brief calls API from render window RenderWindow::draw() and draws object to screen.
      *
      * @note Valid reference shall be provided.
      *

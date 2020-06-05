@@ -40,6 +40,8 @@ class Ball
 {
 public:
     explicit Ball(const sf::Texture& texture);
+    Ball(Ball&& other) noexcept;
+
     void draw(sf::RenderWindow& window) override;
 
     /**@copydoc Movable::updateMovement()*/

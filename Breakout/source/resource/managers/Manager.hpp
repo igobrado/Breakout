@@ -85,7 +85,7 @@ protected:
     tinyxml2::XMLDocument mDocument;
 
 private:
-    std::map<std::string, T, temp::str_less> mData;
+    std::map<std::string, T, defined::str_less> mData;
 };
 
 /**
@@ -101,6 +101,7 @@ public:
         {
             auto startPos{ mDocument.FirstChildElement("Textures") };
             Load(startPos, "Bricks", "Brick");
+            Load(startPos, "Backgrounds", "Background");
             Load(startPos, "Paddles", "Paddle");
             Load(startPos, "Balls", "Ball");
             Load(startPos, "Gui", "Arrow");

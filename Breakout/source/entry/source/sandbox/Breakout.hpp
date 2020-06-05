@@ -17,10 +17,6 @@ public:
     /**@copydoc Application::run**/
     int run() override;
 
-protected:
-    /**@copydoc Application::loop**/
-    int loop(float accumulator) override;
-
 private:
     std::shared_ptr<::common::GameData> mGameData;
     sf::Sprite                          mTestShape;

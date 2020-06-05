@@ -6,17 +6,55 @@
 namespace gui
 {
 
+enum class BrickColor
+{
+    RED,
+    BLUE,
+    GREEN,
+    CYAN
+};
+
+static constexpr const char* toString(BrickColor color)
+{
+    switch (color)
+    {
+        case BrickColor::RED:
+            return "red";
+        case BrickColor::BLUE:
+            return "blue";
+        case BrickColor::GREEN:
+            return "green";
+        case BrickColor::CYAN:
+            return "cyan";
+        default:
+            return "invalid";
+    }
+}
 /**
  * @brief Holds ball important data.
  */
 struct BrickDef : public Definitions
 {
-    BrickDef(sf::Vector2f currentPosition, sf::FloatRect globalBounds, std::uint16_t brickStrength)  //
-        : Definitions{ currentPosition, globalBounds }
-        , brickStrength{ brickStrength }
+    BrickDef(std::uint16_t brickStrength, BrickColor color)
+        : Definitions{ sf::Vector2f{ 0.0f, 0.0f }, sf::FloatRect{ 0.0f, 0.0f, 0.0f, 0.0f } }
+        , brickStrength(brickStrength)
+        , color(color)
     {
     }
+
+    BrickDef(
+            sf::Vector2f  currentPosition,
+            sf::FloatRect globalBounds,
+            std::uint16_t brickStrength,
+            BrickColor    color)  //
+        : Definitions{ currentPosition, globalBounds }
+        , brickStrength{ brickStrength }
+        , color{ color }
+    {
+    }
+
     std::uint16_t brickStrength;
+    BrickColor    color;
 };
 
 /**
@@ -28,13 +66,23 @@ class Brick : public Drawable
 {
 public:
     Brick(const sf::Texture& texture, BrickDef definition);
+    Brick(Brick&& other) noexcept;
+    Brick& operator=(Brick&& other) noexcept;
 
     /**@copydoc Movable::definitions()*/
     const Definitions& definitions() const;
 
     /**@copydoc Movable::draw()*/
-    void               draw(sf::RenderWindow& window) override;
+    void draw(sf::RenderWindow& window) override;
 
+    /**
+     * @brief Checks whether brick strength came down to 0.
+     *
+     * @note If Brick strength comes to 0, brick shall destroy.
+     *
+     * @return true if brick strength is 0 false if not.
+     */
+    bool shouldDestroy() const;
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;

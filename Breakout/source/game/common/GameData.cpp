@@ -4,7 +4,7 @@ namespace common
 {
 GameData::GameData(const char* applicationName)  //
     : mScreenDimensions{ ::sScreenDimensions }
-    , mWindow{ sf::VideoMode{ mScreenDimensions.width, mScreenDimensions.height }, applicationName }
+    , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
     , mStateMachine{}
     , mResourceHolder{}
 {

@@ -1,69 +1,45 @@
 #include "Breakout.hpp"
 
+#include "StateFactory.hpp"
+
 namespace game
 {
 
 Breakout::Breakout(const char* applicationName)
-    : mGameData(std::make_shared<::common::GameData>(applicationName))
+    : mGameData{ std::make_shared<::common::GameData>(applicationName) }
     , mTestShape{ mGameData->resource().getTexture("red") }
     , mClock{}
 {
-    mTestShape.setPosition(100, 100);
+    mGameData->machine().addState(StateFactory::getState(machine::StateType::INTRO, *mGameData));
 }
 
 int Breakout::run()
 {
-    // TODO: Initialization
-    //float newTime, frameTime;
-    //float currentTime = mClock.getElapsedTime().asSeconds();
-    //float accumulator = 0.0f;
+    float newTime, frameTime;
+    float currentTime = mClock.getElapsedTime().asSeconds();
+    float accumulator = 0.0f;
 
-    //while (mGameData->window().isOpen())
-    //{
-    //    mGameData->machine().processChanges();
-    //    newTime   = mClock.getElapsedTime().asSeconds();
-    //    frameTime = newTime - currentTime;
-    //    if (frameTime > 0.25f)
-    //    {
-    //        frameTime = 0.025f;
-    //    }
-    //    currentTime = newTime;
-    //    accumulator += frameTime;
-    //    //loop(accumulator);
-    //    // TODO: Extern loop
-    //    mGameData->machine().activeState()->draw();
-    //}
-    //return 0;
-
-    return loop(0);
-}
-
-int Breakout::loop(float accumulator)
-{
-    //while (accumulator > sDeltaTime)
-    //{
-    //    const auto& activeState = mGameData->machine().activeState();
-    //    activeState->handleInput();
-    //    activeState->update(sDeltaTime);
-    //    accumulator -= sDeltaTime;
-    //}
-    sf::RenderWindow& window = mGameData->window();
-    while (window.isOpen())
+    while (mGameData->window().isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        mGameData->machine().processChanges();
+        newTime   = mClock.getElapsedTime().asSeconds();
+        frameTime = newTime - currentTime;
+        if (frameTime > 0.25f)
         {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-                return 0;
-            }
+            frameTime = 0.025f;
         }
-        window.clear();
-        window.draw(mTestShape);
-        window.display();
+        currentTime = newTime;
+        accumulator += frameTime;
+        while (accumulator > sDeltaTime)
+        {
+            const auto& activeState = mGameData->machine().activeState();
+            activeState->handleInput();
+            activeState->update(sDeltaTime);
+            accumulator -= sDeltaTime;
+        }
+        mGameData->machine().activeState()->draw();
     }
-    return -1;
+    return 0;
 }
 
 }  // namespace game

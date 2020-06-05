@@ -1,6 +1,8 @@
 set(COMMON_DIR "${CMAKE_CURRENT_LIST_DIR}/common")
 include_directories("${COMMON_DIR}")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/objects/interface")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/objects/level")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/objects/source/obj")
 
 list(APPEND BREAKOUT_SOURCES
         ${COMMON_DIR}/GameData.cpp
@@ -17,4 +19,6 @@ list(APPEND BREAKOUT_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Brick.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/objects/level/LevelStack.hpp
+
         )

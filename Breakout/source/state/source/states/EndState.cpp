@@ -4,13 +4,11 @@ namespace machine
 {
 
 EndState::EndState(common::GameData& gameData)  //
-        : State{}
-        , mGameData{ gameData }
+    : State{}
+    , mGameData{ gameData }
+    , mBackground{ mGameData.resource().getTexture("") }
+
 {
-}
-EndState::~EndState()
-{
-    // cleanup
 }
 
 void EndState::update(const float deltaTime)
@@ -32,6 +30,9 @@ void EndState::handleInput()
 
 void EndState::draw()
 {
+    mGameData.window().clear();
+    mGameData.window().draw(mBackground);
+    mGameData.window().display();
 }
 
 void EndState::onMouseKeyPressed(const sf::Mouse::Button button)

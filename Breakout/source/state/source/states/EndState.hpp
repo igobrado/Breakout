@@ -1,8 +1,8 @@
 #ifndef BREAKOUT_ENDSTATE_HPP
 #define BREAKOUT_ENDSTATE_HPP
 
-#include "State.hpp"
 #include "GameData.hpp"
+#include "State.hpp"
 
 namespace machine
 {
@@ -11,7 +11,6 @@ class EndState : public State
 {
 public:
     explicit EndState(::common::GameData& gameData);
-    ~EndState() override;
 
     /**@copydoc State::update()*/
     void update(const float deltaTime) override;
@@ -28,8 +27,10 @@ protected:
      * @param button ButtonID that was being pressed.
      */
     void onMouseKeyPressed(const sf::Mouse::Button button);
+
 private:
     ::common::GameData& mGameData;
+    sf::Sprite          mBackground;
 };
 
 }  // namespace machine

@@ -18,6 +18,12 @@ Ball::Ball(const sf::Texture& texture)  //
 {
 }
 
+Ball::Ball(Ball&& other) noexcept  //
+    : mSprite{ std::move(other.mSprite) }
+    , mBallDefinitions{ other.mBallDefinitions }
+{
+}
+
 void Ball::draw(sf::RenderWindow& window)
 {
     window.draw(mSprite);
