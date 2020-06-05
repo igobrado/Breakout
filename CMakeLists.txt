@@ -14,6 +14,7 @@ if (UNIX)
     set(SFML_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/linux/include")
     set(SFML_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/linux/lib")
     set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/linux/lib/cmake/SFML")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 endif()
 
 if (WIN32)

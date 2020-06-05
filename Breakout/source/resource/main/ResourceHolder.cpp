@@ -2,7 +2,7 @@
 
 ResourceHolder::ResourceHolder()
     : mTextureManager{"../resource/xml/Textures.xml"}
-    , mSoundManager{""}
+    , mSoundManager{"../resource/xml/Sound.xml"}
 {
 
 }
@@ -10,4 +10,9 @@ ResourceHolder::ResourceHolder()
 const sf::Texture& ResourceHolder::getTexture(std::string_view targetID) const
 {
     return mTextureManager.getProperty(targetID);
+}
+
+void ResourceHolder::play(std::string_view music)
+{
+    mSoundManager.play(music);
 }

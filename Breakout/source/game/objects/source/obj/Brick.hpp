@@ -44,11 +44,11 @@ struct BrickDef : public Definitions
     }
 
     BrickDef(
-            sf::Vector2f        currentPosition,
-            sf::FloatRect       globalBounds,
-            std::uint16_t       brickStrength,
-            BrickColor          color,
-            sf::Vector2f scalingFactor)  //
+            sf::Vector2f  currentPosition,
+            sf::FloatRect globalBounds,
+            std::uint16_t brickStrength,
+            BrickColor    color,
+            sf::Vector2f  scalingFactor)  //
         : Definitions{ currentPosition, globalBounds, scalingFactor }
         , brickStrength{ brickStrength }
         , color{ color }
@@ -86,7 +86,13 @@ public:
      */
     bool shouldDestroy() const;
 
-    void onBrickHit();
+    /**
+     * @brief Decreases bricks life by one.
+     *
+     * @note Shall be called only if ball collides with corresponding brick object.
+     */
+    void onHit();
+
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;

@@ -1,12 +1,12 @@
 #ifndef BREAKOUT_MANAGER_HPP
 #define BREAKOUT_MANAGER_HPP
 
+#include <SFML/Audio.hpp>
 #include <cstring>
+#include <future>
+#include <iostream>
 #include <map>
 #include <memory>
-
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics/Texture.hpp>
 
 #include "Template.hpp"
 #include "tinyxml2.h"
@@ -81,6 +81,11 @@ protected:
      */
     void Load(tinyxml2::XMLElement* startPos, const char* moduleName, const char* componentName) = delete;
 
+    const std::map<std::string, T, defined::str_less>& data() const
+    {
+        return mData;
+    }
+
 protected:
     tinyxml2::XMLDocument mDocument;
 
@@ -140,12 +145,20 @@ class SoundManager : public Manager<SoundPair>
 public:
     explicit SoundManager(const char* xmlPath)  //
         : Manager{}
+        , mLoader{}
+        , mIsLoadingOver{ false }
     {
         if (mDocument.LoadFile(xmlPath) == tinyxml2::XMLError::XML_SUCCESS)
         {
-            auto startPos{ mDocument.FirstChildElement("Game") };
-            Load(startPos, "Game", "Hit");
-            Load(startPos, "Game", "Destroy");
+            auto startPos{ mDocument.FirstChildElement("Sounds") };
+            mLoader = std::thread{ &SoundManager::Load, this, startPos, "Game", "Sound" };
+        }
+    }
+    ~SoundManager()
+    {
+        if (mLoader.joinable())
+        {
+            mLoader.join();
         }
     }
 
@@ -174,6 +187,36 @@ public:
                                 std::forward_as_tuple(std::move(soundBuffer), std::move(sound))));
             }
         }
+        if (!data().empty())
+        {
+            bool expect = false;
+            mIsLoadingOver.compare_exchange_strong(
+                    expect,  //
+                    true,
+                    std::memory_order_release,
+                    std::memory_order_relaxed);
+        }
     }
+
+    void play(std::string_view music)
+    {
+        if (mIsLoadingOver.load())
+        {
+            try
+            {
+                auto& it = this->getProperty(music).second;
+                it->play();
+            }
+            catch (std::out_of_range& excp)
+            {
+                FILE* fp = std::fopen("ErrorLog.txt", "w");
+                std::fprintf(fp, "Failed with %s", excp.what());
+            }
+        }
+    }
+
+private:
+    std::thread      mLoader;
+    std::atomic_bool mIsLoadingOver;
 };
 #endif  // BREAKOUT_MANAGER_HPP

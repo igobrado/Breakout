@@ -11,7 +11,7 @@ IntroState::IntroState(common::GameData& gameData)  //
     : State{}
     , mGameData{ gameData }
     , mBackground{ mGameData.resource().getTexture("statetwo") }
-    , mSwapTime{ 4.0f }
+    , mSwapTime{ 6.0f }
     , mClock{}
 {
 }

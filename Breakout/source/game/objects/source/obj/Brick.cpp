@@ -53,7 +53,7 @@ bool Brick::shouldDestroy() const
     return mBrickDefinitions.brickStrength == 0;
 }
 
-void Brick::onBrickHit()
+void Brick::onHit()
 {
     --mBrickDefinitions.brickStrength;
 }

@@ -104,13 +104,14 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
     return std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
         if (mBall.isCollided(brick.definitions().globalBounds))
         {
+            brick.onHit();
+            mBall.onBrickHit();
             if (brick.shouldDestroy())
             {
+                mResourceHolder.play("hit");
                 return true;
             }
-            brick.onBrickHit();
-            mBall.onBrickHit();
         }
-        return brick.shouldDestroy();
+        return false;
     });
 }

@@ -21,6 +21,7 @@ public:
      */
     const sf::Texture& getTexture(std::string_view) const;
 
+    void play(std::string_view music);
 private:
     TextureManager mTextureManager;
     SoundManager   mSoundManager;
