@@ -13,9 +13,10 @@ GameState::GameState(common::GameData& gameData)  //
     gui::BrickDef    blue{ 1, gui::BrickColor::BLUE, mGameData.scalingFactor() };
     gui::BrickDef    green{ 1, gui::BrickColor::GREEN, mGameData.scalingFactor() };
     gui::BrickDef    cyan{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
-    BrickDefinitions tst{ red, blue, green, cyan };
+    BrickDefinitions levelDefinitions{ red, blue, green, cyan };
 
-    mLevelStack.push(Level{ mGameData.resource(), tst, []() {} });
+    mLevelStack.push(
+            Level{ mGameData.resource(), levelDefinitions, [this]() { mGameData.switchState(StateType::END); } });
 }
 
 void GameState::update(const float deltaTime)

@@ -44,7 +44,7 @@ public:
      * @param stateType Type of next state
      * @param gameData Game data that is important for constructing state object.
      */
-    void switchState(::machine::StateType stateType, GameData& gameData);
+    void switchState(::machine::StateType stateType);
 
     /**
      * @return scaling factor relative on 1280x720 resolution.

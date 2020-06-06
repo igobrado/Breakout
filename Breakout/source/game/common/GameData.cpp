@@ -1,5 +1,7 @@
 #include "GameData.hpp"
 
+#include "StateFactory.hpp"
+
 namespace common
 {
 GameData::GameData(const char* applicationName)  //
@@ -22,8 +24,9 @@ sf::RenderWindow& GameData::window()
     return mStateMachine;
 }
 
-void GameData::switchState(::machine::StateType /*stateType*/, GameData& /*gameData*/)
+void GameData::switchState(::machine::StateType stateType)
 {
+    mStateMachine.addState(StateFactory::getState(stateType, *this));
 }
 
 ResourceHolder& GameData::resource()
