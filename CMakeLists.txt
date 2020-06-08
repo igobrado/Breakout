@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(BREAKOUT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
 option(USE_DEBUG "Enter debug mode" OFF)
+option(_CRT_SECURE_NO_WARNINGS "Enable only on windows" OFF)
 
 if (USE_DEBUG)
     add_definitions(-DDEBUG)
@@ -27,6 +28,7 @@ if (WIN32)
     set(SFML_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/win32/lib")
     set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/win32/lib/cmake/SFML")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
     link_directories(SFML_LIBRARY_DIR)

@@ -2,6 +2,8 @@
 #define BREAKOUT_MANAGER_HPP
 
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+
 #include <cstring>
 #include <future>
 #include <iostream>
@@ -130,7 +132,7 @@ protected:
             texture.loadFromFile(path);
             static_cast<void>(                         ///< To satisfy compiler warning for discarding return value.
                     emplace(std::piecewise_construct,  //
-                            std::forward_as_tuple(tolower(name)),  //
+                            std::forward_as_tuple(this->tolower(name)),  //
                             std::forward_as_tuple(std::move(texture))));
         }
     }
@@ -228,7 +230,6 @@ public:
     {
         if (mDocument.LoadFile(xmlFile))
         {
-
         }
     }
 
@@ -274,5 +275,4 @@ public:
 
 };
 
-const sf::Font FontManager::sEmptyFont = sf::Font{};
 #endif  // BREAKOUT_MANAGER_HPP
