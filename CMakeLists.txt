@@ -7,8 +7,12 @@ set(BREAKOUT_HEADERS)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
+option(USE_DEBUG "Enter debug mode" OFF)
 set(BREAKOUT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}")
+
+if (USE_DEBUG)
+    add_definitions(-DDEBUG)
+endif()
 
 if (UNIX)
     set(SFML_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/linux/include")
