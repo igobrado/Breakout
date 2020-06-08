@@ -18,9 +18,11 @@ void operator delete(void* p)
 }
 #endif
 
-#ifndef WIN_32
+#ifndef _WINDOWS
 int main()
 #else  //
+#include <Windows.h>
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 #endif
 {
@@ -32,6 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		    "Breakout");
         rv = breakout->run();
     }
+
 #ifdef DEBUG
     std::ofstream file("Allocations.txt");
     file << allocations;

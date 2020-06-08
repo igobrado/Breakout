@@ -7,8 +7,9 @@ set(BREAKOUT_HEADERS)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-option(USE_DEBUG "Enter debug mode" OFF)
 set(BREAKOUT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}")
+
+option(USE_DEBUG "Enter debug mode" OFF)
 
 if (USE_DEBUG)
     add_definitions(-DDEBUG)
@@ -25,6 +26,7 @@ if (WIN32)
     set(SFML_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/win32/include")
     set(SFML_LIBRARY_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/win32/lib")
     set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/win32/lib/cmake/SFML")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 endif()
 
     link_directories(SFML_LIBRARY_DIR)

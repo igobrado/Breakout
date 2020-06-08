@@ -145,20 +145,20 @@ class SoundManager : public Manager<SoundPair>
 public:
     explicit SoundManager(const char* xmlPath)  //
         : Manager{}
-        , mLoader{}
+        , mLoaderThread{}
         , mIsLoadingOver{ false }
     {
         if (mDocument.LoadFile(xmlPath) == tinyxml2::XMLError::XML_SUCCESS)
         {
             auto startPos{ mDocument.FirstChildElement("Sounds") };
-            mLoader = std::thread{ &SoundManager::Load, this, startPos, "Game", "Sound" };
+            mLoaderThread = std::thread{ &SoundManager::Load, this, startPos, "Game", "Sound" };
         }
     }
     ~SoundManager()
     {
-        if (mLoader.joinable())
+        if (mLoaderThread.joinable())
         {
-            mLoader.join();
+            mLoaderThread.join();
         }
     }
 
@@ -216,7 +216,63 @@ public:
     }
 
 private:
-    std::thread      mLoader;
+    std::thread      mLoaderThread;
     std::atomic_bool mIsLoadingOver;
 };
+
+class FontManager : public Manager<sf::Font>
+{
+public:
+    FontManager(const char* xmlFile)
+        : Manager{}
+    {
+        if (mDocument.LoadFile(xmlFile))
+        {
+
+        }
+    }
+
+	void Load(tinyxml2::XMLElement* startPos, const char* moduleName, const char* componentName)
+	{
+		tinyxml2::XMLElement* element{ startPos->FirstChildElement(moduleName)->FirstChildElement(componentName) };
+		const char* path = "";
+		const char* name = "";
+
+		for (;         //
+			element;  //
+			element = element->NextSiblingElement(componentName))
+		{
+			element->QueryStringAttribute("Font", &path);
+			element->QueryStringAttribute("Name", &name);
+			sf::Font font;
+			if (font.loadFromFile(path))
+			{
+                static_cast<void>(emplace(std::piecewise_construct,
+                    std::forward_as_tuple(tolower(name)),
+                    std::forward_as_tuple(font)));
+			}
+		}
+	}
+    
+    const sf::Font& font(std::string_view fontName) 
+    {
+		try
+		{
+            auto fnt = this->getProperty(fontName);
+            return fnt;
+		}
+		catch (std::out_of_range& excp)
+		{
+			FILE* fp = std::fopen("ErrorLog.txt", "w");
+			std::fprintf(fp, "Failed with %s", excp.what());
+		}
+        return sEmptyFont;
+    }
+    ///< shall be returned from \see FontManager::font() 
+    ///< if there is no wanted font in map
+    static const sf::Font sEmptyFont;
+
+};
+
+const sf::Font FontManager::sEmptyFont = sf::Font{};
 #endif  // BREAKOUT_MANAGER_HPP

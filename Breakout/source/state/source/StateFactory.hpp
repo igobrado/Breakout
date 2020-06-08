@@ -28,6 +28,8 @@ public:
                 return std::make_unique<machine::GameState>(data);
             case machine::StateType::END:
                 return std::make_unique<machine::EndState>(data);
+            default:
+                return nullptr;
         }
     }
 };
