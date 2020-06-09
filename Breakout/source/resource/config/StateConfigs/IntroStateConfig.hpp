@@ -11,6 +11,7 @@ class IntroStateConfig : public Config
 public:
     IntroStateConfig(const char* xmlPath, sf::Font& fontRef);
 
+    /**@copydoc Config::drawAllComponents()*/
     void drawAllComponents(sf::RenderWindow& window) override;
 
 private:

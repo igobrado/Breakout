@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Config.hpp"
 #include "GameData.hpp"
 #include "State.hpp"
 
@@ -12,8 +13,7 @@ namespace machine
 class IntroState : public State
 {
 public:
-    explicit IntroState(::common::GameData& gameData);
-
+    IntroState(::common::GameData& gameData);
     /**@copydoc State::update()*/
     void update(const float deltaTime) override;
 
@@ -36,6 +36,7 @@ private:
 
     const float mSwapTime;
     sf::Clock   mClock;
+    Config&     mStateConfig;
 };
 
 }  // namespace machine

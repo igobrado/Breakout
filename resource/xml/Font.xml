@@ -2,6 +2,6 @@
 
 <Fonts>
   <Classic>
-    <FontID Font = "../resource/font/asrfont.ttf" Name = "asrfont"/>
+    <FontID Font = "../resource/fonts/asrfont.ttf" Name = "asrfont"/>
   </Classic>
 </Fonts>

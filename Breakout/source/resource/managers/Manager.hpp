@@ -3,7 +3,6 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-
 #include <cstring>
 #include <future>
 #include <iostream>
@@ -69,9 +68,9 @@ protected:
      * @return True if insert happened.
      */
     template <typename... Args>
-    bool emplace(Args&&... args)
+    auto emplace(Args&&... args)
     {
-        return mData.emplace(std::forward<Args>(args)...).second;
+        return mData.emplace(std::forward<Args>(args)...);
     }
 
     /**
@@ -225,35 +224,55 @@ private:
 class FontManager : public Manager<sf::Font>
 {
 public:
-    explicit FontManager(const char* xmlFile)
+    explicit FontManager(const char* xmlFile)  //
         : Manager{}
     {
-        if (mDocument.LoadFile(xmlFile))
+        if (mDocument.LoadFile(xmlFile) == tinyxml2::XML_SUCCESS)
         {
+            auto startPos{ mDocument.FirstChildElement("Fonts") };
+            Load(startPos, "Classic", "FontID");
         }
     }
 
-	void Load(tinyxml2::XMLElement* startPos, const char* moduleName, const char* componentName)
-	{
-		tinyxml2::XMLElement* element{ startPos->FirstChildElement(moduleName)->FirstChildElement(componentName) };
-		const char* path = "";
-		const char* name = "";
+    void Load(tinyxml2::XMLElement* startPos, const char* moduleName, const char* componentName)
+    {
+        tinyxml2::XMLElement* element{ startPos->FirstChildElement(moduleName)->FirstChildElement(componentName) };
+        const char*           path = "";
+        const char*           name = "";
 
-		for (;         //
-			element;  //
-			element = element->NextSiblingElement(componentName))
-		{
-			element->QueryStringAttribute("Font", &path);
-			element->QueryStringAttribute("Name", &name);
-			sf::Font font;
-			if (font.loadFromFile(path))
-			{
-                static_cast<void>(emplace(std::piecewise_construct,
-                    std::forward_as_tuple(tolower(name)),
-                    std::forward_as_tuple(font)));
-			}
-		}
-	}
+        for (;         //
+             element;  //
+             element = element->NextSiblingElement(componentName))
+        {
+            element->QueryStringAttribute("Font", &path);
+            element->QueryStringAttribute("Name", &name);
+            sf::Font font;
+            if (font.loadFromFile(path))
+            {
+                // lot of crap here
+                mFontPromise.set_value(emplace(std::piecewise_construct,
+                                               std::forward_as_tuple(tolower(name)),
+                                               std::forward_as_tuple(font))
+                                               .first->second);
+            }
+        }
+    }
+
+    /**
+     * @brief Get reference to Font that will be loaded here in load method.
+     *
+     * @note Use this method only if you are 100% sure that font will be loaded
+     * before you start to use it. Or, block until promise is not fulfilled.
+     *
+     * @return Future of reference to font.
+     */
+    std::future<sf::Font&> getPropertyFuture()
+    {
+        return mFontPromise.get_future();
+    }
+
+private:
+    std::promise<sf::Font&> mFontPromise;
 };
 
 #endif  // BREAKOUT_MANAGER_HPP

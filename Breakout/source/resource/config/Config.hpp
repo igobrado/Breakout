@@ -12,6 +12,11 @@ class Config
 public:
     virtual ~Config() = default;
 
+    /**
+     * @brief Draws all widgets to the screen (if there are any).
+     *
+     * @param window
+     */
     virtual void drawAllComponents(sf::RenderWindow& window) = 0;
 };
 

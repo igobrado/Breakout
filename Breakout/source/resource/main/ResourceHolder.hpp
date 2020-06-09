@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../managers/Manager.hpp"
+#include "Config.hpp"
 
 /**
  * @brief Holds instances of Managers related objects.
@@ -20,14 +21,17 @@ public:
      * @throws std::out_of_range if there is no mapped texture.
      */
     const sf::Texture& getTexture(std::string_view targetID) const;
-    const sf::Font& getFont(std::string_view targetID) const;
+    const sf::Font&    getFont(std::string_view targetID) const;
 
+    Config& getConfig(std::string_view targetID);
     void play(std::string_view music);
 
 private:
+    FontManager    mFontManager;
     TextureManager mTextureManager;
     SoundManager   mSoundManager;
-    FontManager    mFontManager;
+
+    std::map<std::string, std::unique_ptr<Config>, defined::str_less> mConfigs;
 };
 
 #endif  // BREAKOUT_RESOURCEHOLDER_HPP
