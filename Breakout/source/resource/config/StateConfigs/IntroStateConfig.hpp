@@ -1,13 +1,22 @@
-#include "../Config.hpp"
+#ifndef BREAKOUT_INTROCONFIG_HPP
+#define BREAKOUT_INTROCONFIG_HPP
+
+#include <Config.hpp>
+
+#include "Widget.hpp"
+#include "private/StateDefinitions.hpp"
 
 class IntroStateConfig : public Config
 {
-
 public:
-    explicit IntroStateConfig(const char* xmlFilePath)
-    /**@copydoc Config::configure()*/
-    void configure() override;
+    IntroStateConfig(const char* xmlPath, sf::Font& fontRef);
+
+    void drawAllComponents(sf::RenderWindow& window) override;
 
 private:
+    const char*                          mXmlDocumentPath;
+    sf::Font&                            mFontRef;
+    std::vector<std::unique_ptr<Widget>> mWidgets;
+};
 
-}
+#endif  // BREAKOUT_INTROCONFIG_HPP

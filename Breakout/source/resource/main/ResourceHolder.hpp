@@ -19,12 +19,15 @@ public:
      * @return Valid reference to texture object
      * @throws std::out_of_range if there is no mapped texture.
      */
-    const sf::Texture& getTexture(std::string_view) const;
+    const sf::Texture& getTexture(std::string_view targetID) const;
+    const sf::Font& getFont(std::string_view targetID) const;
 
     void play(std::string_view music);
+
 private:
     TextureManager mTextureManager;
     SoundManager   mSoundManager;
+    FontManager    mFontManager;
 };
 
 #endif  // BREAKOUT_RESOURCEHOLDER_HPP

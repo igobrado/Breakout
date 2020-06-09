@@ -225,7 +225,7 @@ private:
 class FontManager : public Manager<sf::Font>
 {
 public:
-    FontManager(const char* xmlFile)
+    explicit FontManager(const char* xmlFile)
         : Manager{}
     {
         if (mDocument.LoadFile(xmlFile))
@@ -254,25 +254,6 @@ public:
 			}
 		}
 	}
-    
-    const sf::Font& font(std::string_view fontName) 
-    {
-		try
-		{
-            auto fnt = this->getProperty(fontName);
-            return fnt;
-		}
-		catch (std::out_of_range& excp)
-		{
-			FILE* fp = std::fopen("ErrorLog.txt", "w");
-			std::fprintf(fp, "Failed with %s", excp.what());
-		}
-        return sEmptyFont;
-    }
-    ///< shall be returned from \see FontManager::font() 
-    ///< if there is no wanted font in map
-    static const sf::Font sEmptyFont;
-
 };
 
 #endif  // BREAKOUT_MANAGER_HPP
