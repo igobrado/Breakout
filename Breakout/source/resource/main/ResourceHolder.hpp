@@ -20,11 +20,11 @@ public:
      * @return Valid reference to texture object
      * @throws std::out_of_range if there is no mapped texture.
      */
-    const sf::Texture& getTexture(std::string_view targetID) const;
-    const sf::Font&    getFont(std::string_view targetID) const;
+    sf::Texture& getTexture(const std::string_view targetID);
+    sf::Font&    getFont(const std::string_view targetID);
 
     Config& getConfig(std::string_view targetID);
-    void play(std::string_view music);
+    void    play(std::string_view music);
 
 private:
     FontManager    mFontManager;

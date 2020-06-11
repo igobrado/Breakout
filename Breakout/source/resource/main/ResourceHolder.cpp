@@ -10,15 +10,15 @@ ResourceHolder::ResourceHolder()
 {
     mConfigs["intro"] = std::make_unique<IntroStateConfig>(
             "../resource/xml/state/intro.xml",
-            mFontManager.getPropertyFuture().get());
+            mFontManager.getProperty("asrfont"));
 }
 
-const sf::Texture& ResourceHolder::getTexture(std::string_view targetID) const
+sf::Texture& ResourceHolder::getTexture(const std::string_view targetID)
 {
     return mTextureManager.getProperty(targetID);
 }
 
-const sf::Font& ResourceHolder::getFont(std::string_view targetID) const
+sf::Font& ResourceHolder::getFont(const std::string_view targetID)
 {
     return mFontManager.getProperty(targetID);
 }

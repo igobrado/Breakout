@@ -37,7 +37,7 @@ public:
      * @return founded object.
      * @throws std::out_of_range if object was not found.
      */
-    const T& getProperty(const std::string_view targetID) const
+    T& getProperty(const std::string_view targetID)
     {
         auto found = mData.find(targetID);
         if (found == std::end(mData))
@@ -250,29 +250,13 @@ public:
             if (font.loadFromFile(path))
             {
                 // lot of crap here
-                mFontPromise.set_value(emplace(std::piecewise_construct,
-                                               std::forward_as_tuple(tolower(name)),
-                                               std::forward_as_tuple(font))
-                                               .first->second);
+                static_cast<void>(
+                        emplace(std::piecewise_construct,
+                                std::forward_as_tuple(tolower(name)),
+                                std::forward_as_tuple(font)));
             }
         }
     }
-
-    /**
-     * @brief Get reference to Font that will be loaded here in load method.
-     *
-     * @note Use this method only if you are 100% sure that font will be loaded
-     * before you start to use it. Or, block until promise is not fulfilled.
-     *
-     * @return Future of reference to font.
-     */
-    std::future<sf::Font&> getPropertyFuture()
-    {
-        return mFontPromise.get_future();
-    }
-
-private:
-    std::promise<sf::Font&> mFontPromise;
 };
 
 #endif  // BREAKOUT_MANAGER_HPP
