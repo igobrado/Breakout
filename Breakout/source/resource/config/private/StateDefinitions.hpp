@@ -17,7 +17,7 @@ public:
         return instance;
     }
 
-    [[nodiscard]] std::vector<std::unique_ptr<Widget>>&& getWidgets(const char* xmlFilePath, sf::Font& font) const;
+    [[nodiscard]] static std::vector<std::unique_ptr<Widget>> getWidgets(const char* xmlFilePath, sf::Font& font) ;
 
 private:
     StateDefinitions() = default;

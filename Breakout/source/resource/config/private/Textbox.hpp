@@ -11,7 +11,8 @@ public:
             sf::Font&     font,
             const char*   text          = "",
             bool          useBackground = false,
-            bool          writeable     = false);
+            bool          writeable     = false,
+            std::uint64_t size = 60);
     ~Textbox() override = default;
 
     /**@copydoc Drawable::draw()*/
@@ -27,6 +28,8 @@ private:
     sf::Text   mText;
     const bool mUseBackground;
     const bool mWriteable;
+
+    const std::uint64_t mSize;
 };
 
 #endif  // BREAKOUT_TEXTBOX_HPP

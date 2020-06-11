@@ -2,14 +2,15 @@
 
 #include "Textbox.hpp"
 
-std::vector<std::unique_ptr<Widget>>&& StateDefinitions::getWidgets(const char* xmlFilePath, sf::Font& font) const
+std::vector<std::unique_ptr<Widget>> StateDefinitions::getWidgets(const char* xmlFilePath, sf::Font& font)
 {
     std::vector<std::unique_ptr<Widget>> widgets{};
     tinyxml2::XMLDocument                document;
-    if (document.LoadFile(xmlFilePath) == tinyxml2::XMLError::XML_SUCCESS)
+    if (document.LoadFile(xmlFilePath) == tinyxml2::XML_SUCCESS)
     {
         auto startPos{ document.FirstChildElement("Config") };
-        auto element{ startPos->FirstChildElement("Textbox") };
+        auto element{ startPos->FirstChildElement("Intro")->FirstChildElement("Textbox") };
+
         for (;  //
              element;
              element = element->NextSiblingElement(("Textbox")))
@@ -19,12 +20,14 @@ std::vector<std::unique_ptr<Widget>>&& StateDefinitions::getWidgets(const char* 
             std::uint64_t useBackground = 0U;
             std::uint64_t coordX        = 0U;
             std::uint64_t coordY        = 0U;
+            std::uint64_t size          = 0U;
 
             element->QueryStringAttribute("Text", &text);
             element->QueryUnsigned64Attribute("PosX", &coordX);
             element->QueryUnsigned64Attribute("PosY", &coordY);
-            element->QueryUnsigned64Attribute("PosY", &writeable);
+            element->QueryUnsigned64Attribute("Writeable", &writeable);
             element->QueryUnsigned64Attribute("UseBackground", &useBackground);
+            element->QueryUnsigned64Attribute("Size", &size);
 
             widgets.push_back(std::make_unique<Textbox>(
                     coordX,
@@ -32,7 +35,9 @@ std::vector<std::unique_ptr<Widget>>&& StateDefinitions::getWidgets(const char* 
                     font,
                     text,
                     static_cast<bool>(useBackground),
-                    static_cast<bool>(writeable)));
+                    static_cast<bool>(writeable),
+                    size));
         }
     }
+    return std::move(widgets);
 }
