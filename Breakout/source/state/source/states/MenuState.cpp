@@ -34,8 +34,4 @@ void MenuState::draw()
     mGameData.window().display();
 }
 
-void MenuState::onMouseKeyPressed(const sf::Mouse::Button button)
-{
-}
-
 }  // namespace machine

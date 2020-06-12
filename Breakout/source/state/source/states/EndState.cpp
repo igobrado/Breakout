@@ -35,8 +35,4 @@ void EndState::draw()
     mGameData.window().display();
 }
 
-void EndState::onMouseKeyPressed(const sf::Mouse::Button button)
-{
-}
-
 }  // namespace machine

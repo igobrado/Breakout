@@ -43,8 +43,4 @@ void IntroState::draw()
     mGameData.window().display();
 }
 
-void IntroState::onMouseKeyPressed(const sf::Mouse::Button button)
-{
-}
-
 }  // namespace machine
