@@ -36,7 +36,7 @@ class Level
 public:
     Level(ResourceHolder&         resourceHolder,
           const BrickDefinitions& brickDefinitions,
-          std::function<void()>&& endLevelCallback);
+          std::function<void()>   endLevelCallback);
     Level(Level&& other) noexcept;
     Level& operator=(Level&& other) noexcept;
     /**

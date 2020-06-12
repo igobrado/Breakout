@@ -14,7 +14,9 @@
 class ResourceHolder
 {
 public:
-    ResourceHolder();
+    ResourceHolder(
+            const sf::RenderWindow&                             renderWindow,
+            const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap);
 
     /**
      * @return Valid reference to texture object

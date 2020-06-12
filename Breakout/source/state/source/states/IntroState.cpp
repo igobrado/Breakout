@@ -19,19 +19,7 @@ IntroState::IntroState(common::GameData& gameData)  //
 
 void IntroState::update(const float deltaTime)
 {
-    // TODO: Break if level cant load
-    if (mClock.getElapsedTime().asSeconds() > mSwapTime)
-    {
-        try
-        {
-            mGameData.switchState(machine::StateType::GAME);
-        }
-        catch (const std::out_of_range& excp)
-        {
-            std::FILE* fp = std::fopen("LevelLog.txt", "");
-            std::fprintf(fp, "Failed opening creating level: %s", excp.what());
-        }
-    }
+    mStateConfig.updateMovableComponents(deltaTime);
 }
 
 void IntroState::handleInput()

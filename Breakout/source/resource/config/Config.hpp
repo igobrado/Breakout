@@ -18,6 +18,15 @@ public:
      * @param window
      */
     virtual void drawAllComponents(sf::RenderWindow& window) = 0;
+
+    /**
+     * Updates movement of movable components.
+     *
+     * Since some of widgets can move, like arrow update is needed.
+     * @param deltaTime
+     */
+    virtual void updateMovableComponents(const float deltaTime) = 0;
+
 };
 
 #endif  // BREAKOUT_CONFIG_HPP

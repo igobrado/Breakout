@@ -50,7 +50,14 @@ public:
      * @return scaling factor relative on 1280x720 resolution.
      */
     sf::Vector2f scalingFactor() const;
+
 private:
+    /**
+     * Used to hold lambda functions.
+     * Describes possible state changes from intro to --. Shall be pass as const ref to IntroStateConfig object.
+     */
+    std::map<std::string, std::function<void()>> mIntroStateSwitchesCallbackMap;
+
     ScreenDimensions        mScreenDimensions;
     sf::RenderWindow        mWindow;
     ::machine::StateMachine mStateMachine;

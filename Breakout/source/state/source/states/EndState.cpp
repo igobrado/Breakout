@@ -6,7 +6,7 @@ namespace machine
 EndState::EndState(common::GameData& gameData)  //
     : State{}
     , mGameData{ gameData }
-    , mBackground{ mGameData.resource().getTexture("") }
+    , mBackground{ mGameData.resource().getTexture("statetwo") }
 
 {
 }

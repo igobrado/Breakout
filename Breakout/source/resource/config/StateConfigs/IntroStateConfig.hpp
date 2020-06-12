@@ -2,6 +2,7 @@
 #define BREAKOUT_INTROCONFIG_HPP
 
 #include <Config.hpp>
+#include <functional>
 
 #include "Widget.hpp"
 #include "private/StateDefinitions.hpp"
@@ -15,15 +16,25 @@
 class IntroStateConfig : public Config
 {
 public:
-    IntroStateConfig(const char* xmlPath, sf::Font& fontRef);
+    IntroStateConfig(
+            const char*                                         xmlPath,
+            sf::Font&                                           fontRef,
+            sf::Texture&                                        arrowTexture,
+            const sf::RenderWindow&                             windowRef,
+            const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap);
 
     /**@copydoc Config::drawAllComponents()*/
     void drawAllComponents(sf::RenderWindow& window) override;
 
+    /**@copydoc Config::updateMovableComponents()*/
+    void updateMovableComponents(const float deltaTime) override;
+
 private:
-    const char*                          mXmlDocumentPath;
-    sf::Font&                            mFontRef;
-    std::vector<std::unique_ptr<Widget>> mWidgets;
+    const char*                                         mXmlDocumentPath;
+    sf::Font&                                           mFontRef;
+    std::vector<std::unique_ptr<Widget>>                mWidgets;
+    std::unique_ptr<Widget>                             mArrow;
+    const std::map<std::string, std::function<void()>>& mSwitchStateCallbackMap;
 };
 
 #endif  // BREAKOUT_INTROCONFIG_HPP

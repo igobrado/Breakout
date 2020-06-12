@@ -2,7 +2,9 @@
 
 #include "StateConfigs/IntroStateConfig.hpp"
 
-ResourceHolder::ResourceHolder()
+ResourceHolder::ResourceHolder(
+        const sf::RenderWindow&                      renderWindow,
+        const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap)
     : mFontManager{ "../resource/xml/Font.xml" }
     , mTextureManager{ "../resource/xml/Textures.xml" }
     , mSoundManager{ "../resource/xml/Sound.xml" }
@@ -10,7 +12,10 @@ ResourceHolder::ResourceHolder()
 {
     mConfigs["intro"] = std::make_unique<IntroStateConfig>(
             "../resource/xml/state/intro.xml",
-            mFontManager.getProperty("asrfont"));
+            mFontManager.getProperty("asrfont"),
+            mTextureManager.getProperty("arrow"),
+            renderWindow,
+            introStateSwitchesCallbackMap);
 }
 
 sf::Texture& ResourceHolder::getTexture(const std::string_view targetID)

@@ -5,13 +5,18 @@
 namespace common
 {
 GameData::GameData(const char* applicationName)  //
-    : mScreenDimensions{ ::sScreenDimensions }
+    : mIntroStateSwitchesCallbackMap{ { "New game", [this]() { switchState(::machine::StateType::GAME); } },
+                                      { "Enter name", [this]() { switchState(::machine::StateType::GAME); } },
+                                      { "Quit game", [this]() { switchState(::machine::StateType::GAME); } },
+                                      { "Scoreboard", [this]() { switchState(::machine::StateType::SCOREBOARD); } } }
+    , mScreenDimensions{ ::sScreenDimensions }
     , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
     , mStateMachine{}
-    , mResourceHolder{}
+    , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap }
     , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }
     , mScalingFactorY{ static_cast<float>(mWindow.getSize().y / 720.) }
 {
+    mWindow.setMouseCursorVisible(false);
 }
 
 sf::RenderWindow& GameData::window()

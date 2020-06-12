@@ -2,11 +2,12 @@
 
 #include <cassert>
 #include <random>
+#include <utility>
 
 Level::Level(
         ResourceHolder&         resourceHolder,
         const BrickDefinitions& brickDefinitions,
-        std::function<void()>&& endLevelCallback)
+        std::function<void()>   endLevelCallback)
     : mResourceHolder{ resourceHolder }
     , mBall{ mResourceHolder.getTexture("ball"), brickDefinitions[0].scalingFactor }  ///< ugly workaround
                                                                                       ///< shall be removed
@@ -24,6 +25,7 @@ Level::Level(Level&& other) noexcept
     , mBall{ std::move(other.mBall) }
     , mBricks{ std::move(other.mBricks) }
     , mPaddle({ std::move(other.mPaddle) })
+    , mEndLevelCallback{ std::move(other.mEndLevelCallback) }
 {
 }
 
@@ -54,12 +56,12 @@ void Level::update(const float& deltaTime)
         // increaseScore
         if (mBricks.empty())
         {
-            // kill level
         }
     }
-    if (mBall.definitions().currentPosition.y < 0)
+
+    if (mBall.definitions().currentPosition.y > mPaddle.definitions().currentPosition.y)
     {
-        // if ball is lower then paddle kill level, for now leave empty.
+        mEndLevelCallback();
     }
 }
 

@@ -11,7 +11,9 @@ enum class StateType
     INTRO,
     MENU,
     GAME,
-    END
+    END,
+    SCOREBOARD,
+
 };
 
 /**
