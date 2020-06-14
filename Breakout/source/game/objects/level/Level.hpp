@@ -34,11 +34,13 @@ using BrickDefinitionsMap = std::unordered_map<LevelID, BrickDefinitions>;
 class Level
 {
 public:
-    Level(ResourceHolder&         resourceHolder,
-          const BrickDefinitions& brickDefinitions,
-          std::function<void()>   endLevelCallback);
+    Level(ResourceHolder&          resourceHolder,
+          const BrickDefinitions&  brickDefinitions,
+          std::function<void()>    endLevelCallback,
+          std::function<void(int)> scoreIncreaseCallback);
     Level(Level&& other) noexcept;
     Level& operator=(Level&& other) noexcept;
+
     /**
      * @brief Updates the scene.
      *
@@ -72,11 +74,16 @@ protected:
     std::vector<gui::Brick>::iterator checkBrickCollision();
 
 private:
-    ResourceHolder&         mResourceHolder;
-    std::vector<gui::Brick> mBricks;
-    gui::Ball               mBall;
-    gui::Paddle             mPaddle;
-    std::function<void()>   mEndLevelCallback;
+    ResourceHolder&          mResourceHolder;
+    std::vector<gui::Brick>  mBricks;
+    gui::Ball                mBall;
+    gui::Paddle              mPaddle;
+    std::function<void()>    mEndLevelCallback;
+    std::function<void(int)> mScoreIncreaseCallback;  ///< Functor that shall receive number
+                                                      ///< for how much score should increase.
+
+    static constexpr int sIncreaseWHenBrickIsWeaken    = 1; ///< To avoid magic numbers in codebase.
+    static constexpr int sIncreaseWhenBrickIsDestroyed = 2;
 };
 
 #endif  // BREAKOUT_LEVEL_HPP

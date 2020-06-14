@@ -15,8 +15,11 @@ GameState::GameState(common::GameData& gameData)  //
     gui::BrickDef    cyan{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
     BrickDefinitions levelDefinitions{ red, blue, green, cyan };
 
-    mLevelStack.push(
-            Level{ mGameData.resource(), levelDefinitions, [this]() { mGameData.switchState(StateType::END); } });
+    mLevelStack.push(Level{
+            mGameData.resource(),
+            levelDefinitions,
+            [this]() { mGameData.switchState(StateType::END); },
+            [this](int increaseNumber) { mGameData.scoreboard().increaseCurrentPlayerScore(increaseNumber); } });
 }
 
 void GameState::update(const float deltaTime)

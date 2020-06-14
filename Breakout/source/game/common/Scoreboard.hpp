@@ -10,6 +10,12 @@
 
 #include "private/Textbox.hpp"
 
+/**
+ * @brief Represents player which is playing the game.
+ *
+ * Player struct holds player name and player's score.
+ * Every instance of player shall be unique.
+ */
 struct Player
 {
     Player() = default;
@@ -19,7 +25,15 @@ struct Player
     {
     }
 
-    [[nodiscard]] std::string toString() const
+    /**
+     * @brief Convert's player score and name to single string.
+     *
+     * @note Even if method is using std::to_string() for converting score (which is a number),
+     * this method won't throw!
+     *
+     * @return valid string if conversion happen, if not string which will be returned shall be empty.
+     */
+    [[nodiscard]] std::string toString() const noexcept
     {
         try
         {
@@ -33,7 +47,7 @@ struct Player
         }
     }
 
-    const Player&        operator=(const Player& other);
+    Player&        operator=(const Player& other);
     friend std::istream& operator>>(std::istream& is, Player& player);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
@@ -46,8 +60,22 @@ class Scoreboard
 public:
     explicit Scoreboard(const char* scoreboardPath, sf::Font& font);
 
+    /**
+     * @brief Sort's vector of players in ascending order and output's it to file.
+     */
     void write();
+
+    /**
+     * @brief Draws the scoreboard on window.
+     */
     void draw(sf::RenderWindow& window);
+
+    /**
+     * @brief Increases current player's score by the given number.
+     *
+     * @param increaseNumber
+     */
+    void increaseCurrentPlayerScore(const int increaseNumber);
 
 private:
     const char*          mScoreboardPath;

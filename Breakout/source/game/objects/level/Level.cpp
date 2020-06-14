@@ -5,14 +5,16 @@
 #include <utility>
 
 Level::Level(
-        ResourceHolder&         resourceHolder,
-        const BrickDefinitions& brickDefinitions,
-        std::function<void()>   endLevelCallback)
+        ResourceHolder&          resourceHolder,
+        const BrickDefinitions&  brickDefinitions,
+        std::function<void()>    endLevelCallback,
+        std::function<void(int)> scoreIncreaseCallback)
     : mResourceHolder{ resourceHolder }
     , mBall{ mResourceHolder.getTexture("ball"), brickDefinitions[0].scalingFactor }  ///< ugly workaround
                                                                                       ///< shall be removed
     , mPaddle{ mResourceHolder.getTexture("paddle"), brickDefinitions[0].scalingFactor }
     , mEndLevelCallback{ std::move(endLevelCallback) }
+    , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
 {
     for (auto i : { 1, 2, 3, 4, 5 })
     {
@@ -26,6 +28,7 @@ Level::Level(Level&& other) noexcept
     , mBricks{ std::move(other.mBricks) }
     , mPaddle({ std::move(other.mPaddle) })
     , mEndLevelCallback{ std::move(other.mEndLevelCallback) }
+    , mScoreIncreaseCallback{ std::move(other.mScoreIncreaseCallback) }
 {
 }
 
@@ -53,7 +56,7 @@ void Level::update(const float& deltaTime)
     if (it != std::end(mBricks))
     {
         mBricks.erase(it);
-        // increaseScore
+
         if (mBricks.empty())
         {
         }
@@ -108,8 +111,10 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
         {
             brick.onHit();
             mBall.onBrickHit();
+            mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
             if (brick.shouldDestroy())
             {
+                mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
                 mResourceHolder.play("hit");
                 return true;
             }

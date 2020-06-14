@@ -13,7 +13,7 @@ std::ostream& operator<<(std::ostream& os, const Player& player)
     return os << player.playerName << std::setw(10) << player.score << "\n";
 }
 
-const Player& Player::operator=(const Player& other)
+Player& Player::operator=(const Player& other)
 {
     if (this != &other)
     {
@@ -84,4 +84,9 @@ void Scoreboard::write()
 void Scoreboard::draw(sf::RenderWindow& window)
 {
     std::for_each(mTextboxes.begin(), mTextboxes.end(), [&window](Textbox& textbox) { textbox.draw(window); });
+}
+
+void Scoreboard::increaseCurrentPlayerScore(const int increaseNumber)
+{
+    mCurrentPlayer->score += increaseNumber;
 }
