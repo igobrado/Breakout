@@ -15,6 +15,7 @@ GameData::GameData(const char* applicationName)  //
     , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap }
     , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }
     , mScalingFactorY{ static_cast<float>(mWindow.getSize().y / 720.) }
+    , mScoreboard{ "Scoreboard.txt", mResourceHolder.getFont("asrfont") }
 {
     mWindow.setMouseCursorVisible(false);
 }
@@ -42,6 +43,11 @@ ResourceHolder& GameData::resource()
 sf::Vector2f GameData::scalingFactor() const
 {
     return sf::Vector2f{ mScalingFactorX, mScalingFactorY };
+}
+
+Scoreboard& GameData::scoreboard()
+{
+    return mScoreboard;
 }
 
 }  // namespace common

@@ -20,6 +20,15 @@ Textbox::Textbox(
     mText.setOutlineColor(sf::Color::Red);
 }
 
+Textbox::Textbox(Textbox&& other) noexcept
+    : mSprite{ std::move(other.mSprite) }
+    , mText{ std::move(other.mText) }
+    , mUseBackground{ other.mUseBackground }
+    , mWriteable{ other.mWriteable }
+    , mSize{ other.mSize }
+{
+}
+
 std::string Textbox::widgetsFullName()
 {
     return std::string{ mText.getString().begin(), mText.getString().end() };  // return mText.getString();

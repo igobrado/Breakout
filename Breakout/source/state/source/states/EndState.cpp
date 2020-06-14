@@ -32,6 +32,7 @@ void EndState::draw()
 {
     mGameData.window().clear();
     mGameData.window().draw(mBackground);
+    mGameData.scoreboard().draw(mGameData.window());
     mGameData.window().display();
 }
 

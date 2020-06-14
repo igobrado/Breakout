@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "ResourceHolder.hpp"
+#include "Scoreboard.hpp"
 #include "ScreenDimensions.hpp"
 #include "StateMachine.hpp"
 
@@ -51,6 +52,8 @@ public:
      */
     sf::Vector2f scalingFactor() const;
 
+    Scoreboard& scoreboard();
+
 private:
     /**
      * Used to hold lambda functions.
@@ -64,6 +67,8 @@ private:
     ResourceHolder          mResourceHolder;
     const float             mScalingFactorX;
     const float             mScalingFactorY;
+
+    Scoreboard mScoreboard;
 };
 
 }  // namespace common

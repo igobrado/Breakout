@@ -13,9 +13,11 @@ public:
             bool          useBackground = false,
             bool          writeable     = false,
             std::uint64_t size          = 60);
+
+    Textbox(Textbox&& other) noexcept;
     ~Textbox() override = default;
 
-    std::string widgetsFullName() ;
+    std::string widgetsFullName();
 
     /**@copydoc Widget::bounds()*/
     sf::FloatRect bounds() const override;
