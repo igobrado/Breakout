@@ -33,6 +33,7 @@ public:
 
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
+
     std::string widgetsFullName() {return "";};
 
 public:

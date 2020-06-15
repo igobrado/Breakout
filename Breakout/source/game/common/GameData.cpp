@@ -5,14 +5,14 @@
 namespace common
 {
 GameData::GameData(const char* applicationName)  //
-    : mIntroStateSwitchesCallbackMap{ { "New game", [this]() { switchState(::machine::StateType::GAME); } },
-                                      { "Enter name", [this]() { switchState(::machine::StateType::GAME); } },
-                                      { "Quit game", [this]() { switchState(::machine::StateType::GAME); } },
+    : mIntroStateSwitchesCallbackMap{ { "Enter name", [this]() { switchState(::machine::StateType::INPUT); } },
                                       { "Scoreboard", [this]() { switchState(::machine::StateType::SCOREBOARD); } } }
+    , mInputStateSwitchesCallback{[this](const Player& player) {mScoreboard.newPlayer(player);
+                                            switchState(::machine::StateType::GAME); } }
     , mScreenDimensions{ ::sScreenDimensions }
     , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
     , mStateMachine{}
-    , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap }
+    , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap, mInputStateSwitchesCallback }
     , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }
     , mScalingFactorY{ static_cast<float>(mWindow.getSize().y / 720.) }
     , mScoreboard{ "Scoreboard.txt", mResourceHolder.getFont("asrfont") }

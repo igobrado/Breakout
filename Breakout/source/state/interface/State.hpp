@@ -13,6 +13,7 @@ enum class StateType
     GAME,
     END,
     SCOREBOARD,
+    INPUT
 
 };
 

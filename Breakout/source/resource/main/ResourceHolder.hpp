@@ -4,6 +4,7 @@
 
 #include "../managers/Manager.hpp"
 #include "Config.hpp"
+#include "Scoreboard.hpp"
 
 /**
  * @brief Holds instances of Managers related objects.
@@ -16,7 +17,8 @@ class ResourceHolder
 public:
     ResourceHolder(
             const sf::RenderWindow&                             renderWindow,
-            const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap);
+            const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap,
+            const std::function<void(const Player& player)>&    inputStateSwitchesCallback);
 
     /**
      * @return Valid reference to texture object

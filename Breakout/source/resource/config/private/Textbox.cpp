@@ -8,12 +8,19 @@ Textbox::Textbox(
         bool          useBackground,
         bool          writeable,
         std::uint64_t size)  //
-    : mSprite{}
+    : mInputRect{}
     , mText{ text, font }
     , mUseBackground{ useBackground }
     , mWriteable{ writeable }
     , mSize{ size }
 {
+    if (mUseBackground)
+    {
+        mInputRect.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
+        mInputRect.setSize({ 400, 80 });
+        mInputRect.setFillColor(sf::Color::White);
+    }
+
     mText.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
     mText.setCharacterSize(60);
     mText.setFillColor(sf::Color::Blue);
@@ -21,7 +28,7 @@ Textbox::Textbox(
 }
 
 Textbox::Textbox(Textbox&& other) noexcept
-    : mSprite{ std::move(other.mSprite) }
+    : mInputRect{ std::move(other.mInputRect) }
     , mText{ std::move(other.mText) }
     , mUseBackground{ other.mUseBackground }
     , mWriteable{ other.mWriteable }
@@ -36,6 +43,10 @@ std::string Textbox::widgetsFullName()
 
 sf::FloatRect Textbox::bounds() const
 {
+    if (mUseBackground)  ///< If background is used,then we need size of input rect, no text.
+    {
+        return mInputRect.getGlobalBounds();
+    }
     return mText.getGlobalBounds();
 }
 
@@ -48,9 +59,8 @@ void Textbox::draw(sf::RenderWindow& window)
 {
     if (mUseBackground)
     {
-        window.draw(mSprite);
+        window.draw(mInputRect);
     }
-
     window.draw(mText);
 }
 
@@ -66,5 +76,5 @@ void Textbox::onFocusEnded()
 
 bool Textbox::checkCollision(Widget& other)
 {
-    return mText.getGlobalBounds().intersects(other.bounds());
+    return bounds().intersects(other.bounds());
 }

@@ -44,8 +44,14 @@ public:
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
 
+    void setString(const sf::String& stringToSet)
+    {
+        mText.setString(stringToSet);
+    }
+
 private:
-    sf::Sprite mSprite;
+    sf::RectangleShape mInputRect;
+
     sf::Text   mText;
     const bool mUseBackground;
     const bool mWriteable;

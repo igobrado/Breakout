@@ -1,5 +1,5 @@
-#ifndef BREAKOUT_INTROCONFIG_HPP
-#define BREAKOUT_INTROCONFIG_HPP
+#ifndef BREAKOUT_INTROSTATECONFIG_HPP
+#define BREAKOUT_INTROSTATECONFIG_HPP
 
 #include <Config.hpp>
 #include <functional>
@@ -37,4 +37,4 @@ private:
     const std::map<std::string, std::function<void()>>& mSwitchStateCallbackMap;
 };
 
-#endif  // BREAKOUT_INTROCONFIG_HPP
+#endif  // BREAKOUT_INTROSTATECONFIG_HPP

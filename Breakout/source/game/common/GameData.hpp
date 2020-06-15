@@ -61,6 +61,14 @@ private:
      */
     std::map<std::string, std::function<void()>> mIntroStateSwitchesCallbackMap;
 
+    /**
+     * Used to hold lambda functions.
+     * Describes possible state changes from input to --. Shall be pass as const ref to InputStateConfig object.
+     *
+     * @note This map will have only one lambda for changing state and that lambda will receive player object.
+     */
+    std::function<void(const Player& player)> mInputStateSwitchesCallback;
+
     ScreenDimensions        mScreenDimensions;
     sf::RenderWindow        mWindow;
     ::machine::StateMachine mStateMachine;

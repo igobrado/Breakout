@@ -77,6 +77,7 @@ public:
      */
     void increaseCurrentPlayerScore(const int increaseNumber);
 
+    void newPlayer(const Player& newPlayer);
 private:
     const char*          mScoreboardPath;
     std::vector<Player>  mPlayers;

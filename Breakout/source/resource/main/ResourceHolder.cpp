@@ -1,21 +1,30 @@
 #include "ResourceHolder.hpp"
 
-#include "StateConfigs/IntroStateConfig.hpp"
+#include <StateConfigs/InputStateConfig.hpp>
+#include <StateConfigs/IntroStateConfig.hpp>
 
 ResourceHolder::ResourceHolder(
-        const sf::RenderWindow&                      renderWindow,
-        const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap)
+        const sf::RenderWindow&                             renderWindow,
+        const std::map<std::string, std::function<void()>>& introStateSwitchesCallbackMap,
+        const std::function<void(const Player& player)>&    inputStateSwitchesCallback)
     : mFontManager{ "../resource/xml/Font.xml" }
     , mTextureManager{ "../resource/xml/Textures.xml" }
     , mSoundManager{ "../resource/xml/Sound.xml" }
     , mConfigs{}
 {
     mConfigs["intro"] = std::make_unique<IntroStateConfig>(
-            "../resource/xml/state/intro.xml",
+            "../resource/xml/state/StateConfig.xml",
             mFontManager.getProperty("asrfont"),
             mTextureManager.getProperty("arrow"),
             renderWindow,
             introStateSwitchesCallbackMap);
+
+    mConfigs["input"] = std::make_unique<InputStateConfig>(
+            "../resource/xml/state/StateConfig.xml",
+            mFontManager.getProperty("asrfont"),
+            mTextureManager.getProperty("arrow"),
+            renderWindow,
+            inputStateSwitchesCallback);
 }
 
 sf::Texture& ResourceHolder::getTexture(const std::string_view targetID)

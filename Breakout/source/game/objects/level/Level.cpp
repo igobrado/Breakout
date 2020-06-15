@@ -104,6 +104,7 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
         }
     }
 }
+
 std::vector<gui::Brick>::iterator Level::checkBrickCollision()
 {
     return std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
@@ -111,10 +112,10 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
         {
             brick.onHit();
             mBall.onBrickHit();
-            mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
+            //mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
             if (brick.shouldDestroy())
             {
-                mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
+              //  mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
                 mResourceHolder.play("hit");
                 return true;
             }
