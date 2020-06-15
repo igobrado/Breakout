@@ -9,10 +9,14 @@ EndState::EndState(common::GameData& gameData)  //
     , mBackground{ mGameData.resource().getTexture("statetwo") }
 
 {
+    mGameData.scoreboard().sort();
 }
 
 void EndState::update(const float deltaTime)
 {
+    /**
+     * TODO: implement update method, updating the cursor etc..
+     */
 }
 
 void EndState::handleInput()

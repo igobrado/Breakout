@@ -27,6 +27,7 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
     : mScoreboardPath{ scoreboardPath }
     , mPlayers{}
     , mCurrentPlayer{}
+    , mIsSorted{ false }
 {
     std::ifstream inScoreboard(mScoreboardPath);
     if (inScoreboard.is_open())
@@ -58,9 +59,9 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
     }
 }
 
-void Scoreboard::write()
+void Scoreboard::sort()
 {
-    if (mPlayers.size() > 1)
+    if ((mPlayers.size() > 1) && (!mIsSorted))
     {
         std::sort(
                 std::begin(mPlayers),
@@ -70,6 +71,11 @@ void Scoreboard::write()
                     return first.score > second.score;
                 });
     }
+}
+
+void Scoreboard::write()
+{
+    sort();
 
     {
         std::ofstream outScoreboard(mScoreboardPath);
@@ -90,6 +96,7 @@ void Scoreboard::increaseCurrentPlayerScore(const int increaseNumber)
 {
     mCurrentPlayer->score += increaseNumber;
 }
+
 void Scoreboard::newPlayer(const Player& newPlayer)
 {
     mPlayers.emplace_back(newPlayer);

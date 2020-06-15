@@ -47,7 +47,7 @@ struct Player
         }
     }
 
-    Player&        operator=(const Player& other);
+    Player&              operator=(const Player& other);
     friend std::istream& operator>>(std::istream& is, Player& player);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
@@ -59,6 +59,11 @@ class Scoreboard
 {
 public:
     explicit Scoreboard(const char* scoreboardPath, sf::Font& font);
+
+    /**
+     * @brief Sorts vector of players in ascending order.
+     */
+    void sort();
 
     /**
      * @brief Sort's vector of players in ascending order and output's it to file.
@@ -78,10 +83,12 @@ public:
     void increaseCurrentPlayerScore(const int increaseNumber);
 
     void newPlayer(const Player& newPlayer);
+
 private:
     const char*          mScoreboardPath;
     std::vector<Player>  mPlayers;
     std::vector<Textbox> mTextboxes;
+    bool                 mIsSorted;
 
     std::vector<Player>::iterator mCurrentPlayer;
 };
