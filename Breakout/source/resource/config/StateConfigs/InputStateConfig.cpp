@@ -54,7 +54,7 @@ void InputStateConfig::handleInput(sf::Event& event)
             std::string playerName = std::string{ mPlayerInput.begin(), mPlayerInput.end() };
             mInputStateSwitchesCallback(Player{ playerName });
         }
-        else
+        else if (mPlayerInput.getSize() < sTextMaxSize)
         {
             mPlayerInput += event.text.unicode;
         }

@@ -5,14 +5,11 @@
 class Textbox : public Widget
 {
 public:
-    explicit Textbox(
-            std::uint32_t coordX,
+    Textbox(std::uint32_t coordX,
             std::uint32_t coordY,
             sf::Font&     font,
-            const char*   text          = "",
-            bool          useBackground = false,
-            bool          writeable     = false,
-            std::uint64_t size          = 60);
+            const char*   text = "",
+            std::uint64_t size = 60);
 
     Textbox(Textbox&& other) noexcept;
     ~Textbox() override = default;
@@ -44,18 +41,14 @@ public:
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
 
-    void setString(const sf::String& stringToSet)
-    {
-        mText.setString(stringToSet);
-    }
-
-private:
-    sf::RectangleShape mInputRect;
-
-    sf::Text   mText;
-    const bool mUseBackground;
-    const bool mWriteable;
-
+    /**
+     * @brief Sets the text that will be printed to the screen.
+     *
+     * @param stringToSet new string that will printed to screen.
+     */
+    void setString(const sf::String& stringToSet);
+protected:
+    sf::Text            mText;
     const std::uint64_t mSize;
 };
 

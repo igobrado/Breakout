@@ -9,6 +9,7 @@ list(APPEND BREAKOUT_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/config/private/Arrow.hpp
         ${CMAKE_CURRENT_LIST_DIR}/config/private/StateDefinitions.hpp
         ${CMAKE_CURRENT_LIST_DIR}/config/private/Textbox.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/config/private/WriteableTextbox.hpp
         ${CMAKE_CURRENT_LIST_DIR}/main/ResourceHolder.hpp
         ${CMAKE_CURRENT_LIST_DIR}/managers/Manager.hpp
 
@@ -20,6 +21,7 @@ list(APPEND BREAKOUT_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/config/private/Arrow.cpp
         ${CMAKE_CURRENT_LIST_DIR}/config/private/StateDefinitions.cpp
         ${CMAKE_CURRENT_LIST_DIR}/config/private/Textbox.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/config/private/WriteableTextbox.cpp
         ${CMAKE_CURRENT_LIST_DIR}/main/ResourceHolder.cpp
 
         )

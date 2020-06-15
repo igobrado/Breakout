@@ -18,10 +18,10 @@ class InputStateConfig : public Config
 {
 public:
     InputStateConfig(
-            const char*                                xmlPath,
-            sf::Font&                                  fontRef,
-            sf::Texture&                               arrowTexture,
-            const sf::RenderWindow&                    windowRef,
+            const char*                                      xmlPath,
+            sf::Font&                                        fontRef,
+            sf::Texture&                                     arrowTexture,
+            const sf::RenderWindow&                          windowRef,
             const std::function<void(const Player& player)>& inputStateSwitchesCallback);
 
     /**@copydoc Config::drawAllComponents()*/
@@ -36,12 +36,14 @@ private:
     const char*                          mXmlDocumentPath;
     sf::Font&                            mFontRef;
     std::vector<std::unique_ptr<Widget>> mWidgets;
-    std::unique_ptr<Widget>              mArrow;  ///< TODO: ADD WRITEABLE TEXTBOX!!!!!!
+    std::unique_ptr<Widget>              mArrow;
     sf::String                           mPlayerInput;
     bool                                 mWidgetIsFocused;
 
     std::vector<std::unique_ptr<Widget>>::iterator   mFocusedTextboxIterator;
     const std::function<void(const Player& player)>& mInputStateSwitchesCallback;
+
+    static constexpr std::uint8_t sTextMaxSize = 13U;
 };
 
 #endif  // BREAKOUT_INTROCONFIG_HPP
