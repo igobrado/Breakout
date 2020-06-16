@@ -1,5 +1,5 @@
 include_directories("${CMAKE_CURRENT_LIST_DIR}/interface")
-set(SANDBOX_DIR "${CMAKE_CURRENT_LIST_DIR}/source/sandbox")
+set(SANDBOX_DIR "${CMAKE_CURRENT_LIST_DIR}/source/app")
 
 list(APPEND BREAKOUT_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/source/main.cpp

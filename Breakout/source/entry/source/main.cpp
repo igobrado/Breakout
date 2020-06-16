@@ -1,4 +1,4 @@
-#include "sandbox/Breakout.hpp"
+#include "app/Breakout.hpp"
 
 #ifdef DEBUG
 #include <fstream>
