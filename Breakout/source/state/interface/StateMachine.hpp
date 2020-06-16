@@ -1,9 +1,10 @@
 #ifndef BREAKOUT_STATEMACHINE_HPP
 #define BREAKOUT_STATEMACHINE_HPP
 
-#include "State.hpp"
 #include <memory>
 #include <stack>
+
+#include "State.hpp"
 
 namespace machine
 {
@@ -37,7 +38,6 @@ public:
      *
      * If there is not states on stack that are running or supposed to run.
      * Game / application will terminate.
-     *
      */
     void processChanges();
 
@@ -45,6 +45,17 @@ public:
      * @return Reference to a current running state. If returned value is being ignored, compiler will raise a warning.
      */
     [[nodiscard]] const std::unique_ptr<State>& activeState() const;
+
+    /**
+     * @brief Stops the application.
+     */
+    void stopApplication();
+
+    /**
+     * @return true if application should stop, otherwise false.
+     */
+    [[nodiscard]] bool shouldStopApplication() const;
+
 private:
     bool mIsReplacing;
     bool mIsAdding;

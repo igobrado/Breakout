@@ -6,9 +6,12 @@ namespace common
 {
 GameData::GameData(const char* applicationName)  //
     : mIntroStateSwitchesCallbackMap{ { "Enter name", [this]() { switchState(::machine::StateType::INPUT); } },
-                                      { "Scoreboard", [this]() { switchState(::machine::StateType::SCOREBOARD); } } }
-    , mInputStateSwitchesCallback{[this](const Player& player) {mScoreboard.newPlayer(player);
-                                            switchState(::machine::StateType::GAME); } }
+                                      { "Scoreboard", [this]() { switchState(::machine::StateType::SCOREBOARD); } },
+                                      { "Quit game", [this]() { mStateMachine.stopApplication(); } } }
+    , mInputStateSwitchesCallback{ [this](const Player& player) {
+        mScoreboard.newPlayer(player);
+        switchState(::machine::StateType::GAME);
+    } }
     , mScreenDimensions{ ::sScreenDimensions }
     , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
     , mStateMachine{}

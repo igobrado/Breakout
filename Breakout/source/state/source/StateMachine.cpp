@@ -17,8 +17,8 @@ void StateMachine::addState(std::unique_ptr<State> newState, bool isReplacing)
 {
     if (newState)
     {
-        mNextState = std::move(newState);
-        mIsAdding = true;
+        mNextState   = std::move(newState);
+        mIsAdding    = true;
         mIsReplacing = isReplacing;
     }
 }
@@ -30,42 +30,49 @@ void StateMachine::removeState()
 
 void StateMachine::processChanges()
 {
-    if (!mShouldStop)
+    if (mIsRemoving && !mStates.empty())
     {
-        if (mIsRemoving && !mStates.empty())
+        mStates.pop();
+
+        if (!mStates.empty())
         {
-            mStates.pop();
-
-            if (!mStates.empty())
-            {
-                mStates.top()->resume();
-            }
-
-            mIsRemoving = false;
+            mStates.top()->resume();
         }
-        if (mIsAdding)
+
+        mIsRemoving = false;
+    }
+    if (mIsAdding)
+    {
+        if (!mStates.empty())
         {
-            if (!mStates.empty())
+            if (mIsReplacing)
             {
-                if (mIsReplacing)
-                {
-                    mStates.pop();
-                }
-                else
-                {
-                    mStates.top()->pause();
-                }
+                mStates.pop();
             }
-
-            mStates.push(std::move(mNextState));
-            mIsAdding = false;
+            else
+            {
+                mStates.top()->pause();
+            }
         }
+
+        mStates.push(std::move(mNextState));
+        mIsAdding = false;
     }
 }
 
 const std::unique_ptr<State>& StateMachine::activeState() const
 {
     return mStates.top();
+}
+
+void StateMachine::stopApplication()
+{
+    mShouldStop = true;
+}
+
+bool StateMachine::shouldStopApplication() const
+{
+    return mShouldStop;
 }
 
 }  // namespace machine

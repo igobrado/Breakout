@@ -16,8 +16,8 @@ Breakout::Breakout(const char* applicationName)
 int Breakout::run()
 {
     float newTime, frameTime;
-    float currentTime = mClock.getElapsedTime().asSeconds();
-    float accumulator = 0.0f;
+    float currentTime         = mClock.getElapsedTime().asSeconds();
+    float accumulator         = 0.0f;
 
     while (mGameData->window().isOpen())
     {
@@ -35,8 +35,13 @@ int Breakout::run()
             const auto& activeState = mGameData->machine().activeState();
             activeState->handleInput();
             activeState->update(sDeltaTime);
+            if (mGameData->machine().shouldStopApplication())
+            {
+                mGameData->window().close();
+            }
             accumulator -= sDeltaTime;
         }
+
         mGameData->machine().activeState()->draw();
     }
     return 0;
