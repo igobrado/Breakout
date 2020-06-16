@@ -7,6 +7,7 @@ list(APPEND BREAKOUT_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/source/states/InputState.cpp
         ${CMAKE_CURRENT_LIST_DIR}/source/states/IntroState.cpp
         ${CMAKE_CURRENT_LIST_DIR}/source/states/MenuState.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/source/states/ScoreboardState.cpp
         ${CMAKE_CURRENT_LIST_DIR}/source/StateMachine.cpp
 
         )
@@ -20,4 +21,5 @@ list(APPEND BREAKOUT_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/source/states/InputState.hpp
         ${CMAKE_CURRENT_LIST_DIR}/source/states/IntroState.hpp
         ${CMAKE_CURRENT_LIST_DIR}/source/states/MenuState.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/source/states/ScoreboardState.hpp
         )

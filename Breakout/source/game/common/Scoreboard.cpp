@@ -82,5 +82,5 @@ void Scoreboard::increaseCurrentPlayerScore(const int increaseNumber)
 void Scoreboard::newPlayer(const Player& newPlayer)
 {
     mPlayers.emplace_back(newPlayer);
-    mCurrentPlayer = mPlayers.end();
+    mCurrentPlayer = mPlayers.end() - 1;
 }

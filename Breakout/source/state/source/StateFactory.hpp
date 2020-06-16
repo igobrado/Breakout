@@ -10,6 +10,7 @@
 #include "states/InputState.hpp"
 #include "states/IntroState.hpp"
 #include "states/MenuState.hpp"
+#include "states/ScoreboardState.hpp"
 
 class StateFactory
 {
@@ -28,6 +29,8 @@ public:
                 return std::make_unique<machine::EndState>(data);
             case machine::StateType::INPUT:
                 return std::make_unique<machine::InputState>(data);
+            case machine::StateType::SCOREBOARD:
+                return std::make_unique<machine::ScoreboardState>(data);
             default:
                 return nullptr;
         }

@@ -112,13 +112,13 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
         {
             brick.onHit();
             mBall.onBrickHit();
-            //mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
             if (brick.shouldDestroy())
             {
-              //  mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
+                mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
                 mResourceHolder.play("hit");
                 return true;
             }
+            mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
         }
         return false;
     });
