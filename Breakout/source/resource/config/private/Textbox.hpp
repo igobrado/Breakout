@@ -12,6 +12,8 @@ public:
             std::uint64_t size = 60);
 
     Textbox(Textbox&& other) noexcept;
+    Textbox& operator=(Textbox&& other);
+
     ~Textbox() override = default;
 
     std::string widgetsFullName();
@@ -47,9 +49,10 @@ public:
      * @param stringToSet new string that will printed to screen.
      */
     void setString(const sf::String& stringToSet);
+
 protected:
-    sf::Text            mText;
-    const std::uint64_t mSize;
+    sf::Text      mText;
+    std::uint64_t mSize;
 };
 
 #endif  // BREAKOUT_TEXTBOX_HPP

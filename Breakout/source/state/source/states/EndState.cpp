@@ -9,7 +9,7 @@ EndState::EndState(common::GameData& gameData)  //
     , mBackground{ mGameData.resource().getTexture("statetwo") }
 
 {
-    mGameData.scoreboard().sort();
+    mGameData.scoreboard().write();
 }
 
 void EndState::update(const float deltaTime)

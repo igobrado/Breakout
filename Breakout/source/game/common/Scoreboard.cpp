@@ -28,6 +28,7 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
     , mPlayers{}
     , mCurrentPlayer{}
     , mIsSorted{ false }
+    , mFont{ font }
 {
     std::ifstream inScoreboard(mScoreboardPath);
     if (inScoreboard.is_open())
@@ -36,29 +37,8 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
         std::copy(in, eof, std::back_inserter(mPlayers));
     }
 
-    std::uint32_t xBegin = 300;
-    std::uint32_t yBegin = 100;
-
-    std::uint32_t i = 1;
-    for (auto& mPlayer : mPlayers)
-    {
-        try
-        {
-            std::string tmp = std::to_string(i);
-            tmp += " " + mPlayer.toString();
-
-            Textbox tb{ xBegin, yBegin, font, tmp.c_str() };
-            mTextboxes.push_back(std::move(tb));
-            yBegin += 200;
-            ++i;
-        }
-        catch (const std::bad_alloc& ex)
-        {
-            std::cerr << ex.what() << std::endl;
-        }
-    }
+    std::transform(mPlayers.begin(), mPlayers.end(), std::back_inserter(mTextboxes), ConvertPlayerToTextbox(mFont));
 }
-
 void Scoreboard::sort()
 {
     if ((mPlayers.size() > 1) && (!mIsSorted))
@@ -76,6 +56,8 @@ void Scoreboard::sort()
 void Scoreboard::write()
 {
     sort();
+
+    std::transform(mPlayers.begin(), mPlayers.end(), std::back_inserter(mTextboxes), ConvertPlayerToTextbox(mFont));
 
     {
         std::ofstream outScoreboard(mScoreboardPath);

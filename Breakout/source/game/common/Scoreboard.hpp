@@ -89,8 +89,48 @@ private:
     std::vector<Player>  mPlayers;
     std::vector<Textbox> mTextboxes;
     bool                 mIsSorted;
+    sf::Font&            mFont;
 
     std::vector<Player>::iterator mCurrentPlayer;
+
+    /**
+     * @brief Callable object which shall be called only to convert player object to printable player object.
+     */
+    struct ConvertPlayerToTextbox
+    {
+        explicit ConvertPlayerToTextbox(sf::Font& font)  //
+            : i{ 1 }
+            , xBegin{ 300 }
+            , yBegin{ 100 }
+            , font{ font }
+        {
+        }
+
+        Textbox operator()(const Player& player)
+        {
+            try
+            {
+                std::string tmp = std::to_string(i);
+                tmp += " " + player.toString();
+
+                Textbox tb{ static_cast<uint32_t>(xBegin), static_cast<uint32_t>(yBegin), font, tmp.c_str() };
+                yBegin += 200;
+                ++i;
+                return tb;
+            }
+            catch (const std::bad_alloc& ex)
+            {
+                std::cerr << ex.what() << std::endl;
+            }
+            return Textbox{ 0, 0, font, "" };
+        }
+
+    private:
+        std::uint8_t  i;
+        std::uint32_t xBegin;
+        std::uint32_t yBegin;
+        sf::Font&     font;
+    };
 };
 
 #endif  // BREAKOUT_SCOREBOARD_HPP

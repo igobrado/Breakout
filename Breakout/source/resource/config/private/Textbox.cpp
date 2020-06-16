@@ -22,6 +22,16 @@ Textbox::Textbox(Textbox&& other) noexcept
 {
 }
 
+Textbox& Textbox::operator=(Textbox&& other)
+{
+    if (this != &other)
+    {
+        mText = std::move(other.mText);
+        mSize = other.mSize;
+    }
+    return *this;
+}
+
 std::string Textbox::widgetsFullName()
 {
     return std::string{ mText.getString().begin(), mText.getString().end() };
