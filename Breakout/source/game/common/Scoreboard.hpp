@@ -88,7 +88,6 @@ private:
     const char*          mScoreboardPath;
     std::vector<Player>  mPlayers;
     std::vector<Textbox> mTextboxes;
-    bool                 mIsSorted;
     sf::Font&            mFont;
 
     std::vector<Player>::iterator mCurrentPlayer;

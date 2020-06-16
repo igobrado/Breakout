@@ -27,7 +27,6 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
     : mScoreboardPath{ scoreboardPath }
     , mPlayers{}
     , mCurrentPlayer{}
-    , mIsSorted{ false }
     , mFont{ font }
 {
     std::ifstream inScoreboard(mScoreboardPath);
@@ -41,7 +40,7 @@ Scoreboard::Scoreboard(const char* scoreboardPath, sf::Font& font)  //
 }
 void Scoreboard::sort()
 {
-    if ((mPlayers.size() > 1) && (!mIsSorted))
+    if (mPlayers.size() > 1)
     {
         std::sort(
                 std::begin(mPlayers),
@@ -69,9 +68,19 @@ void Scoreboard::write()
         }
     }
 }
+
 void Scoreboard::draw(sf::RenderWindow& window)
 {
-    std::for_each(mTextboxes.begin(), mTextboxes.end(), [&window](Textbox& textbox) { textbox.draw(window); });
+    // Not everyone deserves to be on scoreboard ;)
+    int i = 0;
+    for (auto& textbox : mTextboxes)
+    {
+        if (i < 4)
+        {
+            textbox.draw(window);
+        }
+        ++i;
+    }
 }
 
 void Scoreboard::increaseCurrentPlayerScore(const int increaseNumber)
