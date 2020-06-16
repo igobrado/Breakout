@@ -10,6 +10,7 @@ public:
             std::uint32_t coordX,
             std::uint32_t coordY,
             sf::Font&     font,
+            sf::Color     color,
             const char*   text          = "",
             std::uint64_t size          = 60);
 

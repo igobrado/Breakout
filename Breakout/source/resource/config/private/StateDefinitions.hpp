@@ -20,6 +20,8 @@ public:
     [[nodiscard]] std::vector<std::unique_ptr<Widget>>
             getWidgets(const char* xmlFilePath, sf::Font& font, const char* stateName);
 
+    static sf::Color stringToSFMLColor(const std::string& color);
+
 private:
     StateDefinitions() = default;
 };

@@ -113,7 +113,11 @@ private:
                 std::string tmp = std::to_string(i);
                 tmp += " " + player.toString();
 
-                Textbox tb{ static_cast<uint32_t>(xBegin), static_cast<uint32_t>(yBegin), font, tmp.c_str() };
+                Textbox tb{ static_cast<uint32_t>(xBegin),
+                            static_cast<uint32_t>(yBegin),
+                            font,
+                            sf::Color::Red,
+                            tmp.c_str() };
                 yBegin += 200;
                 ++i;
                 return tb;
@@ -122,7 +126,7 @@ private:
             {
                 std::cerr << ex.what() << std::endl;
             }
-            return Textbox{ 0, 0, font, "" };
+            return Textbox{ 0, 0, font, sf::Color::Black, "" };
         }
 
     private:

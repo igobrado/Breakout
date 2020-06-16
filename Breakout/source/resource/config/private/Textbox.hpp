@@ -8,6 +8,7 @@ public:
     Textbox(std::uint32_t coordX,
             std::uint32_t coordY,
             sf::Font&     font,
+            sf::Color     color,
             const char*   text = "",
             std::uint64_t size = 60);
 
@@ -53,6 +54,7 @@ public:
 protected:
     sf::Text      mText;
     std::uint64_t mSize;
+    sf::Color     mColor;
 };
 
 #endif  // BREAKOUT_TEXTBOX_HPP

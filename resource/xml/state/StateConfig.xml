@@ -2,11 +2,11 @@
 
 <Config>
     <Intro>
-        <Textbox Text = "Enter name" PosX = "550" PosY = "150" Writeable = "0" Size = "60"/>
-        <Textbox Text = "Quit game" PosX = "550" PosY = "300" Writeable = "0" Size = "60"/>
-        <Textbox Text = "Scoreboard" PosX = "550" PosY = "450" Writeable = "0" Size = "60"/>
+        <Textbox Text="Enter name" PosX="550" PosY="150" Writeable="0" Size="60" Color="Red"/>
+        <Textbox Text="Quit game" PosX="550" PosY="300" Writeable="0" Size="60" Color="Red"/>
+        <Textbox Text="Scoreboard" PosX="550" PosY="450" Writeable="0" Size="60" Color="Red"/>
     </Intro>
     <Input>
-        <Textbox Text = "" PosX = "550" PosY = "100" Writeable = "1" Size = "60"/>
-    </Input>>
+        <Textbox Text="" PosX="550" PosY="100" Writeable="1" Size="60" Color="Blue"/>
+    </Input>
 </Config>

@@ -51,8 +51,7 @@ void InputStateConfig::handleInput(sf::Event& event)
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
         {
-            std::string playerName = std::string{ mPlayerInput.begin(), mPlayerInput.end() };
-            mInputStateSwitchesCallback(Player{ playerName });
+            mInputStateSwitchesCallback(Player{ std::string{ mPlayerInput.begin(), mPlayerInput.end() } });
         }
         else if (mPlayerInput.getSize() < sTextMaxSize)
         {

@@ -4,9 +4,10 @@ WriteableTextbox::WriteableTextbox(
         std::uint32_t coordX,
         std::uint32_t coordY,
         sf::Font&     font,
+        sf::Color     color,
         const char*   text,
         std::uint64_t size)
-    : Textbox(coordX, coordY, font, text, size)
+    : Textbox(coordX, coordY, font, color,  text, size)
 {
     mInputRect.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
     mInputRect.setOutlineColor(sf::Color::Red);

@@ -4,21 +4,22 @@ Textbox::Textbox(
         std::uint32_t coordX,
         std::uint32_t coordY,
         sf::Font&     font,
+        sf::Color     color,
         const char*   text,
         std::uint64_t size)  //
     : mText{ text, font }
     , mSize{ size }
+    , mColor{ color }
 {
-
     mText.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
     mText.setCharacterSize(60);
-    mText.setFillColor(sf::Color::Blue);
-    mText.setOutlineColor(sf::Color::Red);
+    mText.setFillColor(color);
 }
 
-Textbox::Textbox(Textbox&& other) noexcept
+Textbox::Textbox(Textbox&& other) noexcept  //
     : mText{ std::move(other.mText) }
     , mSize{ other.mSize }
+    , mColor{ other.mColor }
 {
 }
 
@@ -26,8 +27,9 @@ Textbox& Textbox::operator=(Textbox&& other)
 {
     if (this != &other)
     {
-        mText = std::move(other.mText);
-        mSize = other.mSize;
+        mText  = std::move(other.mText);
+        mSize  = other.mSize;
+        mColor = other.mColor;
     }
     return *this;
 }
@@ -54,12 +56,13 @@ void Textbox::draw(sf::RenderWindow& window)
 
 void Textbox::onFocus()
 {
+    // TODO: Magic number, remove
     mText.setFillColor(sf::Color{ 0, 160, 255 });
 }
 
 void Textbox::onFocusEnded()
 {
-    mText.setFillColor(sf::Color::Blue);
+    mText.setFillColor(mColor);
 }
 
 bool Textbox::checkCollision(Widget& other)
