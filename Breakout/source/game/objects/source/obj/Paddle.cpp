@@ -6,8 +6,8 @@ namespace gui
 {
 Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
     : mSprite{ texture }
-    , mPaddleDefinitions{ { sScreenDimensions.width / 2,
-                            sScreenDimensions.height - mSprite.getGlobalBounds().height * 4 },
+    , mPaddleDefinitions{ sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2),
+                            static_cast<float>(sScreenDimensions.height - mSprite.getGlobalBounds().height * 4) },
                           mSprite.getGlobalBounds(),
                           scalingFactor }
 {
@@ -70,7 +70,7 @@ void Paddle::update()
     }
     else if (mPaddleDefinitions.currentPosition.x < -mPaddleDefinitions.globalBounds.width)
     {
-        mSprite.setPosition(sScreenDimensions.width, mPaddleDefinitions.currentPosition.y);
+        mSprite.setPosition(static_cast<float>(sScreenDimensions.width), static_cast<float>(mPaddleDefinitions.currentPosition.y));
     }
     mSprite.move(mPaddleDefinitions.velocity);
 }

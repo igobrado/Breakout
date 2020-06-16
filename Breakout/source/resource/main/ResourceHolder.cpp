@@ -45,7 +45,7 @@ Config& ResourceHolder::getConfig(std::string_view targetID)
         return *tmp->second;
     }
     throw std::out_of_range(
-            "There is no config with " + std::string{ targetID.begin() } + " Look at your path for config.");
+            "There is no config with " + std::string{ targetID.begin(), targetID.end() } + " Look at your path for config.");
 }
 
 void ResourceHolder::play(std::string_view music)
