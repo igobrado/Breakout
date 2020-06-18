@@ -23,6 +23,7 @@ Breakout is an opensource project that started as school assigment for AWP(advan
 
 # TODO
 - Implement Menu state which will be responsible for enabling / disabling sound, changing name of player, exiting game etc..
+- Postbuild command for cmake to copy resources from one path to another (or set root directory, to be decided)
 
 ### Installation and building
 
