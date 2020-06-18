@@ -14,18 +14,19 @@ GameState::GameState(common::GameData& gameData)  //
     , mLevelBrickDefinitions{}
     , mNumberOfLevels{ 2U }
 {
-    std::random_device                     rd;
-    std::mt19937                           mt(rd());
-    std::uniform_int_distribution<uint8_t> dist(1, 3);
 
-    for (uint8_t i = 1; i != mNumberOfLevels; ++i)
-    {
-        gui::BrickDef red{ dist(mt), gui::BrickColor::RED, mGameData.scalingFactor() };
-        gui::BrickDef blue{ dist(mt), gui::BrickColor::BLUE, mGameData.scalingFactor() };
-        gui::BrickDef green{ dist(mt), gui::BrickColor::GREEN, mGameData.scalingFactor() };
-        gui::BrickDef cyan{ dist(mt), gui::BrickColor::CYAN, mGameData.scalingFactor() };
-        mLevelBrickDefinitions.push_back(BrickDefinitions{ red, blue, green, cyan });
-    }
+    // TODO: Configuration file
+    gui::BrickDef red{ 1, gui::BrickColor::RED, mGameData.scalingFactor() };
+    gui::BrickDef blue{ 1, gui::BrickColor::BLUE, mGameData.scalingFactor() };
+    gui::BrickDef green{1, gui::BrickColor::GREEN, mGameData.scalingFactor() };
+    gui::BrickDef cyan{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
+
+    gui::BrickDef redTwo{3, gui::BrickColor::RED, mGameData.scalingFactor() };
+    gui::BrickDef blueTwo{2, gui::BrickColor::BLUE, mGameData.scalingFactor() };
+    gui::BrickDef greenTwo{4, gui::BrickColor::GREEN, mGameData.scalingFactor() };
+    gui::BrickDef cyanTwo{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
+    mLevelBrickDefinitions.push_back(BrickDefinitions{ red, blue, green, cyan });
+    mLevelBrickDefinitions.push_back(BrickDefinitions{ redTwo, blueTwo, greenTwo, cyanTwo });
 
     mLevelStack.push(Level{
             mGameData.resource(),
