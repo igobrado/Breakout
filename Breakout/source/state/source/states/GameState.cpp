@@ -59,9 +59,9 @@ void GameState::handleInput()
 {
     sf::Event         eventToProcess{};
     sf::RenderWindow& window = mGameData.window();
-    if (eventToProcess.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+    while (window.pollEvent(eventToProcess))
     {
-        if (eventToProcess.type == sf::Event::Closed)
+        if (eventToProcess.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
         {
             window.close();
         }

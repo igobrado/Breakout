@@ -45,10 +45,11 @@ bool Level::update(const float& deltaTime)
     if (mBall.isCollided(mPaddle.definitions().globalBounds))
     {
         mBall.onPaddleHit();
+        mResourceHolder.play("hittwo");
     }
+    mPaddle.updateMovement(deltaTime);
 
     auto it = checkBrickCollision();
-    mPaddle.updateMovement(deltaTime);
     if (it != std::end(mBricks))
     {
         mBricks.erase(it);
@@ -110,10 +111,10 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
         {
             brick.onHit();
             mBall.onBrickHit();
+            mResourceHolder.play("hit");
             if (brick.shouldDestroy())
             {
                 mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
-                mResourceHolder.play("hit");
                 return true;
             }
             mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
