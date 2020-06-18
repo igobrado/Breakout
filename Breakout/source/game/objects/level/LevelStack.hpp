@@ -13,9 +13,9 @@ public:
         c.begin()->draw(window);
     }
 
-    void update(const float& deltaTime)
+    bool update(const float& deltaTime)
     {
-        c.begin()->update(deltaTime);
+        return c.begin()->update(deltaTime);
     }
 
 };

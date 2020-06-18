@@ -16,7 +16,7 @@ public:
     /**@copydoc Drawable::draw()*/
     void draw(sf::RenderWindow& window) override;
 
-    /**@copydoc Movable::definitions()*/
+    /**@copydoc Movable::mLevelBrickDefinitions()*/
     const Definitions& definitions() override;
 
     /**@copydoc Movable::updateMovement()*/

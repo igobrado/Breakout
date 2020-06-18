@@ -44,13 +44,15 @@ public:
     Ball(Ball&& other) noexcept;
     Ball& operator=(Ball&& other) noexcept;
 
+    void resetBallPosition();
+
     /**@copydoc Drawable::draw()*/
     void  draw(sf::RenderWindow& window) override;
 
     /**@copydoc Movable::updateMovement()*/
     void updateMovement(const float& deltaTime) override;
 
-    /**@copydoc Movable::definitions()*/
+    /**@copydoc Movable::mLevelBrickDefinitions()*/
     const Definitions& definitions() override;
 
     /**

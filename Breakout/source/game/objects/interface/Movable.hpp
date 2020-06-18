@@ -15,7 +15,7 @@ enum class Direction
  * @note Intended to be empty.
  * Used to avoid multiple getters like getPosition(), getGlobalBounds() etc..
  * All definition types classes shall inherit from it
- * and return relevant data from virtual method \see Movable::definitions
+ * and return relevant data from virtual method \see Movable::mLevelBrickDefinitions
  */
 struct Definitions
 {

@@ -39,6 +39,11 @@ Ball& Ball::operator=(Ball&& other) noexcept
     return *this;
 }
 
+void Ball::resetBallPosition()
+{
+    mSprite.setPosition(600, 600);
+}
+
 void Ball::draw(sf::RenderWindow& window)
 {
     window.draw(mSprite);

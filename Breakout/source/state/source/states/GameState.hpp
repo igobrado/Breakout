@@ -25,6 +25,10 @@ private:
     ::common::GameData& mGameData;
     LevelStack          mLevelStack;
     sf::Sprite          mBackground;
+
+    std::vector<BrickDefinitions> mLevelBrickDefinitions;
+    bool                          mShouldContinue;
+    uint8_t                       mNumberOfLevels;
 };
 
 }  // namespace machine

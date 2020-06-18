@@ -1,6 +1,5 @@
 #include "Level.hpp"
 
-#include <cassert>
 #include <random>
 #include <utility>
 
@@ -16,10 +15,7 @@ Level::Level(
     , mEndLevelCallback{ std::move(endLevelCallback) }
     , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
 {
-    for (auto i : { 1, 2, 3, 4, 5 })
-    {
-        createRow(i, brickDefinitions);
-    }
+    createGrid(brickDefinitions);
 }
 
 Level::Level(Level&& other) noexcept
@@ -43,7 +39,7 @@ Level& Level::operator=(Level&& other) noexcept
     return *this;
 }
 
-void Level::update(const float& deltaTime)
+bool Level::update(const float& deltaTime)
 {
     mBall.updateMovement(deltaTime);
     if (mBall.isCollided(mPaddle.definitions().globalBounds))
@@ -59,6 +55,7 @@ void Level::update(const float& deltaTime)
 
         if (mBricks.empty())
         {
+            return true;
         }
     }
 
@@ -66,6 +63,7 @@ void Level::update(const float& deltaTime)
     {
         mEndLevelCallback();
     }
+    return false;
 }
 
 void Level::draw(sf::RenderWindow& window)
@@ -122,4 +120,18 @@ std::vector<gui::Brick>::iterator Level::checkBrickCollision()
         }
         return false;
     });
+}
+
+void Level::createLevelFromBegining(const BrickDefinitions& brickDefinitions)
+{
+    mBall.resetBallPosition();
+    createGrid(brickDefinitions);
+}
+
+void Level::createGrid(const BrickDefinitions& brickDefinitions)
+{
+    for (auto i : { 1, 2, 3, 4, 5 })
+    {
+        createRow(i, brickDefinitions);
+    }
 }

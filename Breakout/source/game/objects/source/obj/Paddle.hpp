@@ -34,7 +34,7 @@ public:
     /**@copydoc Movable::updateMovement()*/
     void updateMovement(const float& deltaTime) override;
 
-    /**@copydoc Movable::definitions()*/
+    /**@copydoc Movable::mLevelBrickDefinitions()*/
     const Definitions& definitions() override;
 
 protected:

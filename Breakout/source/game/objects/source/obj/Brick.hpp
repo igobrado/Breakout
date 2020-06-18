@@ -9,10 +9,10 @@ namespace gui
 
 enum class BrickColor
 {
-    RED,
-    BLUE,
-    GREEN,
-    CYAN
+    RED   = 0,
+    BLUE  = 1,
+    GREEN = 2,
+    CYAN  = 3
 };
 
 static constexpr const char* toString(BrickColor color)
@@ -71,7 +71,7 @@ public:
     Brick(Brick&& other) noexcept;
     Brick& operator=(Brick&& other) noexcept;
 
-    /**@copydoc Movable::definitions()*/
+    /**@copydoc Movable::mLevelBrickDefinitions()*/
     const Definitions& definitions();
 
     /**@copydoc Movable::draw()*/

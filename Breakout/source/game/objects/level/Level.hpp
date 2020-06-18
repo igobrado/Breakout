@@ -29,7 +29,7 @@ using BrickDefinitionsMap = std::unordered_map<LevelID, BrickDefinitions>;
 /**
  * @brief Represents generic level.
  *
- * Level objects with different definitions shall construct from this class.
+ * Level objects with different mLevelBrickDefinitions shall construct from this class.
  */
 class Level
 {
@@ -46,8 +46,10 @@ public:
      *
      * Calls update method from movable objects.
      * @param deltaTime
+     *
+     * @return true if level should end.
      */
-    void update(const float& deltaTime);
+    bool update(const float& deltaTime);
 
     /**
      * @brief draws scene to screen.
@@ -57,12 +59,13 @@ public:
      */
     void draw(sf::RenderWindow& window);
 
+    void createLevelFromBegining(const BrickDefinitions& brickDefinitions);
 protected:
     /**
      * @brief Constructs bricks in a row.
      *
      * @param row index
-     * @param brickDefinitions brick definitions
+     * @param brickDefinitions brick mLevelBrickDefinitions
      */
     void createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions);
 
@@ -73,6 +76,7 @@ protected:
      */
     std::vector<gui::Brick>::iterator checkBrickCollision();
 
+    void createGrid(const BrickDefinitions& brickDefinitions);
 private:
     ResourceHolder&          mResourceHolder;
     std::vector<gui::Brick>  mBricks;

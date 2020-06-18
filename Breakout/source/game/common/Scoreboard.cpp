@@ -56,8 +56,6 @@ void Scoreboard::write()
 {
     sort();
 
-    std::transform(mPlayers.begin(), mPlayers.end(), std::back_inserter(mTextboxes), ConvertPlayerToTextbox(mFont));
-
     {
         std::ofstream outScoreboard(mScoreboardPath);
 
@@ -67,12 +65,14 @@ void Scoreboard::write()
             std::copy(std::begin(mPlayers), std::end(mPlayers), it);
         }
     }
+    mPlayers.clear();
+    std::transform(mPlayers.begin(), mPlayers.end(), std::back_inserter(mTextboxes), ConvertPlayerToTextbox(mFont));
 }
 
 void Scoreboard::draw(sf::RenderWindow& window)
 {
     // Not everyone deserves to be on scoreboard ;)
-    int i = 0;
+    int i = 1;
     for (auto& textbox : mTextboxes)
     {
         if (i < 4)
