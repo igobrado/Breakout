@@ -14,9 +14,6 @@ EndState::EndState(common::GameData& gameData)  //
 
 void EndState::update(const float deltaTime)
 {
-    /**
-     * TODO: implement update method, updating the cursor etc..
-     */
 }
 
 void EndState::handleInput()
@@ -25,9 +22,13 @@ void EndState::handleInput()
     sf::RenderWindow& window = mGameData.window();
     while (window.pollEvent(eventToProcess))
     {
-        if (eventToProcess.type == sf::Event::Closed)
+        if (eventToProcess.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
         {
             window.close();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        {
+            mGameData.switchState(::machine::StateType::GAME);
         }
     }
 }
