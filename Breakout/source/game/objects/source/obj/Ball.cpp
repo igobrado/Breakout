@@ -73,6 +73,7 @@ void Ball ::updateMovement(const float& deltaTime)
 
 const Definitions& Ball::definitions()
 {
+    mBallDefinitions.globalBounds = mSprite.getGlobalBounds();
     return mBallDefinitions;
 }
 

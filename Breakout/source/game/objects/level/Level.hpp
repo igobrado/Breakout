@@ -60,6 +60,7 @@ public:
     void draw(sf::RenderWindow& window);
 
     void createLevelFromBegining(const BrickDefinitions& brickDefinitions);
+
 protected:
     /**
      * @brief Constructs bricks in a row.
@@ -69,14 +70,8 @@ protected:
      */
     void createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions);
 
-    /**
-     * @brief Checks collision between ball and brick.
-     *
-     * @return it to collided brick, if collision happen, if not std::end(std::vector<>)
-     */
-    std::vector<gui::Brick>::iterator checkBrickCollision();
-
     void createGrid(const BrickDefinitions& brickDefinitions);
+
 private:
     ResourceHolder&          mResourceHolder;
     std::vector<gui::Brick>  mBricks;
@@ -86,8 +81,9 @@ private:
     std::function<void(int)> mScoreIncreaseCallback;  ///< Functor that shall receive number
                                                       ///< for how much score should increase.
 
-    static constexpr int sIncreaseWHenBrickIsWeaken    = 1; ///< To avoid magic numbers in codebase.
+    static constexpr int sIncreaseWHenBrickIsWeaken    = 1;  ///< To avoid magic numbers in codebase.
     static constexpr int sIncreaseWhenBrickIsDestroyed = 2;
+
 };
 
 #endif  // BREAKOUT_LEVEL_HPP

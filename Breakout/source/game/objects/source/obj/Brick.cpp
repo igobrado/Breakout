@@ -58,4 +58,14 @@ void Brick::onHit()
     --mBrickDefinitions.brickStrength;
 }
 
+bool Brick::isCollided(sf::FloatRect rect)
+{
+    if (mSprite.getGlobalBounds().intersects(rect))
+    {
+        onHit();
+        return true;
+    }
+    return false;
+}
+
 }  // namespace gui

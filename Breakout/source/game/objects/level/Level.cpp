@@ -41,19 +41,30 @@ Level& Level::operator=(Level&& other) noexcept
 
 bool Level::update(const float& deltaTime)
 {
-    mBall.updateMovement(deltaTime);
     if (mBall.isCollided(mPaddle.definitions().globalBounds))
     {
         mBall.onPaddleHit();
         mResourceHolder.play("hittwo");
     }
-    mPaddle.updateMovement(deltaTime);
 
-    auto it = checkBrickCollision();
+    auto it = std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
+        return brick.isCollided(mBall.definitions().globalBounds);
+    });
+
     if (it != std::end(mBricks))
     {
-        mBricks.erase(it);
+        mBall.onBrickHit();
+        mResourceHolder.play("hit");
 
+        if (it->shouldDestroy())
+        {
+            mBricks.erase(it);
+            mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
+        }
+        else
+        {
+            mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
+        }
         if (mBricks.empty())
         {
             return true;
@@ -64,6 +75,8 @@ bool Level::update(const float& deltaTime)
     {
         mEndLevelCallback();
     }
+    mBall.updateMovement(deltaTime);
+    mPaddle.updateMovement(deltaTime);
     return false;
 }
 
@@ -102,25 +115,6 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
                                              defs });
         }
     }
-}
-
-std::vector<gui::Brick>::iterator Level::checkBrickCollision()
-{
-    return std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
-        if (mBall.isCollided(brick.definitions().globalBounds))
-        {
-            brick.onHit();
-            mBall.onBrickHit();
-            mResourceHolder.play("hit");
-            if (brick.shouldDestroy())
-            {
-                mScoreIncreaseCallback(sIncreaseWhenBrickIsDestroyed);
-                return true;
-            }
-            mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
-        }
-        return false;
-    });
 }
 
 void Level::createLevelFromBegining(const BrickDefinitions& brickDefinitions)

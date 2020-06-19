@@ -93,6 +93,7 @@ public:
      */
     void onHit();
 
+    bool isCollided(sf::FloatRect rect);
 private:
     float      mXDrawOffset;
     sf::Sprite mSprite;
