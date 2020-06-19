@@ -3,13 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-enum class Direction
-{
-    Left,
-    Right,
-
-    _NoHandle
-};
 
 /**
  * @note Intended to be empty.
