@@ -22,12 +22,9 @@ void Ball::resetBallPosition()
     setPosition(600, 600);
 }
 
-
 void Ball::updateMovement(const float& deltaTime)
 {
     auto currentPosition = getPosition();
-    // IMHO pretty self explanatory.
-    // If ball is trying to not be inside of game screen then reverse it by 45 angles in another angle.
     if (currentPosition.x < 0 || currentPosition.x > mMoveRegion.x)
     {
         mDirection.x = -mDirection.x;
@@ -54,7 +51,7 @@ void Ball::onBrickHit()
     mDirection = -mDirection;
 }
 
-bool Ball::isCollided(sf::FloatRect rect) const
+bool Ball::isCollided(sf::FloatRect rect)
 {
     return getGlobalBounds().intersects(rect);
 }

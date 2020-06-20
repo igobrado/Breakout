@@ -10,33 +10,11 @@ Level::Level(
         std::function<void(int)> scoreIncreaseCallback)
     : mResourceHolder{ resourceHolder }
     , mBall{ mResourceHolder.getTexture("ball"), { 1.0f, 1.0f } }  ///< ugly workaround
-                                                                                      ///< shall be removed
-    , mPaddle{ mResourceHolder.getTexture("paddle"), {1.0f, 1.0f}}
+    , mPaddle{ mResourceHolder.getTexture("paddle"), { 1.0f, 1.0f } }
     , mEndLevelCallback{ std::move(endLevelCallback) }
     , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
 {
     createGrid(brickDefinitions);
-}
-
-Level::Level(Level&& other) noexcept
-    : mResourceHolder{ other.mResourceHolder }
-    , mBall{ std::move(other.mBall) }
-    , mBricks{ std::move(other.mBricks) }
-    , mPaddle({ std::move(other.mPaddle) })
-    , mEndLevelCallback{ std::move(other.mEndLevelCallback) }
-    , mScoreIncreaseCallback{ std::move(other.mScoreIncreaseCallback) }
-{
-}
-
-Level& Level::operator=(Level&& other) noexcept
-{
-    if (this != &other)
-    {
-        mBall   = std::move(other.mBall);
-        mBricks = std::move(other.mBricks);
-        mPaddle = std::move(other.mPaddle);
-    }
-    return *this;
 }
 
 bool Level::update(const float& deltaTime)
@@ -46,16 +24,14 @@ bool Level::update(const float& deltaTime)
         mBall.onPaddleHit();
         mResourceHolder.play("hittwo");
     }
-
     auto it = std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
         return brick.isCollided(mBall.getGlobalBounds());
     });
 
-    if (it != std::end(mBricks))
+    if (it != mBricks.end())
     {
         mBall.onBrickHit();
         mResourceHolder.play("hit");
-
         if (it->shouldDestroy())
         {
             mBricks.erase(it);
@@ -65,17 +41,18 @@ bool Level::update(const float& deltaTime)
         {
             mScoreIncreaseCallback(sIncreaseWHenBrickIsWeaken);
         }
+
         if (mBricks.empty())
         {
             return true;
         }
     }
 
-    //if (mBall.getPosition().y > mPaddle.getPosition().y)
-    //{
-    //    mEndLevelCallback();
-    //}
-    
+    if (mBall.getPosition().y > mPaddle.getPosition().y)
+    {
+        mEndLevelCallback();
+    }
+
     mBall.updateMovement(deltaTime);
     mPaddle.updateMovement(deltaTime);
     return false;
@@ -84,12 +61,12 @@ bool Level::update(const float& deltaTime)
 void Level::draw(sf::RenderWindow& window)
 {
     window.draw(mBall);
-    window.draw(mPaddle);
 
     for (auto& brick : mBricks)
     {
         window.draw(brick);
     }
+    window.draw(mPaddle);
 }
 
 void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions)
@@ -109,9 +86,10 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
         {
             gui::BrickDef defs   = *brickDefinition;
             defs.currentPosition = { static_cast<float>(i), static_cast<float>(row) };
-            mBricks.emplace_back(gui::Brick{ mResourceHolder.getTexture(  //
-                                                     gui::toString(brickDefinition->color)),
-                                             defs });
+            gui::Brick brick{ mResourceHolder.getTexture(  //
+                                      gui::toString(brickDefinition->color)),
+                              defs };
+            mBricks.push_back(brick);
         }
     }
 }

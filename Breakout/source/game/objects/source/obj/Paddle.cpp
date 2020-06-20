@@ -5,28 +5,14 @@
 namespace gui
 {
 Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
-    : mPaddleDefinitions{ sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2),
-                            static_cast<float>(sScreenDimensions.height - getGlobalBounds().height * 4) },
-                          getGlobalBounds(),
-                          scalingFactor }
+    : sf::Sprite{ texture }
+    , mPaddleDefinitions{
+        sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2.),
+                      static_cast<float>(sScreenDimensions.height - getGlobalBounds().height * 4) },
+    }
 {
     setPosition(mPaddleDefinitions.currentPosition);
 }
-
-Paddle::Paddle(Paddle&& other) noexcept
-    : mPaddleDefinitions{ other.mPaddleDefinitions }
-{
-}
-
-Paddle& Paddle::operator=(Paddle&& other) noexcept
-{
-    if (this != &other)
-    {
-        mPaddleDefinitions = other.mPaddleDefinitions;
-    }
-    return *this;
-}
-
 
 void Paddle::updateMovement(const float& deltaTime)
 {

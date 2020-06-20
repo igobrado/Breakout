@@ -3,27 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-
-/**
- * @note Intended to be empty.
- * Used to avoid multiple getters like getPosition(), getGlobalBounds() etc..
- * All definition types classes shall inherit from it
- * and return relevant data from virtual method \see Movable::mLevelBrickDefinitions
- */
-struct Definitions
-{
-    Definitions(sf::Vector2f currentPosition, sf::FloatRect globalBounds, sf::Vector2f scalingFactor)
-        : currentPosition(currentPosition)
-        , globalBounds{ globalBounds }
-        , scalingFactor{ scalingFactor }
-    {
-    }
-
-    sf::Vector2f  currentPosition;
-    sf::FloatRect globalBounds;
-    sf::Vector2f  scalingFactor;
-};
-
 /**
  * @brief Interface for game objects that can be moved around the screen.
  *
@@ -41,17 +20,6 @@ public:
 
     /**@brief deleted copy assign operator*/
     Movable& operator=(const Movable&) = delete;
-
-    /**
-     * @brief Returns definition data for specific object.
-     *
-     * @note If returning upcasted version I.E.
-     * BrickDefinitions -> Definitions, Casting **should** be safe.
-     * But be aware of that it can throw.
-     *
-     * @return  Reference to Definition class.
-     */
-    virtual const Definitions& definitions() = 0;
 
     /**
      * @brief Updates objects current position to next calculated.

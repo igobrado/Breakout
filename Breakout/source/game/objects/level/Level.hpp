@@ -38,8 +38,6 @@ public:
           const BrickDefinitions&  brickDefinitions,
           std::function<void()>    endLevelCallback,
           std::function<void(int)> scoreIncreaseCallback);
-    Level(Level&& other) noexcept;
-    Level& operator=(Level&& other) noexcept;
 
     /**
      * @brief Updates the scene.

@@ -14,12 +14,18 @@ namespace gui
 class Ball : public sf::Sprite
 {
 public:
-    explicit Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
-    Ball(Ball&& other) noexcept = default;
-    Ball& operator=(Ball&& other) noexcept = default;
+    Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
 
+    /**
+     * @brief Resets ball position to default one.
+     */
     void resetBallPosition();
 
+    /**
+     * @brief Updates the ball movement, and changes it according to collision with screen size.
+     *
+     * @param deltaTime
+     */
     void updateMovement(const float& deltaTime);
 
     /**
@@ -42,7 +48,7 @@ public:
      * @param rect
      * @return true if ball and object collides, false if not.
      */
-    bool isCollided(sf::FloatRect rect) const;
+    bool isCollided(sf::FloatRect rect);
 
 private:
     sf::Vector2f mMoveRegion;

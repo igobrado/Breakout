@@ -7,7 +7,7 @@ namespace gui
 {
 struct PaddleDef
 {
-    PaddleDef(sf::Vector2f currentPosition, sf::FloatRect globalBounds, sf::Vector2f scalingFactor)
+    explicit PaddleDef(sf::Vector2f currentPosition)
         : currentPosition{ currentPosition }
         , velocity{ 0.0f, 0.0f }
         , paddleSpeed{ 300.0f, 0.0f }
@@ -24,10 +24,11 @@ class Paddle : public sf::Sprite
 public:
     Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor);
 
-    Paddle(Paddle&& other) noexcept;
-    Paddle& operator=(Paddle&& other) noexcept;
-
-    /**@copydoc Movable::updateMovement()*/
+    /**
+     * @brief Updates the ball movement, and changes it according to collision with screen size.
+     *
+     * @param deltaTime
+     */
     void updateMovement(const float& deltaTime);
 
 protected:
@@ -39,7 +40,7 @@ protected:
     void update();
 
 private:
-    PaddleDef  mPaddleDefinitions;
+    PaddleDef mPaddleDefinitions;
 };
 
 }  // namespace gui

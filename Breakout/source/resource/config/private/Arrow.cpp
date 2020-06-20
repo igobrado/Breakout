@@ -2,7 +2,6 @@
 
 Arrow::Arrow(sf::Texture& texture, const sf::RenderWindow& window)  //
     : mArrow{ texture }
-    , mDefinitions{ { 200, 200 }, mArrow.getGlobalBounds(), { 0, 0 } }
     , mWindowRef{ window }
 {
 }
@@ -10,12 +9,6 @@ Arrow::Arrow(sf::Texture& texture, const sf::RenderWindow& window)  //
 void Arrow::draw(sf::RenderWindow& window)
 {
     window.draw(mArrow);
-}
-
-const Definitions& Arrow::definitions()
-{
-    mDefinitions.globalBounds = mArrow.getGlobalBounds();
-    return mDefinitions;
 }
 
 void Arrow::updateMovement(const float& deltaTime)

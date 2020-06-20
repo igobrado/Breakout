@@ -16,9 +16,6 @@ public:
     /**@copydoc Drawable::draw()*/
     void draw(sf::RenderWindow& window) override;
 
-    /**@copydoc Movable::mLevelBrickDefinitions()*/
-    const Definitions& definitions() override;
-
     /**@copydoc Movable::updateMovement()*/
     void updateMovement(const float& deltaTime) override;
 
@@ -38,7 +35,6 @@ public:
 
 public:
     sf::Sprite              mArrow;
-    Definitions             mDefinitions;
     const sf::RenderWindow& mWindowRef;
 };
 

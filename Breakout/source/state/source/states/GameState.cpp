@@ -16,15 +16,15 @@ GameState::GameState(common::GameData& gameData)  //
 {
 
     // TODO: Configuration file
-    gui::BrickDef red{ 1, gui::BrickColor::RED, mGameData.scalingFactor() };
-    gui::BrickDef blue{ 1, gui::BrickColor::BLUE, mGameData.scalingFactor() };
-    gui::BrickDef green{1, gui::BrickColor::GREEN, mGameData.scalingFactor() };
-    gui::BrickDef cyan{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
+    gui::BrickDef red{ 1, gui::BrickColor::RED };
+    gui::BrickDef blue{ 1, gui::BrickColor::BLUE };
+    gui::BrickDef green{ 1, gui::BrickColor::GREEN };
+    gui::BrickDef cyan{ 1, gui::BrickColor::CYAN };
 
-    gui::BrickDef redTwo{3, gui::BrickColor::RED, mGameData.scalingFactor() };
-    gui::BrickDef blueTwo{2, gui::BrickColor::BLUE, mGameData.scalingFactor() };
-    gui::BrickDef greenTwo{4, gui::BrickColor::GREEN, mGameData.scalingFactor() };
-    gui::BrickDef cyanTwo{ 1, gui::BrickColor::CYAN, mGameData.scalingFactor() };
+    gui::BrickDef redTwo{ 3, gui::BrickColor::RED };
+    gui::BrickDef blueTwo{ 2, gui::BrickColor::BLUE };
+    gui::BrickDef greenTwo{ 4, gui::BrickColor::GREEN };
+    gui::BrickDef cyanTwo{ 1, gui::BrickColor::CYAN };
     mLevelBrickDefinitions.push_back(BrickDefinitions{ red, blue, green, cyan });
     mLevelBrickDefinitions.push_back(BrickDefinitions{ redTwo, blueTwo, greenTwo, cyanTwo });
 

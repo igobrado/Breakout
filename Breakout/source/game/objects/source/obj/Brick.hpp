@@ -30,26 +30,15 @@ static constexpr const char* toString(BrickColor color)
             return "invalid";
     }
 }
+
 /**
  * @brief Holds ball important data.
  */
 struct BrickDef
 {
-    BrickDef(std::uint16_t brickStrength, BrickColor color, sf::Vector2f scalingFactor)
+    BrickDef(std::uint16_t brickStrength, BrickColor color)  //
         : brickStrength(brickStrength)
         , color(color)
-    {
-    }
-
-    BrickDef(
-            sf::Vector2f  currentPosition,
-            sf::FloatRect globalBounds,
-            std::uint16_t brickStrength,
-            BrickColor    color,
-            sf::Vector2f  scalingFactor)  //
-        : brickStrength{ brickStrength }
-        , color{ color }
-        , currentPosition{currentPosition}
     {
     }
 
@@ -67,9 +56,6 @@ class Brick : public sf::Sprite
 {
 public:
     Brick(const sf::Texture& texture, BrickDef definition);
-    Brick(Brick&& other) noexcept;
-    Brick& operator=(Brick&& other) noexcept;
-
     /**
      * @brief Checks whether brick strength came down to 0.
      *
@@ -80,16 +66,24 @@ public:
     bool shouldDestroy() const;
 
     /**
+     * @brief Checks whether brick is collided with given rect and handles onHit event.
+     *
+     * @param rect
+     * @return true if yes, false if not.
+     */
+    bool isCollided(sf::FloatRect rect);
+
+protected:
+    /**
      * @brief Decreases bricks life by one.
      *
      * @note Shall be called only if ball collides with corresponding brick object.
      */
     void onHit();
 
-    bool isCollided(sf::FloatRect rect);
 private:
-    float      mXDrawOffset;
-    BrickDef   mBrickDefinitions;
+    float    mXDrawOffset{};
+    BrickDef mBrickDefinitions;
 };
 
 }  // namespace gui

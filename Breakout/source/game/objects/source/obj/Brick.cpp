@@ -12,22 +12,6 @@ Brick::Brick(const sf::Texture& texture, BrickDef definition)
     setPosition(
             sf::Vector2f{ mBrickDefinitions.currentPosition.x * getGlobalBounds().width + getGlobalBounds().width,
                           mBrickDefinitions.currentPosition.y * getGlobalBounds().height + getGlobalBounds().height });
-  }
-
-Brick::Brick(Brick&& other) noexcept  //
-    : sf::Sprite{ other }
-    , mBrickDefinitions{ other.mBrickDefinitions }
-{
-}
-
-Brick& Brick::operator=(Brick&& other) noexcept
-{
-    if (this != &other)
-    {
-        mXDrawOffset      = other.mXDrawOffset;
-        mBrickDefinitions = other.mBrickDefinitions;
-    }
-    return *this;
 }
 
 bool Brick::shouldDestroy() const
@@ -37,7 +21,8 @@ bool Brick::shouldDestroy() const
 
 void Brick::onHit()
 {
-    --mBrickDefinitions.brickStrength;
+    if (mBrickDefinitions.brickStrength != 0)
+        --mBrickDefinitions.brickStrength;
 }
 
 bool Brick::isCollided(sf::FloatRect rect)
