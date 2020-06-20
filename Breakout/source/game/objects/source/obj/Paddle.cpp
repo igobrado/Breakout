@@ -5,18 +5,16 @@
 namespace gui
 {
 Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
-    : mSprite{ texture }
-    , mPaddleDefinitions{ sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2),
-                            static_cast<float>(sScreenDimensions.height - mSprite.getGlobalBounds().height * 4) },
-                          mSprite.getGlobalBounds(),
+    : mPaddleDefinitions{ sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2),
+                            static_cast<float>(sScreenDimensions.height - getGlobalBounds().height * 4) },
+                          getGlobalBounds(),
                           scalingFactor }
 {
-    mSprite.setPosition(mPaddleDefinitions.currentPosition);
+    setPosition(mPaddleDefinitions.currentPosition);
 }
 
 Paddle::Paddle(Paddle&& other) noexcept
-    : mSprite{ std::move(other.mSprite) }
-    , mPaddleDefinitions{ other.mPaddleDefinitions }
+    : mPaddleDefinitions{ other.mPaddleDefinitions }
 {
 }
 
@@ -24,16 +22,11 @@ Paddle& Paddle::operator=(Paddle&& other) noexcept
 {
     if (this != &other)
     {
-        mSprite            = std::move(other.mSprite);
         mPaddleDefinitions = other.mPaddleDefinitions;
     }
     return *this;
 }
 
-void Paddle::draw(sf::RenderWindow& window)
-{
-    window.draw(mSprite);
-}
 
 void Paddle::updateMovement(const float& deltaTime)
 {
@@ -52,27 +45,23 @@ void Paddle::updateMovement(const float& deltaTime)
     update();
 }
 
-const Definitions& Paddle::definitions()
-{
-    mPaddleDefinitions.currentPosition = mSprite.getPosition();
-    mPaddleDefinitions.globalBounds    = mSprite.getGlobalBounds();
-    return mPaddleDefinitions;
-}
-
 void Paddle::update()
 {
     static_assert(sScreenDimensions.width != 0 && sScreenDimensions.height != 0);
-    mPaddleDefinitions.currentPosition = mSprite.getPosition();
+    mPaddleDefinitions.currentPosition = getPosition();
 
     if (mPaddleDefinitions.currentPosition.x > sScreenDimensions.width)
     {
-        mSprite.setPosition(-mPaddleDefinitions.globalBounds.width, mPaddleDefinitions.currentPosition.y);
+        setPosition(-getGlobalBounds().width, mPaddleDefinitions.currentPosition.y);
     }
-    else if (mPaddleDefinitions.currentPosition.x < -mPaddleDefinitions.globalBounds.width)
+    else if (mPaddleDefinitions.currentPosition.x < -getGlobalBounds().width)
     {
-        mSprite.setPosition(static_cast<float>(sScreenDimensions.width), static_cast<float>(mPaddleDefinitions.currentPosition.y));
+        setPosition(
+                static_cast<float>(sScreenDimensions.width),
+                static_cast<float>(mPaddleDefinitions.currentPosition.y));
     }
-    mSprite.move(mPaddleDefinitions.velocity);
+
+    move(mPaddleDefinitions.velocity);
 }
 
 }  // namespace gui

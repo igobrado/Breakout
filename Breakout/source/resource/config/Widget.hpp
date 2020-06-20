@@ -1,5 +1,6 @@
 #ifndef BREAKOUT_WIDGET_HPP
 #define BREAKOUT_WIDGET_HPP
+
 #include "Drawable.hpp"
 
 class Widget : public Drawable

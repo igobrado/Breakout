@@ -4,24 +4,18 @@ namespace gui
 {
 
 Brick::Brick(const sf::Texture& texture, BrickDef definition)
-    : mXDrawOffset{ 0 }
-    , mSprite{ texture }
+    : sf::Sprite{ texture }
+    , mXDrawOffset{ 0 }
     , mBrickDefinitions{ definition }
 {
-    mSprite.setScale(mBrickDefinitions.scalingFactor);
-    mBrickDefinitions.globalBounds = mSprite.getGlobalBounds();
-    mXDrawOffset = mSprite.getTexture()->getSize().x;
-    mSprite.setPosition(sf::Vector2f{ mBrickDefinitions.currentPosition.x * mBrickDefinitions.globalBounds.width
-                                              + mBrickDefinitions.globalBounds.width,
-                                      mBrickDefinitions.currentPosition.y * mBrickDefinitions.globalBounds.height
-                                              + mBrickDefinitions.globalBounds.height });
-    mBrickDefinitions.currentPosition = mSprite.getPosition();
+    mXDrawOffset = getTexture()->getSize().x;
+    setPosition(
+            sf::Vector2f{ mBrickDefinitions.currentPosition.x * getGlobalBounds().width + getGlobalBounds().width,
+                          mBrickDefinitions.currentPosition.y * getGlobalBounds().height + getGlobalBounds().height });
+  }
 
-}
-
-Brick::Brick(Brick&& other) noexcept
-    : mXDrawOffset{ other.mXDrawOffset }
-    , mSprite{ std::move(other.mSprite) }
+Brick::Brick(Brick&& other) noexcept  //
+    : sf::Sprite{ other }
     , mBrickDefinitions{ other.mBrickDefinitions }
 {
 }
@@ -31,21 +25,9 @@ Brick& Brick::operator=(Brick&& other) noexcept
     if (this != &other)
     {
         mXDrawOffset      = other.mXDrawOffset;
-        mSprite           = std::move(other.mSprite);
         mBrickDefinitions = other.mBrickDefinitions;
     }
     return *this;
-}
-
-const Definitions& Brick::definitions()
-{
-    mBrickDefinitions.globalBounds = mSprite.getGlobalBounds();
-    return mBrickDefinitions;
-}
-
-void Brick::draw(sf::RenderWindow& window)
-{
-    window.draw(mSprite);
 }
 
 bool Brick::shouldDestroy() const
@@ -60,7 +42,7 @@ void Brick::onHit()
 
 bool Brick::isCollided(sf::FloatRect rect)
 {
-    if (mSprite.getGlobalBounds().intersects(rect))
+    if (getGlobalBounds().intersects(rect))
     {
         onHit();
         return true;

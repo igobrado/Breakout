@@ -1,8 +1,7 @@
 #ifndef BREAKOUT_BRICK_HPP
 #define BREAKOUT_BRICK_HPP
 
-#include "Drawable.hpp"
-#include "Movable.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace gui
 {
@@ -34,11 +33,10 @@ static constexpr const char* toString(BrickColor color)
 /**
  * @brief Holds ball important data.
  */
-struct BrickDef : public Definitions
+struct BrickDef
 {
     BrickDef(std::uint16_t brickStrength, BrickColor color, sf::Vector2f scalingFactor)
-        : Definitions{ sf::Vector2f{ 0.0f, 0.0f }, sf::FloatRect{ 0.0f, 0.0f, 0.0f, 0.0f }, scalingFactor }
-        , brickStrength(brickStrength)
+        : brickStrength(brickStrength)
         , color(color)
     {
     }
@@ -49,14 +47,15 @@ struct BrickDef : public Definitions
             std::uint16_t brickStrength,
             BrickColor    color,
             sf::Vector2f  scalingFactor)  //
-        : Definitions{ currentPosition, globalBounds, scalingFactor }
-        , brickStrength{ brickStrength }
+        : brickStrength{ brickStrength }
         , color{ color }
+        , currentPosition{currentPosition}
     {
     }
 
     std::uint16_t brickStrength;
     BrickColor    color;
+    sf::Vector2f  currentPosition;
 };
 
 /**
@@ -64,18 +63,12 @@ struct BrickDef : public Definitions
  *
  * @note implements interfaces: \see Movable \see Drawable
  */
-class Brick : public Drawable
+class Brick : public sf::Sprite
 {
 public:
     Brick(const sf::Texture& texture, BrickDef definition);
     Brick(Brick&& other) noexcept;
     Brick& operator=(Brick&& other) noexcept;
-
-    /**@copydoc Movable::mLevelBrickDefinitions()*/
-    const Definitions& definitions();
-
-    /**@copydoc Movable::draw()*/
-    void draw(sf::RenderWindow& window) override;
 
     /**
      * @brief Checks whether brick strength came down to 0.
@@ -96,7 +89,6 @@ public:
     bool isCollided(sf::FloatRect rect);
 private:
     float      mXDrawOffset;
-    sf::Sprite mSprite;
     BrickDef   mBrickDefinitions;
 };
 

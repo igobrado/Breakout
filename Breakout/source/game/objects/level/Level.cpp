@@ -9,9 +9,9 @@ Level::Level(
         std::function<void()>    endLevelCallback,
         std::function<void(int)> scoreIncreaseCallback)
     : mResourceHolder{ resourceHolder }
-    , mBall{ mResourceHolder.getTexture("ball"), brickDefinitions[0].scalingFactor }  ///< ugly workaround
+    , mBall{ mResourceHolder.getTexture("ball"), { 1.0f, 1.0f } }  ///< ugly workaround
                                                                                       ///< shall be removed
-    , mPaddle{ mResourceHolder.getTexture("paddle"), brickDefinitions[0].scalingFactor }
+    , mPaddle{ mResourceHolder.getTexture("paddle"), {1.0f, 1.0f}}
     , mEndLevelCallback{ std::move(endLevelCallback) }
     , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
 {
@@ -41,14 +41,14 @@ Level& Level::operator=(Level&& other) noexcept
 
 bool Level::update(const float& deltaTime)
 {
-    if (mBall.isCollided(mPaddle.definitions().globalBounds))
+    if (mBall.isCollided(mPaddle.getGlobalBounds()))
     {
         mBall.onPaddleHit();
         mResourceHolder.play("hittwo");
     }
 
     auto it = std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
-        return brick.isCollided(mBall.definitions().globalBounds);
+        return brick.isCollided(mBall.getGlobalBounds());
     });
 
     if (it != std::end(mBricks))
@@ -71,10 +71,11 @@ bool Level::update(const float& deltaTime)
         }
     }
 
-    if (mBall.definitions().currentPosition.y > mPaddle.definitions().currentPosition.y)
-    {
-        mEndLevelCallback();
-    }
+    //if (mBall.getPosition().y > mPaddle.getPosition().y)
+    //{
+    //    mEndLevelCallback();
+    //}
+    
     mBall.updateMovement(deltaTime);
     mPaddle.updateMovement(deltaTime);
     return false;
@@ -82,15 +83,13 @@ bool Level::update(const float& deltaTime)
 
 void Level::draw(sf::RenderWindow& window)
 {
-    mBall.draw(window);
-    std::for_each(
-            std::begin(mBricks),
-            std::end(mBricks),
-            [&window, this](gui::Brick& brick)  //
-            {                                   //
-                brick.draw(window);
-            });
-    mPaddle.draw(window);
+    window.draw(mBall);
+    window.draw(mPaddle);
+
+    for (auto& brick : mBricks)
+    {
+        window.draw(brick);
+    }
 }
 
 void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions)

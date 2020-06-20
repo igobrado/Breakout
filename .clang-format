@@ -15,7 +15,6 @@ AlignOperands:   true
 AlignTrailingComments: true
 AlignConsecutiveMacros: true
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
@@ -99,7 +98,6 @@ SpacesInContainerLiterals: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-Standard: Latest
 TabWidth:        4
 UseTab:          Never
 

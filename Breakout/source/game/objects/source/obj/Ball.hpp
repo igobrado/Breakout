@@ -1,59 +1,26 @@
 #ifndef BREAKOUT_BALL_HPP
 #define BREAKOUT_BALL_HPP
 
-#include "Drawable.hpp"
-#include "Movable.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace gui
 {
-/**
- * @brief Holds ball important data.
- */
-struct BallDefs : public Definitions
-{
-    BallDefs(
-            sf::FloatRect globalBounds,
-            sf::Vector2f  currentPosition,
-            sf::Vector2f  lastPosition,
-            sf::Vector2f  clientZone,
-            sf::Vector2f  direction,
-            sf::Vector2f  scalingFactor)
-        : Definitions{ currentPosition, globalBounds, scalingFactor }
-        , lastPosition{ lastPosition }
-        , clientZone{ clientZone }
-        , direction{ direction }
-    {
-    }
-
-    sf::Vector2f lastPosition;
-    sf::Vector2f clientZone;
-    sf::Vector2f direction;
-};
 
 /**
  * @brief Represents Ball object, wraps sf::Sprite class to abstract ball.
  *
  * @note implements interfaces: \see Movable \see Drawable
  */
-class Ball
-    : public Movable  //
-    , public Drawable
+class Ball : public sf::Sprite
 {
 public:
     explicit Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
-    Ball(Ball&& other) noexcept;
-    Ball& operator=(Ball&& other) noexcept;
+    Ball(Ball&& other) noexcept = default;
+    Ball& operator=(Ball&& other) noexcept = default;
 
     void resetBallPosition();
 
-    /**@copydoc Drawable::draw()*/
-    void  draw(sf::RenderWindow& window) override;
-
-    /**@copydoc Movable::updateMovement()*/
-    void updateMovement(const float& deltaTime) override;
-
-    /**@copydoc Movable::mLevelBrickDefinitions()*/
-    const Definitions& definitions() override;
+    void updateMovement(const float& deltaTime);
 
     /**
      * @brief Changes direction.
@@ -78,8 +45,8 @@ public:
     bool isCollided(sf::FloatRect rect) const;
 
 private:
-    sf::Sprite mSprite;
-    BallDefs   mBallDefinitions;
+    sf::Vector2f mMoveRegion;
+    sf::Vector2f mDirection;
 };
 
 }  // namespace gui
