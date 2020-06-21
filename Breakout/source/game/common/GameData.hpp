@@ -52,6 +52,9 @@ public:
      */
     sf::Vector2f scalingFactor() const;
 
+    /**
+     * @return Reference to scoreboard object.
+     */
     Scoreboard& scoreboard();
 
 private:

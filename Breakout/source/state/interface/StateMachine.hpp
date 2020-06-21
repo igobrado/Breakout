@@ -29,11 +29,6 @@ public:
     void addState(std::unique_ptr<State> newState, bool isReplacing = true);
 
     /**
-     * @brief Removes state from the top of the state stack.
-     */
-    void removeState();
-
-    /**
      * @brief Processes data that was input true the addState / removeState API's.
      *
      * If there is not states on stack that are running or supposed to run.

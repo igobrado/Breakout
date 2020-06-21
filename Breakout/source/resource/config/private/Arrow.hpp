@@ -11,6 +11,11 @@ class Arrow
 public:
     Arrow(sf::Texture& texture, const sf::RenderWindow& window);
 
+    /**
+     * @brief Updates the Arrow's movement.
+     *
+     * @param deltaTime
+     */
     void updateMovement(const float& deltaTime);
 
     /**@copydoc Widget::update()*/

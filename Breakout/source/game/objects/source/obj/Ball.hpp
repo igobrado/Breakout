@@ -50,7 +50,13 @@ public:
      */
     bool isCollided(sf::FloatRect rect);
 
+    /**
+     * @brief Calculates globalBounds on more proper way provided from SFML library.
+     *
+     * @return
+     */
     sf::FloatRect handlyCalculatedGlobalBounds() const;
+
 private:
     sf::Vector2f mMoveRegion;
     sf::Vector2f mDirection;

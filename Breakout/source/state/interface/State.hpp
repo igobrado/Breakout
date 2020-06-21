@@ -50,19 +50,6 @@ public:
      */
     virtual void draw()                        = 0;
 
-    /**
-     * @brief Resumes paused state.
-     *
-     * @note This method shall be called only if pause was called before.
-     */
-    virtual void resume(){};
-
-    /**
-     * @note Pauses current state.
-     *
-     * @note This method shall be called only if state is running.
-     */
-    virtual void pause(){};
 };
 }  // namespace machine
 

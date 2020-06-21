@@ -27,8 +27,20 @@ public:
     sf::Texture& getTexture(const std::string_view targetID);
     sf::Font&    getFont(const std::string_view targetID);
 
+    /**
+     * @brief Returns reference to config with provided targetID.
+     *
+     * @param targetID ID of wanted config. ( Currently <b>INTRO AND INPUT</b>
+     * @return Reference to config, reference is guaranteed to be valid until ResourceHolder object is destroyed.
+     */
     Config& getConfig(std::string_view targetID);
-    void    play(std::string_view music);
+
+    /**
+     * @brief Plays sound with targetID.
+     *
+     * @param sound name of sound.
+     */
+    void play(std::string_view sound);
 
 private:
     FontManager    mFontManager;

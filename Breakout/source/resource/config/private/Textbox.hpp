@@ -13,7 +13,7 @@ public:
             std::uint64_t size = 60);
 
     Textbox(Textbox&& other) noexcept;
-    Textbox& operator=(Textbox&& other);
+    Textbox& operator=(Textbox&& other) noexcept;
 
     ~Textbox() override = default;
 
@@ -54,7 +54,6 @@ protected:
     sf::Color     mColor;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
 };
 
 #endif  // BREAKOUT_TEXTBOX_HPP

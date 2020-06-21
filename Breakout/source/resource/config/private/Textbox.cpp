@@ -23,7 +23,7 @@ Textbox::Textbox(Textbox&& other) noexcept  //
 {
 }
 
-Textbox& Textbox::operator=(Textbox&& other)
+Textbox& Textbox::operator=(Textbox&& other) noexcept
 {
     if (this != &other)
     {

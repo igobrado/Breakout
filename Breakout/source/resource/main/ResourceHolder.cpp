@@ -48,7 +48,7 @@ Config& ResourceHolder::getConfig(std::string_view targetID)
             "There is no config with " + std::string{ targetID.begin(), targetID.end() } + " Look at your path for config.");
 }
 
-void ResourceHolder::play(std::string_view music)
+void ResourceHolder::play(std::string_view sound)
 {
-    mSoundManager.play(music);
+    mSoundManager.play(sound);
 }

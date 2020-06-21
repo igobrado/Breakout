@@ -23,22 +23,11 @@ void StateMachine::addState(std::unique_ptr<State> newState, bool isReplacing)
     }
 }
 
-void StateMachine::removeState()
-{
-    mIsRemoving = false;
-}
-
 void StateMachine::processChanges()
 {
     if (mIsRemoving && !mStates.empty())
     {
         mStates.pop();
-
-        if (!mStates.empty())
-        {
-            mStates.top()->resume();
-        }
-
         mIsRemoving = false;
     }
     if (mIsAdding)
@@ -48,10 +37,6 @@ void StateMachine::processChanges()
             if (mIsReplacing)
             {
                 mStates.pop();
-            }
-            else
-            {
-                mStates.top()->pause();
             }
         }
 

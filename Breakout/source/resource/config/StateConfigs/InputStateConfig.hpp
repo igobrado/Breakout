@@ -30,6 +30,11 @@ public:
     /**@copydoc Config::updateMovableComponents()*/
     void updateMovableComponents(const float deltaTime) override;
 
+    /**
+     * @brief Handles input events.
+     *
+     * @param event to be handled.
+     */
     void handleInput(sf::Event& event);
 
 private:

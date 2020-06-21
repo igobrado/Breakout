@@ -82,6 +82,12 @@ public:
      */
     void increaseCurrentPlayerScore(const int increaseNumber);
 
+    /**
+     * @brief Puts new player into player map.
+     *
+     * @note Player shall be pushed to end of array.
+     * @param newPlayer
+     */
     void newPlayer(const Player& newPlayer);
 
 private:

@@ -8,13 +8,13 @@ Level::Level(
         const BrickDefinitions&  brickDefinitions,
         std::function<void()>    endLevelCallback,
         std::function<void(int)> scoreIncreaseCallback,
-        sf::Vector2f             scaligFactor)
+        sf::Vector2f             scalingFactor)
     : mResourceHolder{ resourceHolder }
     , mBall{ mResourceHolder.getTexture("ball") }
     , mPaddle{ mResourceHolder.getTexture("paddle") }
     , mEndLevelCallback{ std::move(endLevelCallback) }
     , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
-    , mScalingFactor{ scaligFactor }
+    , mScalingFactor{ scalingFactor }
 {
     mBall.scale(mScalingFactor);
     createGrid(brickDefinitions);
@@ -98,12 +98,6 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
     }
 }
 
-void Level::createLevelFromBegining(const BrickDefinitions& brickDefinitions)
-{
-    mBall.resetBallPosition();
-    createGrid(brickDefinitions);
-}
-
 void Level::createGrid(const BrickDefinitions& brickDefinitions)
 {
     for (auto i : { 1, 2, 3, 4, 5 })
@@ -112,3 +106,8 @@ void Level::createGrid(const BrickDefinitions& brickDefinitions)
     }
 }
 
+void Level::createLevelFromBegining(const BrickDefinitions& brickDefinitions)
+{
+    mBall.resetBallPosition();
+    createGrid(brickDefinitions);
+}

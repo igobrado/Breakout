@@ -73,7 +73,13 @@ public:
      */
     bool isCollided(sf::FloatRect rect);
 
+    /**
+     * @brief Calculates globalBounds on more proper way provided from SFML library.
+     *
+     * @return
+     */
     sf::FloatRect handlyCalculatedGlobalBounds() const;
+
 protected:
     /**
      * @brief Decreases bricks life by one.

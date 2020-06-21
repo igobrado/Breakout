@@ -25,7 +25,7 @@ public:
           const BrickDefinitions&  brickDefinitions,
           std::function<void()>    endLevelCallback,
           std::function<void(int)> scoreIncreaseCallback,
-          sf::Vector2f             scaligFactor);
+          sf::Vector2f             scalingFactor);
 
     /**
      * @brief Updates the scene.
@@ -45,9 +45,24 @@ public:
      */
     void draw(sf::RenderWindow& window);
 
+    /**
+     * @brief Restarts level and creates new bricks.
+     *
+     * @note Call this method only and only if level is over,
+     * or player wants to restart game.
+     *
+     * @param brickDefinitions
+     */
     void createLevelFromBegining(const BrickDefinitions& brickDefinitions);
 
 protected:
+    /**
+     * @brief Calls sequentially createRow() method.
+     *
+     * @param brickDefinitions
+     */
+    void createGrid(const BrickDefinitions& brickDefinitions);
+
     /**
      * @brief Constructs bricks in a row.
      *
@@ -55,8 +70,6 @@ protected:
      * @param brickDefinitions brick mLevelBrickDefinitions
      */
     void createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions);
-
-    void createGrid(const BrickDefinitions& brickDefinitions);
 
 private:
     ResourceHolder&          mResourceHolder;

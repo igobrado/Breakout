@@ -31,7 +31,13 @@ public:
      */
     void updateMovement(const float& deltaTime);
 
+    /**
+     * @brief Calculates globalBounds on more proper way provided from SFML library.
+     *
+     * @return
+     */
     sf::FloatRect handlyCalculatedGlobalBounds() const;
+
 protected:
     /**
      * @brief Updates paddle movement.

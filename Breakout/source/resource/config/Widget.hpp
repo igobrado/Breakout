@@ -66,6 +66,6 @@ public:
     virtual bool checkCollision(Widget& other) = 0;
 
 protected:
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override{};
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 };
 #endif  // BREAKOUT_WIDGET_HPP
