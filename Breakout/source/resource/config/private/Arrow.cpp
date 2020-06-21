@@ -35,3 +35,8 @@ void Arrow::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(mArrow, states);
 }
+
+std::string Arrow::widgetsFullName()
+{
+    return "";
+}

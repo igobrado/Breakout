@@ -58,8 +58,9 @@ public:
     sf::FloatRect handlyCalculatedGlobalBounds() const;
 
 private:
-    sf::Vector2f mMoveRegion;
-    sf::Vector2f mDirection;
+    sf::Vector2f mMoveRegion;  ///< Region where ball can move (that is the game screen - width / height).
+    sf::Vector2f mDirection;   ///< Direction of the ball, when ball hits the brick direction swaps. When ball hits the
+                               ///< paddle, its calculated randomly.
 };
 
 }  // namespace gui

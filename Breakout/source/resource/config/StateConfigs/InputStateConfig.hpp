@@ -38,17 +38,26 @@ public:
     void handleInput(sf::Event& event);
 
 private:
-    const char*                          mXmlDocumentPath;
-    sf::Font&                            mFontRef;
-    std::vector<std::unique_ptr<Widget>> mWidgets;
-    std::unique_ptr<Widget>              mArrow;
-    sf::String                           mPlayerInput;
-    bool                                 mWidgetIsFocused;
+    const char* mXmlDocumentPath;                   ///< Path to the xml document.
+    sf::Font&   mFontRef;                           ///< Ref provided by object who construct this one,
+                                                    ///< used for constructing widget objects.
+    std::vector<std::unique_ptr<Widget>> mWidgets;  ///< Array of widgets that this config file has.
+    std::unique_ptr<Widget>              mArrow;    ///< Arrow for this config file.
 
-    std::vector<std::unique_ptr<Widget>>::iterator   mFocusedTextboxIterator;
+    sf::String mPlayerInput;      ///< Current player input that shall be displayed to the scrern.
+    bool       mWidgetIsFocused;  ///< Says has player clicked on the widget,
+                                  ///< if not then you can't put text any of textboxes.
+
+    std::vector<std::unique_ptr<Widget>>::iterator mFocusedTextboxIterator;  ///< Represents currently
+                                                                             ///< focused textbox iterator.
+
+    /**
+     * Lambda function.
+     * Describes possible state change from input to --. Shall be pass as const ref to InputStateConfig object.
+     */
     const std::function<void(const Player& player)>& mInputStateSwitchesCallback;
 
-    static constexpr std::uint8_t sTextMaxSize = 13U;
+    static constexpr std::uint8_t sTextMaxSize = 13U;  ///< Describes how many letters can name have.
 };
 
 #endif  // BREAKOUT_INTROCONFIG_HPP

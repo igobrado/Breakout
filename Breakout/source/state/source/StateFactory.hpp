@@ -15,6 +15,22 @@
 class StateFactory
 {
 public:
+    /**
+     * @brief Creates the fresh unique ptr of state.
+     *
+     * @param stateType Which state shall be created.
+     * @param data shared gamedata between states.
+     *
+     *
+     * @return std::make_unique<machine::IntroState> if machine::StateType::INTRO is provided as stateType
+     * @return std::make_unique<machine::MenuState> if machine::StateType::MENU is provided as stateType
+     * @return std::make_unique<machine::GameState> if machine::StateType::GAME is provided as stateType
+     * @return std::make_unique<machine::EndState> if machine::StateType::END is provided as stateType
+     * @return std::make_unique<machine::InputState> if machine::StateType::INPUT is provided as stateType
+     * @return std::make_unique<machine::ScoreboardState> if machine::StateType::SCOREBOARD is provided as stateType
+     *
+     * @return nullptr stateType didn't appear in StateType enum.
+     */
     static std::unique_ptr<machine::State> getState(const machine::StateType stateType, common::GameData& data)
     {
         switch (stateType)

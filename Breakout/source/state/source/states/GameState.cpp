@@ -25,6 +25,7 @@ GameState::GameState(common::GameData& gameData)  //
     gui::BrickDef blueTwo{ 2, gui::BrickColor::BLUE };
     gui::BrickDef greenTwo{ 4, gui::BrickColor::GREEN };
     gui::BrickDef cyanTwo{ 1, gui::BrickColor::CYAN };
+
     mLevelBrickDefinitions.push_back(BrickDefinitions{ red, blue, green, cyan });
     mLevelBrickDefinitions.push_back(BrickDefinitions{ redTwo, blueTwo, greenTwo, cyanTwo });
 

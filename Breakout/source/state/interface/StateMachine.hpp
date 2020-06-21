@@ -52,13 +52,13 @@ public:
     [[nodiscard]] bool shouldStopApplication() const;
 
 private:
-    bool mIsReplacing;
-    bool mIsAdding;
-    bool mIsRemoving;
-    bool mShouldStop;
+    bool mIsReplacing;  ///< Indicates is replacing between screens being done.
+    bool mIsAdding;     ///< Indicates that is adding new state being done.
+    bool mIsRemoving;   ///< Indicates should old state be removed from state stack.
+    bool mShouldStop;   ///< Indicates should game stop running.
 
-    std::stack<std::unique_ptr<State>> mStates;
-    std::unique_ptr<State>             mNextState;
+    std::stack<std::unique_ptr<State>> mStates;     ///< Stack of the states currently in progress.
+    std::unique_ptr<State>             mNextState;  ///< Waiting state.
 };
 
 }  // namespace machine

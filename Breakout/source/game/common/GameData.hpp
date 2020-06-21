@@ -65,19 +65,17 @@ private:
     std::map<std::string, std::function<void()>> mIntroStateSwitchesCallbackMap;
 
     /**
-     * Used to hold lambda functions.
-     * Describes possible state changes from input to --. Shall be pass as const ref to InputStateConfig object.
-     *
-     * @note This map will have only one lambda for changing state and that lambda will receive player object.
+     * Lambda function.
+     * Describes possible state change from input to --. Shall be pass as const ref to InputStateConfig object.
      */
     std::function<void(const Player& player)> mInputStateSwitchesCallback;
 
-    ScreenDimensions        mScreenDimensions;
-    sf::RenderWindow        mWindow;
-    ::machine::StateMachine mStateMachine;
-    ResourceHolder          mResourceHolder;
-    const float             mScalingFactorX;
-    const float             mScalingFactorY;
+    ScreenDimensions        mScreenDimensions;  ///< Current dimensions of the window.
+    sf::RenderWindow        mWindow;            ///< Render window onto all content shall be drawn.
+    ::machine::StateMachine mStateMachine;      ///< State machine, represents the game states, like game, into etc..
+    ResourceHolder          mResourceHolder;    ///< Holds managers for all resources ( sound, font, textures)..
+    const float             mScalingFactorX;    ///< Scaling factor on axis X ( window width / 1280U ).
+    const float             mScalingFactorY;    ///< Scaling factor on axis Y ( window height / 720U ).
 
     Scoreboard mScoreboard;
 };

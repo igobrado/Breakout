@@ -7,7 +7,6 @@ namespace game
 
 Breakout::Breakout(const char* applicationName)
     : mGameData{ std::make_shared<::common::GameData>(applicationName) }
-    , mTestShape{ mGameData->resource().getTexture("red") }
     , mClock{}
 {
     mGameData->machine().addState(StateFactory::getState(machine::StateType::INTRO, *mGameData));

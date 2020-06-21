@@ -6,6 +6,9 @@
 namespace gui
 {
 
+/**
+ * @brief Brick color that are suppored.
+ */
 enum class BrickColor
 {
     RED   = 0,
@@ -14,6 +17,12 @@ enum class BrickColor
     CYAN  = 3
 };
 
+/**
+ * @brief Converts brick color to the string.
+ *
+ * @param color
+ * @return stringified color name. If color is invalid then "invalid" is returned.
+ */
 static constexpr const char* toString(BrickColor color)
 {
     switch (color)
@@ -39,12 +48,13 @@ struct BrickDef
     BrickDef(std::uint16_t brickStrength, BrickColor color)  //
         : brickStrength(brickStrength)
         , color(color)
+        , currentPosition{ 0.0f, 0.0f }
     {
     }
 
-    std::uint16_t brickStrength;
-    BrickColor    color;
-    sf::Vector2f  currentPosition;
+    std::uint16_t brickStrength;    ///< Strength of the brick. Brick on every hit loses one point.
+    BrickColor    color;            ///< Color of the brick.
+    sf::Vector2f  currentPosition;  ///< Where is brick located.
 };
 
 /**
@@ -89,8 +99,9 @@ protected:
     void onHit();
 
 private:
-    float    mXDrawOffset{};
-    BrickDef mBrickDefinitions;
+    float    mXDrawOffset;       ///< For positioning the brick on the screen.
+    BrickDef mBrickDefinitions;  ///< Brick definitions that describes the brick.
+                                 ///< All of brick objects have unique defs.
 };
 
 }  // namespace gui

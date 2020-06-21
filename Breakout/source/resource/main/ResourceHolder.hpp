@@ -43,11 +43,11 @@ public:
     void play(std::string_view sound);
 
 private:
-    FontManager    mFontManager;
-    TextureManager mTextureManager;
-    SoundManager   mSoundManager;
+    FontManager    mFontManager;     ///< Manager object that holds every supported font.
+    TextureManager mTextureManager;  ///< Manager object that holds every supported texture.
+    SoundManager   mSoundManager;    ///< Manager object that holds every supported sound.
 
-    std::map<std::string, std::unique_ptr<Config>, defined::str_less> mConfigs;
+    std::map<std::string, std::unique_ptr<Config>, defined::str_less> mConfigs;  ///< Map of available config files.
 };
 
 #endif  // BREAKOUT_RESOURCEHOLDER_HPP

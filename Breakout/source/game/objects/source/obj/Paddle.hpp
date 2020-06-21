@@ -14,9 +14,9 @@ struct PaddleDef
     {
     }
 
-    sf::Vector2f currentPosition;
-    sf::Vector2f velocity;
-    sf::Vector2f paddleSpeed;
+    sf::Vector2f currentPosition;  ///< Current position of the paddle.
+    sf::Vector2f velocity;         ///< Velocity of the paddle.
+    sf::Vector2f paddleSpeed;      ///< Paddle's speed.
 };
 
 class Paddle : public sf::Sprite
@@ -47,7 +47,7 @@ protected:
     void update();
 
 private:
-    PaddleDef mPaddleDefinitions;
+    PaddleDef mPaddleDefinitions;  ///< Paddle definitions. Every paddle object has unique definitions.
 };
 
 }  // namespace gui

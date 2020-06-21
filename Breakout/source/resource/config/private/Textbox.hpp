@@ -49,9 +49,9 @@ public:
     void setString(const sf::String& stringToSet);
 
 protected:
-    sf::Text      mText;
-    std::uint64_t mSize;
-    sf::Color     mColor;
+    sf::Text      mText;   ///< Text that shall be displayed to the screen.
+    std::uint64_t mSize;   ///< Size of the text that shall be displayed to the screen.
+    sf::Color     mColor;  ///< Color of the text that shall be displayed to the screen.
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };

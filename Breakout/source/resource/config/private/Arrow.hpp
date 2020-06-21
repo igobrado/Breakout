@@ -5,8 +5,7 @@
 
 #include "Widget.hpp"
 
-class Arrow
-    : public Widget
+class Arrow : public Widget
 {
 public:
     Arrow(sf::Texture& texture, const sf::RenderWindow& window);
@@ -30,13 +29,18 @@ public:
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
 
-    std::string widgetsFullName() {return "";};
+    /**
+     * @note Returns empty string since this method is not relevant for this object type.
+     */
+    std::string widgetsFullName();
 
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
 public:
-    sf::Sprite              mArrow;
-    const sf::RenderWindow& mWindowRef;
+    sf::Sprite              mArrow;      ///< Sprite object of the arrow that shall be displayed to the screen.
+    const sf::RenderWindow& mWindowRef;  ///< Render window ref. Arrow updates the position
+                                         ///< of itself with api provided from this ref.
 };
 
 #endif  // BREAKOUT_ARROW_HPP

@@ -5,8 +5,8 @@
 
 struct ScreenDimensions
 {
-    std::uint32_t width;
-    std::uint32_t height;
+    std::uint32_t width;   ///< Width of the screen.
+    std::uint32_t height;  ///< Height of the screen.
 };
 
 /**
@@ -15,6 +15,5 @@ struct ScreenDimensions
  * @note Shall NOT be used for data processing and any ANY kind of callculation!
  */
 constexpr const ScreenDimensions sScreenDimensions = ScreenDimensions{ 1280U, 720U };
-
 
 #endif  // BREAKOUT_SCREENDIMENSIONS_HPP

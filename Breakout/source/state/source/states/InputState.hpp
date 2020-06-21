@@ -25,9 +25,9 @@ public:
     void draw() override;
 
 private:
-    ::common::GameData& mGameData;
-    sf::Sprite          mBackground;
-    Config&             mConfig;
+    ::common::GameData& mGameData;    ///< Reference to  shared game data(Resource holder etc..)
+    sf::Sprite          mBackground;  ///< Background of the state.
+    Config&             mConfig;      ///< Reference to config file that game data holds.
 };
 
 }  // namespace machine

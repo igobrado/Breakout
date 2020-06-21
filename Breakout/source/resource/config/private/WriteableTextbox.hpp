@@ -11,8 +11,8 @@ public:
             std::uint32_t coordY,
             sf::Font&     font,
             sf::Color     color,
-            const char*   text          = "",
-            std::uint64_t size          = 60);
+            const char*   text = "",
+            std::uint64_t size = 60);
 
     /**@copydoc Widget::bounds()*/
     sf::FloatRect bounds() const override;
@@ -26,10 +26,11 @@ public:
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
 
+protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
-    sf::RectangleShape mInputRect;
+    sf::RectangleShape mInputRect;  ///< White rectangle which represents the input area of the player.
 };
 
 #endif  // BREAKOUT_WRITEABLETEXTBOX_HPP

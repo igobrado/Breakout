@@ -88,10 +88,11 @@ protected:
     }
 
 protected:
-    tinyxml2::XMLDocument mDocument;
+    tinyxml2::XMLDocument mDocument;  ///< XML document that shall be opened.
 
 private:
-    std::map<std::string, T, defined::str_less> mData;
+    std::map<std::string, T, defined::str_less> mData;  ///< Map of data compared with key string that is ordered with
+                                                        ///< std::lexicographical_compare
 };
 
 /**
@@ -217,8 +218,8 @@ public:
     }
 
 private:
-    std::thread      mLoaderThread;
-    std::atomic_bool mIsLoadingOver;
+    std::thread      mLoaderThread;   ///< Thread in which loading of sound is being done.
+    std::atomic_bool mIsLoadingOver;  ///< Atomic variable that is indicating is loading of sound over.
 };
 
 class FontManager : public Manager<sf::Font>

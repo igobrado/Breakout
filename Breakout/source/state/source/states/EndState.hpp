@@ -22,8 +22,8 @@ public:
     void draw() override;
 
 private:
-    ::common::GameData& mGameData;
-    sf::Sprite          mBackground;
+    ::common::GameData& mGameData;    ///< Reference to  shared game data(Resource holder etc..)
+    sf::Sprite          mBackground;  ///< Background of the state.
 };
 
 }  // namespace machine

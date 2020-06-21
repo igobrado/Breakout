@@ -72,14 +72,18 @@ protected:
     void createRow(const uint8_t& row, const BrickDefinitions& brickDefinitions);
 
 private:
-    ResourceHolder&          mResourceHolder;
-    std::vector<gui::Brick>  mBricks;
-    gui::Ball                mBall;
-    gui::Paddle              mPaddle;
-    std::function<void()>    mEndLevelCallback;
+    ResourceHolder& mResourceHolder;  ///< Reference to the resource holder, where all resources are located.
+                                      ///< ( Fonts, Textures, Sound)
+    std::vector<gui::Brick> mBricks;  ///< Array of bricks that appear on the screen.
+    gui::Ball               mBall;    ///< Ball object that appear on the screen.
+    gui::Paddle             mPaddle;  ///< Paddle object that appear on the screen.
+
+    std::function<void()> mEndLevelCallback;  ///< Callback that ends the level, callback is provided by object which
+                                              ///< creates the level object
+
     std::function<void(int)> mScoreIncreaseCallback;  ///< Functor that shall receive number
                                                       ///< for how much score should increase.
-    const sf::Vector2f   mScalingFactor;
+    const sf::Vector2f   mScalingFactor;              ///< Scaling factor that is being used to scale the textures.
     static constexpr int sIncreaseWHenBrickIsWeaken    = 1;  ///< To avoid magic numbers in codebase.
     static constexpr int sIncreaseWhenBrickIsDestroyed = 2;
 };

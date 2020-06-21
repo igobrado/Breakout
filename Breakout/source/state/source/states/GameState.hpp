@@ -22,13 +22,16 @@ public:
     void draw() override;
 
 private:
-    ::common::GameData& mGameData;
-    LevelStack          mLevelStack;
-    sf::Sprite          mBackground;
+    ::common::GameData& mGameData;    ///< Reference to  shared game data(Resource holder etc..)
+    LevelStack          mLevelStack;  ///< Levels that this game has.
+    sf::Sprite          mBackground;  ///< Background of the state.
 
-    std::vector<BrickDefinitions> mLevelBrickDefinitions;
-    bool                          mShouldContinue;
-    uint8_t                       mNumberOfLevels;
+    std::vector<BrickDefinitions> mLevelBrickDefinitions;  ///< Brick Definitions for each level.
+    bool                          mShouldContinue;         ///< Indicates should level continue
+                                                           ///< with displaying, if false game
+                                                           ///< pauses until enter is press.
+
+    uint8_t mNumberOfLevels;  ///< Number of how many levels game has.
 };
 
 }  // namespace machine

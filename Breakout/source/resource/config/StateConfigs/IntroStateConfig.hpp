@@ -30,10 +30,17 @@ public:
     void updateMovableComponents(const float deltaTime) override;
 
 private:
-    const char*                                         mXmlDocumentPath;
-    sf::Font&                                           mFontRef;
-    std::vector<std::unique_ptr<Widget>>                mWidgets;
-    std::unique_ptr<Widget>                             mArrow;
+    const char* mXmlDocumentPath;  ///< Path to xml file.
+    sf::Font&   mFontRef;          ///< Ref provided by object who construct this one,
+                                   ///< used for constructing widget objects.
+
+    std::vector<std::unique_ptr<Widget>> mWidgets;  ///< Array of widgets that this config file has.
+    std::unique_ptr<Widget>              mArrow;    ///< Arrow for this config file.
+
+    /**
+     * Used to hold lambda functions.
+     * Describes possible state changes from intro to --. Shall be pass as const ref to IntroStateConfig object.
+     */
     const std::map<std::string, std::function<void()>>& mSwitchStateCallbackMap;
 };
 
