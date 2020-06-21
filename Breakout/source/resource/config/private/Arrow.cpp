@@ -30,3 +30,8 @@ bool Arrow::checkCollision(Widget& other)
 {
     return mArrow.getGlobalBounds().intersects(other.bounds());
 }
+
+void Arrow::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(mArrow, states);
+}

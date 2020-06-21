@@ -26,6 +26,8 @@ public:
     /**@copydoc Widget::checkCollision()*/
     bool checkCollision(Widget& other) override;
 
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
 private:
     sf::RectangleShape mInputRect;
 };

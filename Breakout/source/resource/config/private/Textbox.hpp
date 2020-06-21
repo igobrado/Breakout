@@ -52,6 +52,9 @@ protected:
     sf::Text      mText;
     std::uint64_t mSize;
     sf::Color     mColor;
+
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
 };
 
 #endif  // BREAKOUT_TEXTBOX_HPP

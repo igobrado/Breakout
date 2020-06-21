@@ -7,7 +7,7 @@ WriteableTextbox::WriteableTextbox(
         sf::Color     color,
         const char*   text,
         std::uint64_t size)
-    : Textbox(coordX, coordY, font, color,  text, size)
+    : Textbox(coordX, coordY, font, color, text, size)
 {
     mInputRect.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
     mInputRect.setOutlineColor(sf::Color::Red);
@@ -29,4 +29,10 @@ Widget::WidgetType WriteableTextbox::type() const
 bool WriteableTextbox::checkCollision(Widget& other)
 {
     return bounds().intersects(other.bounds());
+}
+
+void WriteableTextbox::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(mInputRect, states);
+    Textbox::draw(target, states);
 }

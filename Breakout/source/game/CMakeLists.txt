@@ -17,8 +17,6 @@ list(APPEND BREAKOUT_HEADERS
         ${COMMON_DIR}/GameData.hpp
         ${COMMON_DIR}/Scoreboard.hpp
         ${COMMON_DIR}/ScreenDimensions.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/objects/interface/Movable.hpp
-        ${CMAKE_CURRENT_LIST_DIR}/objects/interface/Drawable.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Brick.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/source/obj/Ball.hpp
         ${CMAKE_CURRENT_LIST_DIR}/objects/level/Level.hpp

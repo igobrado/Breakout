@@ -1,7 +1,7 @@
 #ifndef BREAKOUT_WIDGET_HPP
 #define BREAKOUT_WIDGET_HPP
 
-#include "Drawable.hpp"
+#include <SFML/Graphics.hpp>
 
 class Widget : public sf::Drawable
 {
@@ -66,7 +66,6 @@ public:
     virtual bool checkCollision(Widget& other) = 0;
 
 protected:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override{};
-
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override{};
 };
 #endif  // BREAKOUT_WIDGET_HPP

@@ -69,3 +69,8 @@ void Textbox::setString(const sf::String& stringToSet)
 {
     mText.setString(stringToSet);
 }
+
+void Textbox::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(mText, states);
+}

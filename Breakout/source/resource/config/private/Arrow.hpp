@@ -3,18 +3,15 @@
 
 #include <ostream>
 
-#include "Movable.hpp"
 #include "Widget.hpp"
 
 class Arrow
     : public Widget
-    , public Movable
 {
 public:
     Arrow(sf::Texture& texture, const sf::RenderWindow& window);
 
-    /**@copydoc Movable::updateMovement()*/
-    void updateMovement(const float& deltaTime) override;
+    void updateMovement(const float& deltaTime);
 
     /**@copydoc Widget::update()*/
     void update(const float deltaTime) override;
@@ -30,6 +27,8 @@ public:
 
     std::string widgetsFullName() {return "";};
 
+protected:
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 public:
     sf::Sprite              mArrow;
     const sf::RenderWindow& mWindowRef;
