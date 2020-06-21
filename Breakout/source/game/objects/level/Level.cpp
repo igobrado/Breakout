@@ -7,25 +7,28 @@ Level::Level(
         ResourceHolder&          resourceHolder,
         const BrickDefinitions&  brickDefinitions,
         std::function<void()>    endLevelCallback,
-        std::function<void(int)> scoreIncreaseCallback)
+        std::function<void(int)> scoreIncreaseCallback,
+        sf::Vector2f             scaligFactor)
     : mResourceHolder{ resourceHolder }
-    , mBall{ mResourceHolder.getTexture("ball"), { 1.0f, 1.0f } }  ///< ugly workaround
-    , mPaddle{ mResourceHolder.getTexture("paddle"), { 1.0f, 1.0f } }
+    , mBall{ mResourceHolder.getTexture("ball") }
+    , mPaddle{ mResourceHolder.getTexture("paddle") }
     , mEndLevelCallback{ std::move(endLevelCallback) }
     , mScoreIncreaseCallback{ std::move(scoreIncreaseCallback) }
+    , mScalingFactor{ scaligFactor }
 {
+    mBall.scale(mScalingFactor);
     createGrid(brickDefinitions);
 }
 
 bool Level::update(const float& deltaTime)
 {
-    if (mBall.isCollided(mPaddle.getGlobalBounds()))
+    if (mBall.isCollided(mPaddle.handlyCalculatedGlobalBounds()))
     {
         mBall.onPaddleHit();
         mResourceHolder.play("hittwo");
     }
     auto it = std::find_if(mBricks.begin(), mBricks.end(), [this](gui::Brick& brick) {
-        return brick.isCollided(mBall.getGlobalBounds());
+        return brick.isCollided(mBall.handlyCalculatedGlobalBounds());
     });
 
     if (it != mBricks.end())
@@ -89,6 +92,7 @@ void Level::createRow(const uint8_t& row, const BrickDefinitions& brickDefinitio
             gui::Brick brick{ mResourceHolder.getTexture(  //
                                       gui::toString(brickDefinition->color)),
                               defs };
+            brick.scale(mScalingFactor);
             mBricks.push_back(brick);
         }
     }
@@ -107,3 +111,4 @@ void Level::createGrid(const BrickDefinitions& brickDefinitions)
         createRow(i, brickDefinitions);
     }
 }
+

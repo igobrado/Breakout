@@ -27,12 +27,17 @@ void Brick::onHit()
 
 bool Brick::isCollided(sf::FloatRect rect)
 {
-    if (getGlobalBounds().intersects(rect))
+    if (handlyCalculatedGlobalBounds().intersects(rect))
     {
         onHit();
         return true;
     }
     return false;
+}
+
+sf::FloatRect Brick::handlyCalculatedGlobalBounds() const
+{
+    return getTransform().transformRect(getLocalBounds());
 }
 
 }  // namespace gui

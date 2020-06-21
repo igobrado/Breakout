@@ -73,6 +73,7 @@ public:
      */
     bool isCollided(sf::FloatRect rect);
 
+    sf::FloatRect handlyCalculatedGlobalBounds() const;
 protected:
     /**
      * @brief Decreases bricks life by one.

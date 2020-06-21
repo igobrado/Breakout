@@ -22,7 +22,7 @@ struct PaddleDef
 class Paddle : public sf::Sprite
 {
 public:
-    Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor);
+    Paddle(const sf::Texture& texture);
 
     /**
      * @brief Updates the ball movement, and changes it according to collision with screen size.
@@ -31,6 +31,7 @@ public:
      */
     void updateMovement(const float& deltaTime);
 
+    sf::FloatRect handlyCalculatedGlobalBounds() const;
 protected:
     /**
      * @brief Updates paddle movement.

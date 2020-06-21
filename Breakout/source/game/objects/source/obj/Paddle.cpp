@@ -4,7 +4,7 @@
 
 namespace gui
 {
-Paddle::Paddle(const sf::Texture& texture, sf::Vector2f scalingFactor)
+Paddle::Paddle(const sf::Texture& texture)
     : sf::Sprite{ texture }
     , mPaddleDefinitions{
         sf::Vector2f{ static_cast<float>(sScreenDimensions.width / 2.),
@@ -48,6 +48,11 @@ void Paddle::update()
     }
 
     move(mPaddleDefinitions.velocity);
+}
+
+sf::FloatRect Paddle::handlyCalculatedGlobalBounds() const
+{
+    return getTransform().transformRect(getLocalBounds());
 }
 
 }  // namespace gui

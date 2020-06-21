@@ -14,7 +14,7 @@ namespace gui
 class Ball : public sf::Sprite
 {
 public:
-    Ball(const sf::Texture& texture, sf::Vector2f scalingFactor);
+    Ball(const sf::Texture& texture);
 
     /**
      * @brief Resets ball position to default one.
@@ -50,6 +50,7 @@ public:
      */
     bool isCollided(sf::FloatRect rect);
 
+    sf::FloatRect handlyCalculatedGlobalBounds() const;
 private:
     sf::Vector2f mMoveRegion;
     sf::Vector2f mDirection;

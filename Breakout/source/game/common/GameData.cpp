@@ -13,7 +13,9 @@ GameData::GameData(const char* applicationName)  //
         switchState(::machine::StateType::GAME);
     } }
     , mScreenDimensions{ ::sScreenDimensions }
-    , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height), applicationName }
+    , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height),
+               applicationName,
+               sf::VideoMode::getDesktopMode().bitsPerPixel }
     , mStateMachine{}
     , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap, mInputStateSwitchesCallback }
     , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }

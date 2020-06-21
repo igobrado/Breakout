@@ -28,11 +28,12 @@ GameState::GameState(common::GameData& gameData)  //
     mLevelBrickDefinitions.push_back(BrickDefinitions{ red, blue, green, cyan });
     mLevelBrickDefinitions.push_back(BrickDefinitions{ redTwo, blueTwo, greenTwo, cyanTwo });
 
-    mLevelStack.push(Level{
-            mGameData.resource(),
-            *(mLevelBrickDefinitions.begin()),
-            [this]() { mGameData.switchState(StateType::END); },
-            [this](int increaseNumber) { mGameData.scoreboard().increaseCurrentPlayerScore(increaseNumber); } });
+    mLevelStack.push(
+            Level{ mGameData.resource(),
+                   *(mLevelBrickDefinitions.begin()),
+                   [this]() { mGameData.switchState(StateType::END); },
+                   [this](int increaseNumber) { mGameData.scoreboard().increaseCurrentPlayerScore(increaseNumber); },
+                   mGameData.scalingFactor() });
     --mNumberOfLevels;
 }
 

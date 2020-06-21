@@ -11,20 +11,7 @@
 #include "Paddle.hpp"
 #include "ResourceHolder.hpp"
 
-/**
- * @brief Level typed enum.
- *
- * Represents how many levels game shall have.
- */
-enum class LevelID
-{
-    FIRST,
-    SECOND,
-    THIRD
-};
-
-using BrickDefinitions    = std::vector<gui::BrickDef>;
-using BrickDefinitionsMap = std::unordered_map<LevelID, BrickDefinitions>;
+using BrickDefinitions = std::vector<gui::BrickDef>;
 
 /**
  * @brief Represents generic level.
@@ -37,7 +24,8 @@ public:
     Level(ResourceHolder&          resourceHolder,
           const BrickDefinitions&  brickDefinitions,
           std::function<void()>    endLevelCallback,
-          std::function<void(int)> scoreIncreaseCallback);
+          std::function<void(int)> scoreIncreaseCallback,
+          sf::Vector2f             scaligFactor);
 
     /**
      * @brief Updates the scene.
@@ -78,10 +66,9 @@ private:
     std::function<void()>    mEndLevelCallback;
     std::function<void(int)> mScoreIncreaseCallback;  ///< Functor that shall receive number
                                                       ///< for how much score should increase.
-
+    const sf::Vector2f   mScalingFactor;
     static constexpr int sIncreaseWHenBrickIsWeaken    = 1;  ///< To avoid magic numbers in codebase.
     static constexpr int sIncreaseWhenBrickIsDestroyed = 2;
-
 };
 
 #endif  // BREAKOUT_LEVEL_HPP

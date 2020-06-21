@@ -8,11 +8,11 @@
 namespace gui
 {
 
-Ball::Ball(const sf::Texture& texture, sf::Vector2f scalingFactor)  //
+Ball::Ball(const sf::Texture& texture)  //
     : sf::Sprite{ texture }
     , mMoveRegion{ sScreenDimensions.width - getGlobalBounds().width,
-                          sScreenDimensions.height - getGlobalBounds().height} 
-    , mDirection{7.0f, 7.0f}
+                   sScreenDimensions.height - getGlobalBounds().height }
+    , mDirection{ 7.0f, 7.0f }
 {
     setPosition(600, 600);
 }
@@ -36,7 +36,6 @@ void Ball::updateMovement(const float& deltaTime)
     move(mDirection);
 }
 
-
 void Ball::onPaddleHit()
 {
     std::random_device                 rd;
@@ -53,7 +52,12 @@ void Ball::onBrickHit()
 
 bool Ball::isCollided(sf::FloatRect rect)
 {
-    return getGlobalBounds().intersects(rect);
+    return getTransform().transformRect(getLocalBounds()).intersects(rect);
+}
+
+sf::FloatRect Ball::handlyCalculatedGlobalBounds() const
+{
+    return getTransform().transformRect(getLocalBounds());
 }
 
 }  // namespace gui
