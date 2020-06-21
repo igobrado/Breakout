@@ -77,7 +77,7 @@ void Scoreboard::draw(sf::RenderWindow& window)
     {
         if (i < 4)
         {
-            textbox.draw(window);
+            window.draw(textbox);
         }
         ++i;
     }

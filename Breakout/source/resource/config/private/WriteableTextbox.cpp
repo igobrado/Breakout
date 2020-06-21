@@ -26,12 +26,6 @@ Widget::WidgetType WriteableTextbox::type() const
     return WidgetType::TEXTBOX;
 }
 
-void WriteableTextbox::draw(sf::RenderWindow& window)
-{
-    window.draw(mInputRect);
-    window.draw(mText);
-}
-
 bool WriteableTextbox::checkCollision(Widget& other)
 {
     return bounds().intersects(other.bounds());

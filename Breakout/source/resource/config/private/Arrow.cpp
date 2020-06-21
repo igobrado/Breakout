@@ -6,11 +6,6 @@ Arrow::Arrow(sf::Texture& texture, const sf::RenderWindow& window)  //
 {
 }
 
-void Arrow::draw(sf::RenderWindow& window)
-{
-    window.draw(mArrow);
-}
-
 void Arrow::updateMovement(const float& deltaTime)
 {
     mArrow.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(mWindowRef)));

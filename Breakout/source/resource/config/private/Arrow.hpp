@@ -13,9 +13,6 @@ class Arrow
 public:
     Arrow(sf::Texture& texture, const sf::RenderWindow& window);
 
-    /**@copydoc Drawable::draw()*/
-    void draw(sf::RenderWindow& window) override;
-
     /**@copydoc Movable::updateMovement()*/
     void updateMovement(const float& deltaTime) override;
 

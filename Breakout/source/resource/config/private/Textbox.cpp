@@ -49,11 +49,6 @@ Widget::WidgetType Textbox::type() const
     return Widget::WidgetType::TEXTBOX;
 }
 
-void Textbox::draw(sf::RenderWindow& window)
-{
-    window.draw(mText);
-}
-
 void Textbox::onFocus()
 {
     // TODO: Magic number, remove

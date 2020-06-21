@@ -3,7 +3,7 @@
 
 #include "Drawable.hpp"
 
-class Widget : public Drawable
+class Widget : public sf::Drawable
 {
 public:
     /**
@@ -64,5 +64,9 @@ public:
      * @return true if collision happened, false if not.
      */
     virtual bool checkCollision(Widget& other) = 0;
+
+protected:
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override{};
+
 };
 #endif  // BREAKOUT_WIDGET_HPP

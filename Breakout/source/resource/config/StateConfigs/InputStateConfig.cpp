@@ -24,9 +24,10 @@ InputStateConfig::InputStateConfig(
 void InputStateConfig::drawAllComponents(sf::RenderWindow& window)
 {
     std::for_each(mWidgets.begin(), mWidgets.end(), [&window](std::unique_ptr<Widget>& widget) {
-        widget->draw(window);
+        window.draw(*widget);
     });
-    mArrow->draw(window);
+    window.draw(*mArrow);
+
 }
 void InputStateConfig::updateMovableComponents(const float deltaTime)
 {

@@ -21,10 +21,12 @@ IntroStateConfig::IntroStateConfig(
 void IntroStateConfig::drawAllComponents(sf::RenderWindow& window)
 {
     std::for_each(mWidgets.begin(), mWidgets.end(), [&window](std::unique_ptr<Widget>& widget) {
-        widget->draw(window);
+        window.draw(*widget);
     });
-    mArrow->draw(window);
+    window.draw(*mArrow);
+
 }
+
 void IntroStateConfig::updateMovableComponents(const float deltaTime)
 {
     mArrow->update(deltaTime);

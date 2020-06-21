@@ -20,9 +20,6 @@ public:
     /**@copydoc Widget::type()*/
     Widget::WidgetType type() const override;
 
-    /**@copydoc Drawable::draw()*/
-    void draw(sf::RenderWindow& window) override;
-
     /**@copydoc Widget::update()*/
     void update(const float deltaTime) override{};
 
