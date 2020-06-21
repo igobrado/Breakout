@@ -15,7 +15,12 @@ GameData::GameData(const char* applicationName)  //
     , mScreenDimensions{ ::sScreenDimensions }
     , mWindow{ sf::VideoMode(mScreenDimensions.width, mScreenDimensions.height),
                applicationName,
-               sf::VideoMode::getDesktopMode().bitsPerPixel }
+               sf::Style::Fullscreen,
+               sf::ContextSettings{
+                       0,
+                       0,
+                       8,
+               } }
     , mStateMachine{}
     , mResourceHolder{ mWindow, mIntroStateSwitchesCallbackMap, mInputStateSwitchesCallback }
     , mScalingFactorX{ static_cast<float>(mWindow.getSize().x / 1280.) }

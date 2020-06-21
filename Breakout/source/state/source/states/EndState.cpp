@@ -26,9 +26,10 @@ void EndState::handleInput()
         {
             window.close();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
         {
-            mGameData.switchState(::machine::StateType::GAME);
+
+            mGameData.switchState(::machine::StateType::INTRO);
         }
     }
 }

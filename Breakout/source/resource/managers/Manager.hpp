@@ -129,6 +129,7 @@ protected:
             element->QueryStringAttribute("Texture", &path);
             element->QueryStringAttribute("Name", &name);
             sf::Texture texture{};
+            texture.setSmooth(true);
             texture.loadFromFile(path);
             static_cast<void>(                         ///< To satisfy compiler warning for discarding return value.
                     emplace(std::piecewise_construct,  //
