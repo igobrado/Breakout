@@ -1,7 +1,11 @@
 # Breakout clone crossplatform
 
 Breakout is cross platform game which is written in c++ ( standard c++17).
-
+# Controls
+  - Movement of paddle: Left arrow, right arrow.
+  - In input state, you should click first on textbox, enter your name and press enter.
+  - When you are in scoreboard state, press backspace to return into intro state.
+  - When you are in end game state, to exit the game press Escape, to play again press R
 # Tools that have been used: 
   - C++ as programming language
   - SFML graphics library
