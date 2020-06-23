@@ -31,6 +31,7 @@ protected:
 
 private:
     sf::RectangleShape mInputRect;  ///< White rectangle which represents the input area of the player.
+    sf::Vector2f       mDefaultSize;
 };
 
 #endif  // BREAKOUT_WRITEABLETEXTBOX_HPP

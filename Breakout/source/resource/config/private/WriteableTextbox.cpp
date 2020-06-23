@@ -1,5 +1,7 @@
 #include "WriteableTextbox.hpp"
 
+#include "ScreenDimensions.hpp"
+
 WriteableTextbox::WriteableTextbox(
         std::uint32_t coordX,
         std::uint32_t coordY,
@@ -8,12 +10,21 @@ WriteableTextbox::WriteableTextbox(
         const char*   text,
         std::uint64_t size)
     : Textbox(coordX, coordY, font, color, text, size)
+    , mDefaultSize{ 400, 80 }
 {
-    mInputRect.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
     mInputRect.setOutlineColor(sf::Color::Red);
     mInputRect.setOutlineThickness(1.0f);
-    mInputRect.setSize({ 400, 80 });
+    mInputRect.setSize(mDefaultSize);
     mInputRect.setFillColor(sf::Color::White);
+
+    if (!coordX && !coordY)
+    {
+        coordX = ::sScreenDimensions.width / 2. - mDefaultSize.x / 2.;
+        coordY = ::sScreenDimensions.height / 2. - mDefaultSize.y / 2.;
+    }
+
+    mText.setPosition(coordX, coordY);
+    mInputRect.setPosition(static_cast<float>(coordX), static_cast<float>(coordY));
 }
 
 sf::FloatRect WriteableTextbox::bounds() const

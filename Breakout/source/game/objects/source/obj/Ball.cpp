@@ -1,7 +1,6 @@
 #include "Ball.hpp"
 
 #include <SFML/Graphics/Glsl.hpp>
-#include <cmath>
 #include <random>
 
 #include "ScreenDimensions.hpp"
