@@ -10,12 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(BREAKOUT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}")
 set(WINDOWS "Enable SUBSYSTEM WINDOWS option")
 
-option(USE_DEBUG "Enter debug mode" OFF)
 option(_CRT_SECURE_NO_WARNINGS "Enable only on windows" OFF)
-
-if (USE_DEBUG)
-    add_definitions(-DDEBUG)
-endif()
 
 if (UNIX)
     set(SFML_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/Dependencies/SFML/linux/include")
