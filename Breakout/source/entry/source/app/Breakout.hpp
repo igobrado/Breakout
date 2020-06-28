@@ -9,7 +9,7 @@
 namespace game
 {
 
-    class Breakout : public Application
+class Breakout : public Application
 {
 public:
     explicit Breakout(const char* applicationName);

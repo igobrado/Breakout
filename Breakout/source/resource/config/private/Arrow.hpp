@@ -10,13 +10,6 @@ class Arrow : public Widget
 public:
     Arrow(sf::Texture& texture, const sf::RenderWindow& window);
 
-    /**
-     * @brief Updates the Arrow's movement.
-     *
-     * @param deltaTime
-     */
-    void updateMovement(const float& deltaTime);
-
     /**@copydoc Widget::update()*/
     void update(const float deltaTime) override;
 
@@ -35,6 +28,13 @@ public:
     std::string widgetsFullName();
 
 protected:
+    /**
+     * @brief Updates the Arrow's movement.
+     *
+     * @param deltaTime
+     */
+    void updateMovement(const float& deltaTime);
+
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 public:
