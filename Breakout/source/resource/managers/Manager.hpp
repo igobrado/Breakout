@@ -4,10 +4,12 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <cstring>
-#include <future>
+#include <thread>
+#include <atomic>
 #include <iostream>
 #include <map>
 #include <memory>
+#include <fstream>
 
 #include "Template.hpp"
 #include "tinyxml2.h"
@@ -212,8 +214,8 @@ public:
             }
             catch (std::out_of_range& excp)
             {
-                FILE* fp = std::fopen("ErrorLog.txt", "w");
-                std::fprintf(fp, "Failed with %s", excp.what());
+                std::ofstream ostr{ "ErrorLog.txt", std::ios::out };
+                ostr << "Playing music failed with: " << excp.what() << std::endl;
             }
         }
     }
