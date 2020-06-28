@@ -2,6 +2,10 @@
 
 #include "Textbox.hpp"
 #include "WriteableTextbox.hpp"
+#ifdef _WINDOWS
+    #include <sstream>
+    #include <windows.h>
+#endif  // !
 
 std::vector<std::unique_ptr<Widget>>
         StateDefinitions::getWidgets(const char* xmlFilePath, sf::Font& font, const char* stateName)
@@ -42,6 +46,19 @@ std::vector<std::unique_ptr<Widget>>
             }
         }
     }
+    if (widgets.empty())
+    {
+#ifdef _WINDOWS
+        std::stringstream ss;
+        ss << "Continuing without widget config for provided state"
+           << std::endl <<"Game might not work properly."
+           << std::endl
+           << "This message is related to state: "
+           << stateName << std::endl;
+    MessageBox(nullptr, ss.str().c_str(),"WARN", MB_ICONWARNING);
+#endif  // _WINDOWS
+    }
+
     return std::move(widgets);
 }
 sf::Color StateDefinitions::stringToSFMLColor(const std::string& color)

@@ -11,7 +11,14 @@ Breakout::Breakout(const char* applicationName)
     : mGameData{ std::make_shared<::common::GameData>(applicationName) }
     , mClock{}
 {
-    mGameData->machine().addState(StateFactory::getState(machine::StateType::INTRO, *mGameData));
+    try
+    {
+        mGameData->machine().addState(StateFactory::getState(machine::StateType::INTRO, *mGameData));
+    }
+    catch(const std::out_of_range& except)
+    {
+        throw except;
+    }
 }
 
 int Breakout::run()
@@ -49,9 +56,7 @@ int Breakout::run()
     }
     catch (const std::out_of_range& except)
     {
-        std::ofstream errorLog{"ErrorLog.txt", std::ios::out};
-        errorLog << except.what() << "Check configuration files, where did you put them?" << std::endl;
-        return -1;
+        throw except;
     }
     
     return 0;

@@ -22,7 +22,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     {
         std::ofstream errorLog{ "ErrorLog.txt", std::ios::out };
         std::stringstream ss;
-        ss << except.what() << "Check configuration files where did you put them?" << std::endl;
+        ss << except.what() << std::endl;
         errorLog << ss.str() << std::endl;
         rv = -1;
 #ifdef _WINDOWS

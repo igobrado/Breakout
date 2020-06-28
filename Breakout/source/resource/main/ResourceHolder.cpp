@@ -12,19 +12,27 @@ ResourceHolder::ResourceHolder(
     , mSoundManager{ "../resource/xml/Sound.xml" }
     , mConfigs{}
 {
-    mConfigs["intro"] = std::make_unique<IntroStateConfig>(
-            "../resource/xml/state/StateConfig.xml",
-            mFontManager.getProperty("asrfont"),
-            mTextureManager.getProperty("arrow"),
-            renderWindow,
-            introStateSwitchesCallbackMap);
+    try
+    {
+        mConfigs["intro"] = std::make_unique<IntroStateConfig>(
+                "../resource/xml/state/StateConfig.xml",
+                mFontManager.getProperty("asrfont"),
+                mTextureManager.getProperty("arrow"),
+                renderWindow,
+                introStateSwitchesCallbackMap);
 
-    mConfigs["input"] = std::make_unique<InputStateConfig>(
-            "../resource/xml/state/StateConfig.xml",
-            mFontManager.getProperty("asrfont"),
-            mTextureManager.getProperty("arrow"),
-            renderWindow,
-            inputStateSwitchesCallback);
+        mConfigs["input"] = std::make_unique<InputStateConfig>(
+                "../resource/xml/state/StateConfig.xml",
+                mFontManager.getProperty("asrfont"),
+                mTextureManager.getProperty("arrow"),
+                renderWindow,
+                inputStateSwitchesCallback);
+    }
+    catch (const std::out_of_range& except)
+    {
+        throw except;
+    }
+
 }
 
 sf::Texture& ResourceHolder::getTexture(const std::string_view targetID)
@@ -45,7 +53,7 @@ Config& ResourceHolder::getConfig(std::string_view targetID)
         return *tmp->second;
     }
     throw std::out_of_range(
-            "There is no config with " + std::string{ targetID.begin(), targetID.end() } + " Look at your path for config.");
+            "There is no config with " + std::string{ targetID.begin(), targetID.end() } + " \nLook at your config name.");
 }
 
 void ResourceHolder::play(std::string_view sound)
