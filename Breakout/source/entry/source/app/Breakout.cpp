@@ -2,6 +2,8 @@
 
 #include "StateFactory.hpp"
 
+#include <fstream>
+
 namespace game
 {
 
@@ -17,32 +19,41 @@ int Breakout::run()
     float newTime, frameTime;
     float currentTime         = mClock.getElapsedTime().asSeconds();
     float accumulator         = 0.0f;
-
-    while (mGameData->window().isOpen())
+    try
     {
-        mGameData->machine().processChanges();
-        newTime   = mClock.getElapsedTime().asSeconds();
-        frameTime = newTime - currentTime;
-        if (frameTime > 0.25f)
+        while (mGameData->window().isOpen())
         {
-            frameTime = 0.025f;
-        }
-        currentTime = newTime;
-        accumulator += frameTime;
-        while (accumulator > sDeltaTime)
-        {
-            const auto& activeState = mGameData->machine().activeState();
-            activeState->handleInput();
-            activeState->update(sDeltaTime);
-            if (mGameData->machine().shouldStopApplication())
+            mGameData->machine().processChanges();
+            newTime   = mClock.getElapsedTime().asSeconds();
+            frameTime = newTime - currentTime;
+            if (frameTime > 0.25f)
             {
-                mGameData->window().close();
+                frameTime = 0.025f;
             }
-            accumulator -= sDeltaTime;
-        }
+            currentTime = newTime;
+            accumulator += frameTime;
+            while (accumulator > sDeltaTime)
+            {
+                const auto& activeState = mGameData->machine().activeState();
+                activeState->handleInput();
+                activeState->update(sDeltaTime);
+                if (mGameData->machine().shouldStopApplication())
+                {
+                    mGameData->window().close();
+                }
+                accumulator -= sDeltaTime;
+            }
 
-        mGameData->machine().activeState()->draw();
+            mGameData->machine().activeState()->draw();
+        }
     }
+    catch (const std::out_of_range& except)
+    {
+        std::ofstream errorLog{"ErrorLog.txt", std::ios::out};
+        errorLog << except.what() << "Check configuration files, where did you put them?" << std::endl;
+        return -1;
+    }
+    
     return 0;
 }
 

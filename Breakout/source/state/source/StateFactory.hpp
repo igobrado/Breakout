@@ -33,24 +33,31 @@ public:
      */
     static std::unique_ptr<machine::State> getState(const machine::StateType stateType, common::GameData& data)
     {
-        switch (stateType)
+        try
         {
-            case machine::StateType::INTRO:
-                return std::make_unique<machine::IntroState>(data);
-            case machine::StateType::MENU:
-                return std::make_unique<machine::MenuState>(data);
-            case machine::StateType::GAME:
-                return std::make_unique<machine::GameState>(data);
-            case machine::StateType::END:
-                return std::make_unique<machine::EndState>(data);
-            case machine::StateType::INPUT:
-                return std::make_unique<machine::InputState>(data);
-            case machine::StateType::SCOREBOARD:
-                return std::make_unique<machine::ScoreboardState>(data);
-            default:
-                return nullptr;
+            switch (stateType)
+            {
+                case machine::StateType::INTRO:
+                    return std::make_unique<machine::IntroState>(data);
+                case machine::StateType::MENU:
+                    return std::make_unique<machine::MenuState>(data);
+                case machine::StateType::GAME:
+                    return std::make_unique<machine::GameState>(data);
+                case machine::StateType::END:
+                    return std::make_unique<machine::EndState>(data);
+                case machine::StateType::INPUT:
+                    return std::make_unique<machine::InputState>(data);
+                case machine::StateType::SCOREBOARD:
+                    return std::make_unique<machine::ScoreboardState>(data);
+                default:
+                    return nullptr;
+            }
         }
-    }
+        catch (const std::out_of_range& except)
+        {
+            throw except;
+        }
+     }
 };
 
 #endif  // BREAKOUT_STATEFACTORY_HP

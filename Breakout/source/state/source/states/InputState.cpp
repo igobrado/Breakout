@@ -29,7 +29,14 @@ void InputState::handleInput()
         }
         else if (eventToProcess.type == sf::Event::TextEntered)
         {
-            dynamic_cast<InputStateConfig&>(mConfig).handleInput(eventToProcess);
+            try
+            {
+                dynamic_cast<InputStateConfig&>(mConfig).handleInput(eventToProcess);
+            }
+            catch(const std::out_of_range& except)
+            {
+                throw except;
+            }
         }
     }
 }

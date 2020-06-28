@@ -29,6 +29,7 @@ void InputStateConfig::drawAllComponents(sf::RenderWindow& window)
     window.draw(*mArrow);
 
 }
+
 void InputStateConfig::updateMovableComponents(const float deltaTime)
 {
     mArrow->update(deltaTime);
@@ -42,7 +43,7 @@ void InputStateConfig::updateMovableComponents(const float deltaTime)
     }
 }
 
-void InputStateConfig::handleInput(sf::Event& event)
+bool InputStateConfig::handleInput(sf::Event& event)
 {
     if (mFocusedTextboxIterator != mWidgets.end())
     {
@@ -52,7 +53,14 @@ void InputStateConfig::handleInput(sf::Event& event)
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
         {
-            mInputStateSwitchesCallback(Player{ std::string{ mPlayerInput.begin(), mPlayerInput.end() } });
+            try
+            {
+                mInputStateSwitchesCallback(Player{ std::string{ mPlayerInput.begin(), mPlayerInput.end() } });
+            }
+            catch(const std::out_of_range& except)
+            {
+                throw except;
+            }
         }
         else if (mPlayerInput.getSize() < sTextMaxSize)
         {
@@ -60,4 +68,5 @@ void InputStateConfig::handleInput(sf::Event& event)
         }
         dynamic_cast<Textbox&>(**mFocusedTextboxIterator).setString(mPlayerInput);
     }
+    return true;
 }

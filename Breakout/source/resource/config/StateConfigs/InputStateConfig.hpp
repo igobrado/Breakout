@@ -35,7 +35,7 @@ public:
      *
      * @param event to be handled.
      */
-    void handleInput(sf::Event& event);
+    bool handleInput(sf::Event& event);
 
 private:
     const char* mXmlDocumentPath;                   ///< Path to the xml document.

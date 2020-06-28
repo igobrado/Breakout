@@ -1,22 +1,6 @@
 #include "app/Breakout.hpp"
 
-#ifdef DEBUG
 #include <fstream>
-static long allocations = 0;
-
-void* operator new(size_t size)
-{
-    ++allocations;
-
-    void * p = malloc(size);
-    return p;
-}
-void operator delete(void* p)
-{
-    --allocations;
-	free(p);
-}
-#endif
 
 #ifndef _WINDOWS
 int main()
@@ -28,16 +12,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 {
     int rv = 0;
 
-    {///< only to track are all objects clean up after game finishes
-     ///< TODO: DELETE BEFORE RELEASE
+    try
+    {
 	    std::unique_ptr<Application> breakout = std::make_unique<game::Breakout>(  //
 		    "Breakout");
         rv = breakout->run();
     }
-
-#ifdef DEBUG
-    std::ofstream file("Allocations.txt");
-    file << allocations;
-#endif
+    catch (const std::out_of_range& except) ///< Instance of breakout might throw since it has resource holder which depends on file paths
+    {
+        std::ofstream errorLog{ "ErrorLog.txt", std::ios::out };
+        errorLog << except.what() << "Check configuration files where did you put them?" << std::endl;
+        rv = -1;
+    }
     return rv;
 }  //

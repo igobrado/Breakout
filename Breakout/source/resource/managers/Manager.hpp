@@ -42,7 +42,7 @@ public:
         auto found = mData.find(targetID);
         if (found == std::end(mData))
         {
-            throw std::out_of_range("No data in map with " + std::string{ targetID } + "\n");
+            throw std::out_of_range("No data in map with key: " + std::string{ targetID } + "\n");
         }
         return found->second;
     }
