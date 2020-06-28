@@ -18,7 +18,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		    "Breakout");
         rv = breakout->run();
     }
-    catch (const std::out_of_range& except) ///< Instance of breakout might throw since it has resource holder which depends on file paths
+    catch (const std::out_of_range& except)
     {
         std::ofstream errorLog{ "ErrorLog.txt", std::ios::out };
         std::stringstream ss;
@@ -28,7 +28,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 #ifdef _WINDOWS
         MessageBox(nullptr, ss.str().c_str() , "Configuration file error", MB_OK);
 #endif  // _WINDOWS
-
 
     }
     return rv;
